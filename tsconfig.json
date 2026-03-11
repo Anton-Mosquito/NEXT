@@ -18,8 +18,14 @@
         "name": "next"
       }
     ],
+    "types": ["jest", "@testing-library/jest-dom"],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@shared/*": ["./src/shared/*"],
+      "@entities/*": ["./src/entities/*"],
+      "@features/*": ["./src/features/*"],
+      "@widgets/*": ["./src/widgets/*"]
     }
   },
   "include": [

@@ -1,0 +1,92 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Lighthouse CI — automatic performance audit on every Pull Request
+#
+# What this does:
+#   1. Triggers on every PR opened/updated against `main`
+#   2. Builds the Next.js app in production mode
+#   3. Starts the production server on localhost:3000
+#   4. Runs Lighthouse 3× per audited URL (uses the median)
+#   5. Asserts Core Web Vitals & category scores defined in .lighthouserc.js
+#   6. Uploads the report to temporary-public-storage and posts a link
+#      as a PR comment via the built-in GITHUB_TOKEN
+#
+# Thresholds are configured in `.lighthouserc.js` at the project root.
+# All assertions use `warn` level initially — change to `error` once a
+# stable baseline has been established to make the check required.
+#
+# Docs: https://github.com/GoogleChrome/lighthouse-ci
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: Lighthouse CI
+
+on:
+  pull_request:
+    branches: [main]
+    # Re-run on every new commit pushed to an open PR
+    types: [opened, synchronize, reopened]
+
+# Cancel any in-flight run for the same PR/branch when a new commit arrives
+concurrency:
+  group: lighthouse-${{ github.head_ref }}
+  cancel-in-progress: true
+
+jobs:
+  lighthouse:
+    name: Lighthouse Audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      # ── 1. Source ──────────────────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history lets LHCI compare against base branch
+
+      # ── 2. Node.js ────────────────────────────────────────────────────────
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # ── 3. Dependencies ───────────────────────────────────────────────────
+      - name: Install dependencies
+        run: npm ci
+
+      # ── 4. Production build ───────────────────────────────────────────────
+      # Build once here so `startServerCommand` in .lighthouserc.js only runs
+      # `npm run start` (not rebuild) — saves ~1 min on each audit URL.
+      - name: Build Next.js (production)
+        run: npm run build
+        env:
+          # Suppress bundle-analyzer output to keep logs clean
+          ANALYZE: 'false'
+          # Required by Next.js to silence non-fatal telemetry prompts in CI
+          NEXT_TELEMETRY_DISABLED: '1'
+
+      # ── 5. Lighthouse CI ──────────────────────────────────────────────────
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          # Point to our config file instead of inline config
+          configPath: './.lighthouserc.js'
+          # Uploads reports to temporary-public-storage and posts them as
+          # a PR comment with score table + links to full HTML reports.
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          # Required for posting PR comments and creating commit statuses
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+          LHCI_BUILD_CONTEXT__CURRENT_BRANCH: ${{ github.head_ref }}
+          LHCI_BUILD_CONTEXT__GITHUB_REPO_SLUG: ${{ github.repository }}
+
+      # ── 6. Artifact — keep raw LHCI results for debugging ─────────────────
+      - name: Upload LHCI results artifact
+        if: always() # preserve results even when assertions warn/fail
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-results-${{ github.run_number }}
+          path: .lighthouseci/
+          retention-days: 30

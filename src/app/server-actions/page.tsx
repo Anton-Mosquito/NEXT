@@ -1,6 +1,6 @@
 // src/app/server-actions/page.tsx
 import { Suspense } from 'react'
-import { Card } from '@/shared/ui'
+import { Card, SkeletonList } from '@/shared/ui'
 import { CreatePostServerAction } from '@/features/create-post/ui/CreatePostServerAction'
 import { PostFeed } from '@/widgets/post-feed'
 
@@ -58,16 +58,7 @@ export default function ServerActionsPage() {
             📋 Список (RTK Query, автооновлення)
           </h2>
           <Suspense
-            fallback={
-              <div className="space-y-3">
-                {[...Array(3)].map((_, i) => (
-                  <div
-                    key={i}
-                    className="animate-pulse bg-white rounded-xl border p-4 h-20"
-                  />
-                ))}
-              </div>
-            }
+            fallback={<SkeletonList count={3} />}
           >
             <PostFeed />
           </Suspense>

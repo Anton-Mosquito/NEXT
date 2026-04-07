@@ -58,3 +58,7 @@ export {
   resetCacheMetrics,
 } from "./rtkCacheMetrics";
 export type { CacheMetrics, EndpointMetrics } from "./rtkCacheMetrics";
+
+// NOTE: db.ts (pg pool) is intentionally NOT exported here.
+// It uses Node.js-only built-ins and must be imported directly
+// in server-side code only: import { query } from "@shared/lib/db"

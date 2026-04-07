@@ -2,7 +2,7 @@
 // ✅ ФІНАЛЬНА HYBRID сторінка
 
 import { Suspense } from "react";
-import { Card } from "@/shared/ui";
+import { Card, SkeletonList } from "@/shared/ui";
 import { HybridDemo } from "@/widgets/hybrid-demo";
 
 // Серверні дані — різна "вага"
@@ -96,16 +96,7 @@ export default async function HybridPage() {
       <div>
         <h2 className="font-bold text-lg mb-3">🌊 Streaming + Redux Client</h2>
         <Suspense
-          fallback={
-            <div className="space-y-3">
-              {[...Array(3)].map((_, i) => (
-                <div
-                  key={i}
-                  className="animate-pulse bg-white rounded-xl border p-4 h-20"
-                />
-              ))}
-            </div>
-          }
+          fallback={<SkeletonList count={3} />}
         >
           {/* Async Server Component → передає у Client Widget */}
           <HybridDataLoader />

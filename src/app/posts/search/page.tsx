@@ -5,6 +5,7 @@
 import { Suspense } from "react";
 import { PostsSearchClient } from "@/features/search-posts/ui/PostsSearchClient";
 import { PostsSearchResults } from "@/features/search-posts/ui/PostsSearchResults";
+import { SkeletonList } from "@/shared/ui";
 
 // ✅ Server Component читає searchParams
 export default async function PostsSearchPage({
@@ -62,14 +63,5 @@ async function fetchPostsServer({
 }
 
 function SearchResultsSkeleton() {
-  return (
-    <div className="space-y-3">
-      {[...Array(3)].map((_, i) => (
-        <div
-          key={i}
-          className="animate-pulse bg-white rounded-xl border p-4 h-20"
-        />
-      ))}
-    </div>
-  );
+  return <SkeletonList count={3} />;
 }

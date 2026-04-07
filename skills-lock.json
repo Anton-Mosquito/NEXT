@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "vitest": {
+      "source": "supabase/supabase",
+      "sourceType": "github",
+      "computedHash": "87c8cf025987d1f1a0e9c0fd0b8605946a0ebd5478676471ce296d8f0adc0f07"
+    }
+  }
+}

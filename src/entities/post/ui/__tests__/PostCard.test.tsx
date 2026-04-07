@@ -40,7 +40,7 @@ describe("PostCard", () => {
 
   it("викликає onClick при кліку", async () => {
     const user = userEvent.setup();
-    const handleClick = jest.fn();
+    const handleClick = vi.fn();
 
     renderWithProviders(<PostCard post={mockPost} onClick={handleClick} />);
 

@@ -1,4 +1,4 @@
-import { cn } from "@/shared/lib";
+import { cn } from "@/lib/utils";
 import { Card } from "./Card";
 import { Button } from "./Button";
 
@@ -29,7 +29,7 @@ export function EmptyState({
   className,
   children,
 }: EmptyStateProps) {
-  const padding = size === "sm" ? "p-4" : size === "lg" ? "p-8" : "p-6";
+  const paddingClass = size === "sm" ? "p-4" : size === "lg" ? "p-8" : "p-6";
 
   const renderDefaultIcon = () => (
     <svg
@@ -56,7 +56,7 @@ export function EmptyState({
   );
 
   return (
-    <Card className={cn("flex flex-col items-center justify-center text-center gap-3", padding, className)}>
+    <Card padding="none" className={cn("flex flex-col items-center justify-center text-center gap-3", paddingClass, className)}>
       <div role="img" aria-hidden className="text-gray-400">
         {icon ?? renderDefaultIcon()}
       </div>
@@ -68,28 +68,15 @@ export function EmptyState({
       {children}
 
       {action ? (
-        action.href ? (
-          <a
-            href={action.href}
-            className={cn(
-              "inline-flex items-center justify-center mt-2",
-              action.variant === "secondary"
-                ? "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                : action.variant === "danger"
-                ? "bg-red-500 text-white hover:bg-red-600"
-                : action.variant === "ghost"
-                ? "bg-transparent text-gray-600 hover:bg-gray-100"
-                : "bg-blue-500 text-white hover:bg-blue-600",
-              action.size === "sm" ? "px-3 py-1.5 text-xs rounded-lg" : action.size === "lg" ? "px-6 py-3 text-base rounded-xl" : "px-4 py-2 text-sm rounded-lg",
-            )}
-          >
-            {action.label}
-          </a>
-        ) : (
-          <Button onClick={action.onClick} variant={action.variant ?? "primary"} size={action.size ?? "md"} className="mt-2">
-            {action.label}
-          </Button>
-        )
+        <Button
+          asChild={!!action.href}
+          onClick={action.onClick}
+          variant={action.variant ?? "primary"}
+          size={action.size ?? "md"}
+          className="mt-2"
+        >
+          {action.href ? <a href={action.href}>{action.label}</a> : action.label}
+        </Button>
       ) : null}
     </Card>
   );

@@ -14,6 +14,7 @@ import {
   batchArchive,
 } from "../model/bulkSlice";
 import { Card, Button, Badge } from "@/shared/ui";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export function BulkActions() {
   const dispatch = useAppDispatch();
@@ -73,11 +74,9 @@ export function BulkActions() {
       {/* Toolbar */}
       <div className="flex items-center gap-2 flex-wrap">
         <label className="flex items-center gap-2 cursor-pointer text-sm">
-          <input
-            type="checkbox"
+          <Checkbox
             checked={items.length > 0 && items.every((i) => i.selected)}
-            onChange={() => dispatch(selectAll())}
-            className="w-4 h-4 accent-blue-500"
+            onCheckedChange={() => dispatch(selectAll())}
           />
           Вибрати всі
         </label>
@@ -125,12 +124,11 @@ export function BulkActions() {
                       : "border-gray-200 bg-white hover:border-gray-300"
             }`}
           >
-            <input
-              type="checkbox"
+            <Checkbox
               checked={item.selected}
-              onChange={() => dispatch(toggleSelect(item.id))}
+              onCheckedChange={() => dispatch(toggleSelect(item.id))}
               disabled={item.status !== "active" || item.isPending}
-              className="w-4 h-4 accent-blue-500 shrink-0"
+              className="shrink-0"
             />
             <div className="flex-1 min-w-0">
               <p className="text-sm font-medium truncate">{item.title}</p>

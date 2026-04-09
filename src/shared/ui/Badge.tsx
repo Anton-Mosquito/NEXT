@@ -1,36 +1,44 @@
 // src/shared/ui/Badge.tsx
-import { cn } from "@/shared/lib";
+import { cn } from "@/lib/utils";
+import { Badge as ShadcnBadge } from "@/components/ui/badge";
+import type { ReactNode } from "react";
 
 type BadgeVariant = "default" | "primary" | "success" | "warning" | "danger";
 
-const variantStyles: Record<BadgeVariant, string> = {
-  default: "bg-gray-100 text-gray-600",
-  primary: "bg-blue-100 text-blue-600",
-  success: "bg-green-100 text-green-600",
-  warning: "bg-yellow-100 text-yellow-700",
-  danger: "bg-red-100 text-red-600",
+type ShadcnVariant = "default" | "secondary" | "destructive" | "outline";
+
+const variantMap: Record<
+  BadgeVariant,
+  { variant: ShadcnVariant; className?: string }
+> = {
+  default: { variant: "secondary" },
+  primary: { variant: "default" },
+  success: {
+    variant: "outline",
+    className: "bg-green-100 text-green-600 border-transparent",
+  },
+  warning: {
+    variant: "outline",
+    className: "bg-yellow-100 text-yellow-700 border-transparent",
+  },
+  danger: { variant: "destructive" },
 };
 
 interface BadgeProps {
-  children: React.ReactNode;
+  children: ReactNode;
   variant?: BadgeVariant;
   className?: string;
 }
 
-export function Badge({
-  children,
-  variant = "default",
-  className,
-}: BadgeProps) {
+export function Badge({ children, variant = "default", className }: BadgeProps) {
+  const { variant: shadcnVariant, className: variantClass } =
+    variantMap[variant];
   return (
-    <span
-      className={cn(
-        "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium",
-        variantStyles[variant],
-        className,
-      )}
+    <ShadcnBadge
+      variant={shadcnVariant}
+      className={cn(variantClass, className)}
     >
       {children}
-    </span>
+    </ShadcnBadge>
   );
 }

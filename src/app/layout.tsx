@@ -1,6 +1,6 @@
 // src/app/layout.tsx — ОНОВЛЕНА ВЕРСІЯ З PRELOADED STATE
 import type { Metadata } from "next";
-import { Inter, Geist } from "next/font/google";
+import { Inter } from "next/font/google";
 import { cookies, headers } from "next/headers";
 import "./globals.css";
 import { StoreProvider } from "@/app/providers/StoreProvider";
@@ -11,11 +11,12 @@ import { buildPreloadedState } from "@/app/store/preloadState";
 import type { AuthUser } from "@/entities/auth";
 import { makeStore } from "@/app/store/makeStore";
 import { postApi } from "@/entities/post";
-import { cn } from "@/lib/utils";
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
-
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
   title: "FSD Next.js App",
@@ -66,7 +67,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   const store = makeStore();
 
   // 2. Запускаємо запит через dispatch(initiate)
@@ -86,8 +86,8 @@ export default async function RootLayout({
   });
 
   return (
-    <html lang="uk" className={cn("font-sans", geist.variable)}>
-      <body className={`${inter.className} bg-gray-50 min-h-screen`}>
+    <html lang="uk" className={inter.variable}>
+      <body className="min-h-screen">
         {/*
           ✅ Передаємо preloadedState у StoreProvider
           Store ініціалізується з серверним auth станом

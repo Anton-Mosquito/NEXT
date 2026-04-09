@@ -11,17 +11,8 @@ import {
 } from "@/entities/auth";
 import { Avatar, Button, Badge } from "@/shared/ui";
 import { cn } from "@/shared/lib";
-import { ROUTES } from "@/shared/config";
+import { NAV_LINKS } from "@/shared/constants";
 
-const navLinks = [
-  { href: "/", label: "🏠" },
-  { href: "/posts", label: "📝 Пости" },
-  { href: "/posts/prefetched", label: "⚡ Prefetch" },
-  { href: "/posts/streaming", label: "🌊 Streaming" },
-  { href: "/hybrid", label: "🏛️ Hybrid" },
-  { href: "/profile", label: "👤 Профіль" },
-  { href: "/users", label: "🗄️ Users DB" },
-];
 
 export function Header() {
   const dispatch = useAppDispatch();
@@ -39,7 +30,7 @@ export function Header() {
 
         {/* Навігація */}
         <nav className="flex items-center gap-1">
-          {navLinks.map(({ href, label }) => (
+          {NAV_LINKS.map(({ href, label }) => (
             <Link
               key={href}
               href={href}

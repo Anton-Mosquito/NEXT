@@ -14,6 +14,12 @@ const nextConfig: NextConfig = {
   // bundled into the server bundle — use native require instead.
   serverExternalPackages: ["pg"],
 
+  images: {
+    remotePatterns: [
+      { protocol: "https", hostname: "i.pravatar.cc" },
+    ],
+  },
+
   // ✅ Оптимізації для production
   experimental: {
     optimizePackageImports: ["@reduxjs/toolkit", "react-redux"],

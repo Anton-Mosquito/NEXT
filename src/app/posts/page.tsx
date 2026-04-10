@@ -2,7 +2,7 @@
 // ✅ SERVER COMPONENT — читає дані напряму
 import { Suspense } from 'react'
 import { PostFeed } from '@/widgets/post-feed'
-import { Card } from '@/shared/ui'
+import { Card, SkeletonList } from '@/shared/ui'
 
 // Metadata — тільки в Server Components
 export const metadata = {
@@ -43,24 +43,9 @@ export default async function PostsPage() {
         Сервер рендерить його SHELL (HTML структуру)
         Клієнт додає інтерактивність (фільтри, лайки, форму)
       */}
-      <Suspense fallback={<PostFeedSkeleton />}>
+      <Suspense fallback={<SkeletonList count={3} />}>
         <PostFeed />
       </Suspense>
-    </div>
-  )
-}
-
-// Skeleton для Suspense fallback (Server Component!)
-function PostFeedSkeleton() {
-  return (
-    <div className="space-y-3">
-      {[...Array(3)].map((_, i) => (
-        <div key={i} className="animate-pulse bg-white rounded-xl border p-4 space-y-3">
-          <div className="h-5 bg-gray-200 rounded w-3/4" />
-          <div className="h-3 bg-gray-200 rounded" />
-          <div className="h-3 bg-gray-200 rounded w-2/3" />
-        </div>
-      ))}
     </div>
   )
 }

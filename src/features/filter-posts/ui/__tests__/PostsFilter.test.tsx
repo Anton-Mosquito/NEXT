@@ -1,5 +1,5 @@
 // src/features/filter-posts/ui/__tests__/PostsFilter.test.tsx
-import { screen, waitFor, act } from "@testing-library/react";
+import { screen, waitFor, act, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { renderWithProviders } from "@/test-utils/renderWithProviders";
 import { PostsFilter } from "../PostsFilter";
@@ -64,23 +64,21 @@ describe("PostsFilter", () => {
   });
 
   it("debounce: search dispatch спрацьовує після затримки", async () => {
-    jest.useFakeTimers();
-    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
     const { store } = renderWithProviders(<PostsFilter />);
-
     const searchInput = screen.getByPlaceholderText(/пошук/i);
-    await user.type(searchInput, "react");
+
+    vi.useFakeTimers();
+    fireEvent.change(searchInput, { target: { value: "react" } });
 
     // До debounce — store ще не оновився
     expect(selectPostsFilter(store.getState()).search).toBe("");
 
     // Після debounce (400мс)
-    act(() => jest.advanceTimersByTime(400));
+    act(() => vi.advanceTimersByTime(400));
+    vi.useRealTimers();
 
     await waitFor(() => {
       expect(selectPostsFilter(store.getState()).search).toBe("react");
     });
-
-    jest.useRealTimers();
   });
 });

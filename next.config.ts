@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
   // ✅ Turbopack config
   turbopack: {},
 
+  // Prevent pg (and its Node.js-only deps like dns/net) from being
+  // bundled into the server bundle — use native require instead.
+  serverExternalPackages: ["pg"],
+
   // ✅ Оптимізації для production
   experimental: {
     optimizePackageImports: ["@reduxjs/toolkit", "react-redux"],

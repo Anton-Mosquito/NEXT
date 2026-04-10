@@ -20,6 +20,7 @@ const navLinks = [
   { href: "/posts/streaming", label: "🌊 Streaming" },
   { href: "/hybrid", label: "🏛️ Hybrid" },
   { href: "/profile", label: "👤 Профіль" },
+  { href: "/users", label: "🗄️ Users DB" },
 ];
 
 export function Header() {

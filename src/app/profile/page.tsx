@@ -3,7 +3,7 @@
 
 import { useAppSelector } from "@/app/store";
 import { selectCurrentUser, selectIsAuthenticated } from "@/entities/auth";
-import { Card, Avatar, Badge, Button } from "@/shared/ui";
+import { Card, Avatar, Badge, Button, SkeletonList } from "@/shared/ui";
 import { useGetPostsByUserQuery } from "@/entities/post";
 import { PostCard } from "@/entities/post";
 import { LikeButton } from "@/features/like-post";
@@ -53,14 +53,7 @@ export default function ProfilePage() {
         </h2>
 
         {isLoading ? (
-          <div className="space-y-3">
-            {[...Array(3)].map((_, i) => (
-              <div
-                key={i}
-                className="animate-pulse bg-gray-100 rounded-xl h-24"
-              />
-            ))}
-          </div>
+          <SkeletonList count={3} />
         ) : (
           <div className="space-y-3">
             {userPosts?.map((post) => (

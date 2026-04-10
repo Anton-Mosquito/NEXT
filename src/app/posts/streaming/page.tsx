@@ -2,7 +2,7 @@
 // ✅ Streaming + Suspense
 
 import { Suspense } from "react";
-import { Card, SkeletonCard } from "@/shared/ui";
+import { Card, Skeleton, SkeletonCard } from "@/shared/ui";
 import { ReduxStreamingClient } from '@/components/ReduxStreamingClient'
 
 // Симуляція різних швидкостей завантаження
@@ -84,11 +84,11 @@ async function SlowSection() {
 // Skeleton компоненти
 function SectionSkeleton({ label }: { label: string }) {
   return (
-    <div className="animate-pulse bg-white rounded-xl border p-4 flex items-center gap-3">
-      <div className="w-8 h-8 bg-gray-200 rounded-full shrink-0" />
+    <div className="bg-white rounded-xl border p-4 flex items-center gap-3">
+      <Skeleton className="w-8 h-8 rounded-full shrink-0" />
       <div className="flex-1 space-y-2">
-        <div className="h-4 bg-gray-200 rounded w-3/4" />
-        <div className="h-3 bg-gray-200 rounded w-1/3" />
+        <Skeleton className="h-4 w-3/4" />
+        <Skeleton className="h-3 w-1/3" />
       </div>
       <span className="text-xs text-gray-400">{label}</span>
     </div>

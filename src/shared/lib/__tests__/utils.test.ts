@@ -78,33 +78,33 @@ describe("getReadingTime()", () => {
 // ============================================================
 describe("debounce()", () => {
   beforeEach(() => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
   });
 
   afterEach(() => {
-    jest.useRealTimers();
+    vi.useRealTimers();
   });
 
   it("викликає функцію після затримки", () => {
-    const fn = jest.fn();
+    const fn = vi.fn();
     const debounced = debounce(fn, 300);
 
     debounced("arg1");
     expect(fn).not.toHaveBeenCalled();
 
-    jest.advanceTimersByTime(300);
+    vi.advanceTimersByTime(300);
     expect(fn).toHaveBeenCalledTimes(1);
     expect(fn).toHaveBeenCalledWith("arg1");
   });
 
   it("скидає таймер при повторному виклику", () => {
-    const fn = jest.fn();
+    const fn = vi.fn();
     const debounced = debounce(fn, 300);
 
     debounced("first");
-    jest.advanceTimersByTime(200);
+    vi.advanceTimersByTime(200);
     debounced("second");
-    jest.advanceTimersByTime(300);
+    vi.advanceTimersByTime(300);
 
     expect(fn).toHaveBeenCalledTimes(1);
     expect(fn).toHaveBeenCalledWith("second");

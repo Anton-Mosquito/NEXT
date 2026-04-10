@@ -1,15 +1,19 @@
 // src/app/layout.tsx — ОНОВЛЕНА ВЕРСІЯ З PRELOADED STATE
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Geist } from "next/font/google";
 import { cookies, headers } from "next/headers";
 import "./globals.css";
 import { StoreProvider } from "@/app/providers/StoreProvider";
+import { QueryProvider } from "@/app/providers/QueryProvider";
 import { Header } from "@/widgets/header";
 import { WhydrInit } from "@/app/WhydrInit";
 import { buildPreloadedState } from "@/app/store/preloadState";
 import type { AuthUser } from "@/entities/auth";
 import { makeStore } from "@/app/store/makeStore";
 import { postApi } from "@/entities/post";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -82,18 +86,20 @@ export default async function RootLayout({
   });
 
   return (
-    <html lang="uk">
+    <html lang="uk" className={cn("font-sans", geist.variable)}>
       <body className={`${inter.className} bg-gray-50 min-h-screen`}>
         {/*
           ✅ Передаємо preloadedState у StoreProvider
           Store ініціалізується з серверним auth станом
           Клієнт гідратується БЕЗ mismatch!
         */}
-        <StoreProvider preloadedState={preloadedState}>
-          <WhydrInit />
-          <Header />
-          <main className="max-w-5xl mx-auto px-4 py-6">{children}</main>
-        </StoreProvider>
+        <QueryProvider>
+          <StoreProvider preloadedState={preloadedState}>
+            <WhydrInit />
+            <Header />
+            <main className="max-w-5xl mx-auto px-4 py-6">{children}</main>
+          </StoreProvider>
+        </QueryProvider>
       </body>
     </html>
   );

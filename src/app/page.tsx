@@ -1,7 +1,7 @@
 // src/app/page.tsx
 import { Card } from "@/shared/ui";
 import Link from "next/link";
-import { ROUTES } from "@/shared/config";
+import { ROUTES } from "@/shared/constants";
 
 export default function HomePage() {
   const features = [

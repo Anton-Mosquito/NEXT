@@ -1,5 +1,6 @@
 // src/widgets/post-feed/ui/OptimizedPostFeed.tsx
 'use client'
+import { SkeletonList } from '@/shared/ui'
 
 // ✅ Демонстрація оптимізацій для production
 
@@ -88,13 +89,7 @@ export function OptimizedPostFeed() {
   )
 
   if (isLoading) {
-    return (
-      <div className="space-y-3">
-        {[...Array(3)].map((_, i) => (
-          <div key={i} className="animate-pulse bg-white rounded-xl border h-20" />
-        ))}
-      </div>
-    )
+    return <SkeletonList count={3} />
   }
 
   return (

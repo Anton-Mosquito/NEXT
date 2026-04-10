@@ -18,11 +18,3 @@ export const CACHE = {
   // Час у секундах після якого дані вважаються застарілими
   STALE_TIME: 30,
 } as const;
-
-export const ROUTES = {
-  HOME: "/",
-  POSTS: "/posts",
-  POST: (id: number) => `/posts/${id}`,
-  PROFILE: "/profile",
-  LOGIN: "/login",
-} as const;

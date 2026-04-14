@@ -14,7 +14,7 @@ export const UserService = {
    */
   async getAllUsers(): Promise<DbUser[]> {
     const result = await query<DbUser>(
-      "SELECT id, name, email, created_at FROM users ORDER BY created_at DESC",
+      `SELECT id, name, email, created_at AS "createdAt" FROM "user" ORDER BY created_at DESC`,
     );
     return result.rows;
   },
@@ -23,9 +23,9 @@ export const UserService = {
    * Fetch a single user by primary key.
    * Returns null when no row is found (instead of throwing).
    */
-  async getUserById(id: number): Promise<DbUser | null> {
+  async getUserById(id: string): Promise<DbUser | null> {
     const result = await query<DbUser>(
-      "SELECT id, name, email, created_at FROM users WHERE id = $1",
+      `SELECT id, name, email, created_at AS "createdAt" FROM "user" WHERE id = $1`,
       [id],
     );
     return result.rows[0] ?? null;
@@ -37,7 +37,7 @@ export const UserService = {
    */
   async createUser(data: CreateUserInput): Promise<DbUser> {
     const result = await query<DbUser>(
-      "INSERT INTO users (name, email) VALUES ($1, $2) RETURNING id, name, email, created_at",
+      `INSERT INTO "user" (id, name, email) VALUES (gen_random_uuid()::text, $1, $2) RETURNING id, name, email, created_at AS "createdAt"`,
       [data.name, data.email],
     );
     return result.rows[0];
@@ -47,11 +47,8 @@ export const UserService = {
    * Delete a user by primary key.
    * Returns true when a row was deleted, false when not found.
    */
-  async deleteUser(id: number): Promise<boolean> {
-    const result = await query(
-      "DELETE FROM users WHERE id = $1",
-      [id],
-    );
+  async deleteUser(id: string): Promise<boolean> {
+    const result = await query(`DELETE FROM "user" WHERE id = $1`, [id]);
     return (result.rowCount ?? 0) > 0;
   },
 };

@@ -38,9 +38,6 @@ export default function UsersPage() {
         <h2 className="font-semibold">Architecture overview</h2>
         <ul className="list-disc list-inside space-y-1 text-muted-foreground">
           <li>
-            <strong className="text-foreground">docker-compose.yml</strong> — runs a local PostgreSQL 16 instance on port 5432
-          </li>
-          <li>
             <strong className="text-foreground">src/shared/lib/db.ts</strong> — pg.Pool singleton; survives Next.js HMR in dev
           </li>
           <li>

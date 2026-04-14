@@ -14,18 +14,22 @@
     "test:ci": "vitest run --ci --coverage",
     "test:ui": "vitest --ui",
     "db:migrate": "tsx --env-file=.env.local src/shared/lib/db-migrate.ts",
-    "db:up": "docker compose up -d",
-    "db:down": "docker compose down",
-    "db:setup:local": "npm run db:up && sleep 3 && npm run db:migrate"
+    "db:migrate:kysely": "tsx --env-file=.env.local src/shared/lib/kysely-migrate.ts",
+    "db:seed": "tsx --env-file=.env.local scripts/seed.ts",
+    "vercel:pull": "vercel env pull .env.local",
+    "db:setup": "npm run db:migrate"
   },
   "dependencies": {
+    "@auth/kysely-adapter": "^1.11.1",
     "@hookform/resolvers": "^5.2.2",
     "@reduxjs/toolkit": "^2.11.2",
     "@tanstack/react-query": "^5.90.21",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "kysely": "^0.28.15",
     "lucide-react": "^0.577.0",
     "next": "16.1.6",
+    "next-auth": "^5.0.0-beta.30",
     "pg": "^8.20.0",
     "postcss": "^8.5.8",
     "radix-ui": "^1.4.3",
@@ -39,6 +43,7 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@faker-js/faker": "^10.4.0",
     "@next/bundle-analyzer": "^16.1.6",
     "@tailwindcss/postcss": "^4.2.1",
     "@testing-library/jest-dom": "^6.9.1",
@@ -62,6 +67,7 @@
     "tailwindcss": "^4.2.1",
     "tsx": "^4.19.4",
     "typescript": "^5",
+    "vercel": "^51.2.1",
     "vitest": "^4.1.2",
     "whatwg-fetch": "^3.6.20"
   }

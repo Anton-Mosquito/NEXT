@@ -15,7 +15,7 @@ import type { DbUser, CreateUserInput } from "@shared/schemas";
 // Centralise keys so invalidation never goes out of sync.
 export const userQueryKeys = {
   all: ["db-users"] as const,
-  byId: (id: number) => ["db-users", id] as const,
+  byId: (id: string) => ["db-users", id] as const,
 };
 
 // ─── Fetch helpers (plain fetch, no extra lib) ────────────────────────────────
@@ -26,7 +26,7 @@ async function fetchUsers(): Promise<DbUser[]> {
   return res.json();
 }
 
-async function fetchUserById(id: number): Promise<DbUser> {
+async function fetchUserById(id: string): Promise<DbUser> {
   const res = await fetch(`/api/users/${id}`);
   if (!res.ok) throw new Error("Failed to fetch user");
   return res.json();
@@ -47,7 +47,7 @@ async function createUserRequest(data: CreateUserInput): Promise<DbUser> {
   return res.json();
 }
 
-async function deleteUserRequest(id: number): Promise<void> {
+async function deleteUserRequest(id: string): Promise<void> {
   const res = await fetch(`/api/users/${id}`, { method: "DELETE" });
   if (!res.ok && res.status !== 404) throw new Error("Failed to delete user");
 }
@@ -63,11 +63,11 @@ export function useUsersQuery() {
 }
 
 /** Fetch a single user by id. */
-export function useUserByIdQuery(id: number) {
+export function useUserByIdQuery(id: string) {
   return useQuery({
     queryKey: userQueryKeys.byId(id),
     queryFn: () => fetchUserById(id),
-    enabled: id > 0,
+    enabled: !!id,
   });
 }
 

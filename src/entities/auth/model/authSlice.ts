@@ -4,7 +4,7 @@ import type { AuthUser, AuthState } from "./types";
 
 const initialState: AuthState = {
   user: {
-    id: 1,
+    id: "1",
     name: "Demo User",
     email: "demo@example.com",
     role: "admin",

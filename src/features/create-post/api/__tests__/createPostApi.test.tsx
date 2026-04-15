@@ -3,7 +3,7 @@ import { screen, waitFor, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { renderWithProviders } from "@/test-utils/renderWithProviders";
 import { server } from "@/__mocks__/server";
-import { rest } from "msw";
+import { http, HttpResponse } from "msw";
 import { useCreatePostMutation } from "../createPostApi";
 
 // Тестовий компонент для мутації
@@ -52,14 +52,14 @@ describe("useCreatePostMutation", () => {
   it("показує loading під час запиту", async () => {
     // Затримуємо відповідь MSW
     server.use(
-      rest.post("https://jsonplaceholder.typicode.com/posts", async (req, res, ctx) => {
+      http.post("https://jsonplaceholder.typicode.com/posts", async () => {
         await new Promise((r) => setTimeout(r, 100));
-        return res(ctx.json({
+        return HttpResponse.json({
           id: 101,
           title: "New Post",
           body: "",
           userId: 1,
-        }), ctx.status(201));
+        }, { status: 201 });
       }),
     );
 
@@ -82,8 +82,8 @@ describe("useCreatePostMutation", () => {
 
   it("показує error при помилці сервера", async () => {
     server.use(
-      rest.post("https://jsonplaceholder.typicode.com/posts", (req, res, ctx) => {
-        return res(ctx.status(500));
+      http.post("https://jsonplaceholder.typicode.com/posts", () => {
+        return new HttpResponse(null, { status: 500 });
       }),
     );
 

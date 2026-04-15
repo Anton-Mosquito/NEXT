@@ -1,5 +1,5 @@
 // src/__mocks__/handlers/postHandlers.ts
-import { rest } from "msw";
+import { http, HttpResponse } from "msw";
 import type { Post } from "@/entities/post";
 
 // ✅ Фікстурні дані — використовуємо в тестах
@@ -26,8 +26,8 @@ export const mockPosts: Post[] = [
 
 export const postHandlers = [
   // GET /posts
-  rest.get("https://jsonplaceholder.typicode.com/posts", (req, res, ctx) => {
-    const url = new URL(req.url);
+  http.get("https://jsonplaceholder.typicode.com/posts", ({ request }) => {
+    const url = new URL(request.url);
     const userId = url.searchParams.get("userId");
     const limit = Number(url.searchParams.get("_limit")) || mockPosts.length;
 
@@ -35,52 +35,52 @@ export const postHandlers = [
       ? mockPosts.filter((p) => p.userId === Number(userId))
       : mockPosts;
 
-    return res(ctx.json(posts.slice(0, limit)));
+    return HttpResponse.json(posts.slice(0, limit));
   }),
 
   // GET /posts/:id
-  rest.get("https://jsonplaceholder.typicode.com/posts/:id", (req, res, ctx) => {
-    const { id } = req.params;
+  http.get("https://jsonplaceholder.typicode.com/posts/:id", ({ params }) => {
+    const { id } = params;
     const post = mockPosts.find((p) => p.id === Number(id));
 
     if (!post) {
-      return res(ctx.status(404));
+      return new HttpResponse(null, { status: 404 });
     }
 
-    return res(ctx.json(post));
+    return HttpResponse.json(post);
   }),
 
   // POST /posts
-  rest.post(
+  http.post(
     "https://jsonplaceholder.typicode.com/posts",
-    async (req, res, ctx) => {
-      const body = (await req.json()) as Omit<Post, "id">;
+    async ({ request }) => {
+      const body = (await request.json()) as Omit<Post, "id">;
       const newPost: Post = { ...body, id: 101 };
-      return res(ctx.json(newPost), ctx.status(201));
+      return HttpResponse.json(newPost, { status: 201 });
     },
   ),
 
   // PATCH /posts/:id
-  rest.patch(
+  http.patch(
     "https://jsonplaceholder.typicode.com/posts/:id",
-    async (req, res, ctx) => {
-      const { id } = req.params;
-      const body = (await req.json()) as Partial<Post>;
+    async ({ request, params }) => {
+      const { id } = params;
+      const body = (await request.json()) as Partial<Post>;
       const post = mockPosts.find((p) => p.id === Number(id));
 
       if (!post) {
-        return res(ctx.status(404));
+        return new HttpResponse(null, { status: 404 });
       }
 
-      return res(ctx.json({ ...post, ...body }));
+      return HttpResponse.json({ ...post, ...body });
     },
   ),
 
   // DELETE /posts/:id
-  rest.delete(
+  http.delete(
     "https://jsonplaceholder.typicode.com/posts/:id",
-    (req, res, ctx) => {
-      return res(ctx.status(200));
+    () => {
+      return new HttpResponse(null, { status: 200 });
     },
   ),
 ];

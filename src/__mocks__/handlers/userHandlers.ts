@@ -1,5 +1,5 @@
 // src/__mocks__/handlers/userHandlers.ts
-import { rest } from "msw";
+import { http, HttpResponse } from "msw";
 import type { User } from "@/entities/user";
 
 export const mockUsers: User[] = [
@@ -26,14 +26,14 @@ export const mockUsers: User[] = [
 ];
 
 export const userHandlers = [
-  rest.get("https://jsonplaceholder.typicode.com/users", (req, res, ctx) => {
-    return res(ctx.json(mockUsers));
+  http.get("https://jsonplaceholder.typicode.com/users", () => {
+    return HttpResponse.json(mockUsers);
   }),
 
-  rest.get("https://jsonplaceholder.typicode.com/users/:id", (req, res, ctx) => {
-    const { id } = req.params;
+  http.get("https://jsonplaceholder.typicode.com/users/:id", ({ params }) => {
+    const { id } = params;
     const user = mockUsers.find((u) => u.id === Number(id));
-    if (!user) return res(ctx.status(404));
-    return res(ctx.json(user));
+    if (!user) return new HttpResponse(null, { status: 404 });
+    return HttpResponse.json(user);
   }),
 ];

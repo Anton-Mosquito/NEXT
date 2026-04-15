@@ -26,7 +26,11 @@ export const createWebSocketMiddleware = (wsUrl?: string): Middleware => {
   const HEARTBEAT_INTERVAL = 30_000;
 
   function flushQueue() {
-    while (messageQueue.length > 0 && socket && (socket as any).readyState === 1) {
+    while (
+      messageQueue.length > 0 &&
+      socket &&
+      (socket as any).readyState === 1
+    ) {
       const msg = messageQueue.shift()!;
       (socket as any).send(msg);
       console.log("📬 WS queue flushed:", msg);
@@ -85,7 +89,9 @@ export const createWebSocketMiddleware = (wsUrl?: string): Middleware => {
             if (reconnectAttempts < MAX_RECONNECT) {
               const delay = RECONNECT_DELAY * Math.pow(2, reconnectAttempts);
               reconnectAttempts++;
-              console.log(`🔄 WS reconnect attempt ${reconnectAttempts}/${MAX_RECONNECT} in ${delay}ms`);
+              console.log(
+                `🔄 WS reconnect attempt ${reconnectAttempts}/${MAX_RECONNECT} in ${delay}ms`,
+              );
               reconnectTimer = setTimeout(() => {
                 dispatch({ type: WS_ACTIONS.CONNECT });
               }, delay);
@@ -124,7 +130,10 @@ export const createWebSocketMiddleware = (wsUrl?: string): Middleware => {
         } else {
           // З'єднання відсутнє — зберігаємо в чергу
           messageQueue.push(payload);
-          console.log(`📥 WS queued (${messageQueue.length} pending):`, payload);
+          console.log(
+            `📥 WS queued (${messageQueue.length} pending):`,
+            payload,
+          );
         }
         break;
       }

@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Checkbox as CheckboxPrimitive } from "radix-ui"
+import * as React from "react";
+import { Checkbox as CheckboxPrimitive } from "radix-ui";
 
-import { cn } from "@/lib/utils"
-import { CheckIcon } from "lucide-react"
+import { cn } from "@/lib/utils";
+import { CheckIcon } from "lucide-react";
 
 function Checkbox({
   className,
@@ -28,7 +28,7 @@ function Checkbox({
         "aria-invalid:bg-destructive/20 aria-invalid:ring-3 aria-invalid:ring-destructive/20",
         // Dark mode unchecked surface
         "dark:bg-gray-04",
-        className
+        className,
       )}
       {...props}
     >
@@ -39,7 +39,7 @@ function Checkbox({
         <CheckIcon className="size-4 stroke-[2.5]" />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
-  )
+  );
 }
 
-export { Checkbox }
+export { Checkbox };

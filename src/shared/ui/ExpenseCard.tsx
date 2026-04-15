@@ -46,16 +46,22 @@ export function ExpenseCard({
           {/* Category + total */}
           <div className="flex flex-col">
             <span className="text-body-md text-gray-02">{category}</span>
-            <span className="text-display-sm text-foreground">{totalAmount}</span>
+            <span className="text-display-sm text-foreground">
+              {totalAmount}
+            </span>
           </div>
 
           {/* Trend — pushed to right */}
           <div className="ml-auto flex flex-col items-end">
             <div className="flex items-center gap-1">
-              <span className="text-display-sm text-foreground">{changePercent}</span>
+              <span className="text-display-sm text-foreground">
+                {changePercent}
+              </span>
               <TrendIcon size={18} className={trendColor} strokeWidth={2.5} />
             </div>
-            <span className="text-body-sm text-gray-02">Compare to last month</span>
+            <span className="text-body-sm text-gray-02">
+              Compare to last month
+            </span>
           </div>
         </div>
       </div>
@@ -66,7 +72,9 @@ export function ExpenseCard({
           <div key={`${item.label}-${i}`}>
             {i > 0 && <div className="mx-4 border-t border-border" />}
             <div className="flex items-center justify-between px-4 py-4">
-              <span className="text-heading-md text-foreground">{item.label}</span>
+              <span className="text-heading-md text-foreground">
+                {item.label}
+              </span>
               <div className="text-right">
                 <p className="text-heading-md text-foreground">{item.amount}</p>
                 <p className="text-body-sm text-gray-02">{item.date}</p>

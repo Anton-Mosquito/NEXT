@@ -2,4 +2,4 @@
 export { makeStore } from "./makeStore";
 export type { AppStore, RootState, AppDispatch } from "./makeStore";
 export { useAppDispatch, useAppSelector } from "./hooks";
-export { useStore } from 'react-redux'
+export { useStore } from "react-redux";

@@ -36,7 +36,7 @@ const defaultCategories: ExpenseCategory[] = [
     trend: "up",
     items: [
       { label: "House Rent", amount: "$230.00", date: DEFAULT_DATE },
-      { label: "Parking",    amount: "$20.00",  date: DEFAULT_DATE },
+      { label: "Parking", amount: "$20.00", date: DEFAULT_DATE },
     ],
   },
   {
@@ -46,7 +46,7 @@ const defaultCategories: ExpenseCategory[] = [
     changePercent: "08%",
     trend: "down",
     items: [
-      { label: "Grocery",         amount: "$230.00", date: DEFAULT_DATE },
+      { label: "Grocery", amount: "$230.00", date: DEFAULT_DATE },
       { label: "Restaurant bill", amount: "$120.00", date: DEFAULT_DATE },
     ],
   },
@@ -57,7 +57,7 @@ const defaultCategories: ExpenseCategory[] = [
     changePercent: "12%",
     trend: "down",
     items: [
-      { label: "Taxi Fare",      amount: "$30.00", date: DEFAULT_DATE },
+      { label: "Taxi Fare", amount: "$30.00", date: DEFAULT_DATE },
       { label: "Metro Card bill", amount: "$20.00", date: DEFAULT_DATE },
     ],
   },
@@ -69,7 +69,7 @@ const defaultCategories: ExpenseCategory[] = [
     trend: "down",
     items: [
       { label: "Movie ticket", amount: "$30.00", date: DEFAULT_DATE },
-      { label: "iTunes",       amount: "$50.00", date: DEFAULT_DATE },
+      { label: "iTunes", amount: "$50.00", date: DEFAULT_DATE },
     ],
   },
   {
@@ -91,7 +91,7 @@ const defaultCategories: ExpenseCategory[] = [
     trend: "up",
     items: [
       { label: "Donation", amount: "$30.00", date: DEFAULT_DATE },
-      { label: "Gift",     amount: "$20.00", date: DEFAULT_DATE },
+      { label: "Gift", amount: "$20.00", date: DEFAULT_DATE },
     ],
   },
 ];

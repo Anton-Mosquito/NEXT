@@ -1,5 +1,5 @@
 // src/app/bulk-demo/page.tsx
-import { BulkActions, bulkSlice } from '@/features/bulk-actions'
+import { BulkActions, bulkSlice } from "@/features/bulk-actions";
 export default function BulkDemoPage() {
   return (
     <div className="max-w-xl mx-auto">
@@ -9,5 +9,5 @@ export default function BulkDemoPage() {
       </p>
       <BulkActions />
     </div>
-  )
+  );
 }

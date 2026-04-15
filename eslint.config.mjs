@@ -24,11 +24,31 @@ const eslintConfig = defineConfig([
         {
           default: "disallow",
           rules: [
-            { from: "shared", disallow: ["entities", "features", "widgets", "pages"], allow: ["shared"] },
-            { from: "entities", disallow: ["features", "widgets", "pages"], allow: ["shared"] },
-            { from: "features", disallow: ["widgets", "pages"], allow: ['entities', 'shared'] },
-            { from: "widgets", disallow: ["pages"], allow: ['features', 'entities', 'shared'] },
-            { from: "pages", disallow: [], allow: ['app','widgets', 'features', 'entities', 'shared'] },
+            {
+              from: "shared",
+              disallow: ["entities", "features", "widgets", "pages"],
+              allow: ["shared"],
+            },
+            {
+              from: "entities",
+              disallow: ["features", "widgets", "pages"],
+              allow: ["shared"],
+            },
+            {
+              from: "features",
+              disallow: ["widgets", "pages"],
+              allow: ["entities", "shared"],
+            },
+            {
+              from: "widgets",
+              disallow: ["pages"],
+              allow: ["features", "entities", "shared"],
+            },
+            {
+              from: "pages",
+              disallow: [],
+              allow: ["app", "widgets", "features", "entities", "shared"],
+            },
           ],
         },
       ],

@@ -1,1 +1,1 @@
-export {PostsWithPrefetch} from "./ui/PostsWithPrefetch";
+export { PostsWithPrefetch } from "./ui/PostsWithPrefetch";

@@ -1,19 +1,19 @@
 // src/widgets/post-feed/ui/OptimizedPostFeed.tsx
-'use client'
-import { SkeletonList } from '@/shared/ui'
+"use client";
+import { SkeletonList } from "@/shared/ui";
 
 // ✅ Демонстрація оптимізацій для production
 
-import { memo, useMemo, useCallback, useState } from 'react'
-import { useGetPostsQuery } from '@/entities/post'
-import { LikeButton } from '@/features/like-post'
-import { Card, Badge } from '@/shared/ui'
-import { useAppSelector } from '@/app/store'
+import { memo, useMemo, useCallback, useState } from "react";
+import { useGetPostsQuery } from "@/entities/post";
+import { LikeButton } from "@/features/like-post";
+import { Card, Badge } from "@/shared/ui";
+import { useAppSelector } from "@/app/store";
 import {
   selectPostsQueryArgs,
   selectLikesStats,
-} from '@/entities/post/model/postSelectors'
-import type { PostWithMeta } from '@/entities/post'
+} from "@/entities/post/model/postSelectors";
+import type { PostWithMeta } from "@/entities/post";
 
 // ============================================================
 // ✅ React.memo: ре-рендериться тільки якщо post змінився
@@ -22,15 +22,15 @@ const OptimizedPostCard = memo(function OptimizedPostCard({
   post,
   onSelect,
 }: {
-  post: PostWithMeta
-  onSelect: (id: number) => void
+  post: PostWithMeta;
+  onSelect: (id: number) => void;
 }) {
-  console.log(`🔄 PostCard #${post.id} рендериться`)
+  console.log(`🔄 PostCard #${post.id} рендериться`);
 
   // useCallback всередині memo — стабільний callback
   const handleClick = useCallback(() => {
-    onSelect(post.id)
-  }, [post.id, onSelect])
+    onSelect(post.id);
+  }, [post.id, onSelect]);
 
   return (
     <Card hoverable onClick={handleClick}>
@@ -47,49 +47,49 @@ const OptimizedPostCard = memo(function OptimizedPostCard({
         </span>
       </div>
     </Card>
-  )
-})
+  );
+});
 
 // ============================================================
 // ✅ Статистика — окремий компонент з мемоізованим selector
 // ============================================================
 const LikesStatsBar = memo(function LikesStatsBar() {
   // ✅ createSelector — перераховується тільки при зміні likes
-  const stats = useAppSelector(selectLikesStats)
+  const stats = useAppSelector(selectLikesStats);
 
   return (
     <div className="flex gap-3 text-xs text-gray-500">
       <span>❤️ Всього лайків: {stats.total}</span>
       <span>✅ Liked: {stats.liked}</span>
     </div>
-  )
-})
+  );
+});
 
 // ============================================================
 // Головний компонент
 // ============================================================
 export function OptimizedPostFeed() {
-  const [selectedId, setSelectedId] = useState<number | null>(null)
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
   // ✅ Мемоізований selector → query args
-  const queryArgs = useAppSelector(selectPostsQueryArgs)
+  const queryArgs = useAppSelector(selectPostsQueryArgs);
 
   // ✅ RTK Query з мемоізованими аргументами
-  const { data: posts, isLoading } = useGetPostsQuery(queryArgs)
+  const { data: posts, isLoading } = useGetPostsQuery(queryArgs);
 
   // ✅ useCallback: стабільна функція між рендерами
   const handleSelect = useCallback((id: number) => {
-    setSelectedId((prev) => (prev === id ? null : id))
-  }, [])
+    setSelectedId((prev) => (prev === id ? null : id));
+  }, []);
 
   // ✅ useMemo: відфільтрований список без зайвих обчислень
   const filteredPosts = useMemo(
     () => posts?.filter((p) => p.wordCount > 5) ?? [],
-    [posts]
-  )
+    [posts],
+  );
 
   if (isLoading) {
-    return <SkeletonList count={3} />
+    return <SkeletonList count={3} />;
   }
 
   return (
@@ -97,11 +97,7 @@ export function OptimizedPostFeed() {
       <LikesStatsBar />
 
       {filteredPosts.map((post) => (
-        <OptimizedPostCard
-          key={post.id}
-          post={post}
-          onSelect={handleSelect}
-        />
+        <OptimizedPostCard key={post.id} post={post} onSelect={handleSelect} />
       ))}
 
       {selectedId && (
@@ -110,11 +106,11 @@ export function OptimizedPostFeed() {
         </div>
       )}
     </div>
-  )
+  );
 }
 
-if (process.env.NODE_ENV === 'development') {
-  OptimizedPostFeed.whyDidYouRender = true
-  OptimizedPostCard.whyDidYouRender = true
-  LikesStatsBar.whyDidYouRender = true
+if (process.env.NODE_ENV === "development") {
+  OptimizedPostFeed.whyDidYouRender = true;
+  OptimizedPostCard.whyDidYouRender = true;
+  LikesStatsBar.whyDidYouRender = true;
 }

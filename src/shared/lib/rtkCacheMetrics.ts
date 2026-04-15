@@ -103,9 +103,7 @@ function _logSummary(): void {
  */
 export const rtkCacheMetricsMiddleware: Middleware =
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  (_api) =>
-  (next) =>
-  (action) => {
+  (_api) => (next) => (action) => {
     if (process.env.NODE_ENV !== "production") {
       const a = action as UnknownAction & {
         meta?: { condition?: boolean; arg?: { endpointName?: string } };
@@ -195,7 +193,10 @@ export function resetCacheMetrics(): void {
 if (process.env.NODE_ENV !== "production" && typeof window !== "undefined") {
   (
     window as unknown as {
-      __rtkCacheMetrics?: { get: typeof getCacheMetrics; reset: typeof resetCacheMetrics };
+      __rtkCacheMetrics?: {
+        get: typeof getCacheMetrics;
+        reset: typeof resetCacheMetrics;
+      };
     }
   ).__rtkCacheMetrics = {
     get: getCacheMetrics,

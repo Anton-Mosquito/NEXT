@@ -8,7 +8,6 @@ export const ROUTES = {
   STREAMING_POSTS: "/posts/streaming",
   HYBRID: "/hybrid",
   USERS: "/users",
-
 } as const;
 
 export const NAV_LINKS = [

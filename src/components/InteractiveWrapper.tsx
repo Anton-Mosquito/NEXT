@@ -1,8 +1,8 @@
 // src/components/InteractiveWrapper.tsx
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { Card } from '@/shared/ui'
+import { useState } from "react";
+import { Card } from "@/shared/ui";
 
 // ✅ ПАТЕРН 2 в дії:
 // Client Component з клієнтським станом
@@ -10,15 +10,15 @@ import { Card } from '@/shared/ui'
 export function InteractiveWrapper({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
-  const [isExpanded, setIsExpanded] = useState(true)
-  const [highlight, setHighlight] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(true);
+  const [highlight, setHighlight] = useState(false);
 
   return (
     <div
       className={`rounded-xl border-2 p-4 transition-all ${
-        highlight ? 'border-blue-400 bg-blue-50' : 'border-gray-200'
+        highlight ? "border-blue-400 bg-blue-50" : "border-gray-200"
       }`}
     >
       {/* Клієнтські контролери */}
@@ -27,7 +27,7 @@ export function InteractiveWrapper({
           onClick={() => setIsExpanded((s) => !s)}
           className="text-xs bg-gray-100 px-3 py-1.5 rounded-lg hover:bg-gray-200"
         >
-          {isExpanded ? '▲ Згорнути' : '▼ Розгорнути'}
+          {isExpanded ? "▲ Згорнути" : "▼ Розгорнути"}
         </button>
         <button
           onClick={() => setHighlight((s) => !s)}
@@ -42,11 +42,7 @@ export function InteractiveWrapper({
         Це НЕ викликає re-render Server Component при зміні стану!
         Server content заморожений як HTML
       */}
-      {isExpanded && (
-        <div className="border-t pt-3">
-          {children}
-        </div>
-      )}
+      {isExpanded && <div className="border-t pt-3">{children}</div>}
     </div>
-  )
+  );
 }

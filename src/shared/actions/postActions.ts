@@ -113,6 +113,10 @@ export async function bulkDeletePostsAction(
       data: { deletedCount: successCount },
     };
   } catch (error) {
-    return { success: false, error: error instanceof Error ? error.message : "Batch видалення провалилось" };
+    return {
+      success: false,
+      error:
+        error instanceof Error ? error.message : "Batch видалення провалилось",
+    };
   }
 }

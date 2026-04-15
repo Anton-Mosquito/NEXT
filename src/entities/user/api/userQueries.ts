@@ -4,11 +4,7 @@
 // gradually replace it as the project migrates fully to PostgreSQL.
 "use client";
 
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import type { DbUser, CreateUserInput } from "@shared/schemas";
 
 // ─── Query keys ──────────────────────────────────────────────────────────────

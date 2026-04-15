@@ -77,7 +77,10 @@ describe("PostCard + LikeButton інтеграція", () => {
 
     // Початкові likes для поста #42 (fallback якщо немає в store)
     const initialState = store.getState();
-    const initialLikes = initialState.likes.likes[mockPost.id] ?? { count: 0, isLiked: false };
+    const initialLikes = initialState.likes.likes[mockPost.id] ?? {
+      count: 0,
+      isLiked: false,
+    };
 
     // Клікаємо лайк
     const likeButton = screen.getByRole("button");
@@ -89,6 +92,8 @@ describe("PostCard + LikeButton інтеграція", () => {
 
     expect(newLikes).toBeDefined();
     expect(newLikes.isLiked).toBe(!initialLikes.isLiked);
-    expect(newLikes.count).toBe(initialLikes.count + (initialLikes.isLiked ? -1 : 1));
+    expect(newLikes.count).toBe(
+      initialLikes.count + (initialLikes.isLiked ? -1 : 1),
+    );
   });
 });

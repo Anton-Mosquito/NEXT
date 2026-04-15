@@ -7,7 +7,6 @@ import { cn } from "@/shared/lib";
 import { NAV_LINKS } from "@/shared/constants";
 import { UserAuthButton } from "@/features/auth-form";
 
-
 export function Header() {
   const pathname = usePathname();
 

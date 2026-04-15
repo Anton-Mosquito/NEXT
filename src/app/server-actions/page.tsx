@@ -1,12 +1,12 @@
 // src/app/server-actions/page.tsx
-import { Suspense } from 'react'
-import { Card, SkeletonList } from '@/shared/ui'
-import { CreatePostServerAction } from '@/features/create-post/ui/CreatePostServerAction'
-import { PostFeed } from '@/widgets/post-feed'
+import { Suspense } from "react";
+import { Card, SkeletonList } from "@/shared/ui";
+import { CreatePostServerAction } from "@/features/create-post/ui/CreatePostServerAction";
+import { PostFeed } from "@/widgets/post-feed";
 
 export const metadata = {
-  title: 'Server Actions + Redux',
-}
+  title: "Server Actions + Redux",
+};
 
 export default function ServerActionsPage() {
   return (
@@ -14,7 +14,8 @@ export default function ServerActionsPage() {
       <div>
         <h1 className="text-2xl font-bold">🚀 Server Actions + Redux</h1>
         <p className="text-gray-500 text-sm mt-1">
-          Server Actions виконуються на сервері, результат інвалідує RTK Query кеш
+          Server Actions виконуються на сервері, результат інвалідує RTK Query
+          кеш
         </p>
       </div>
 
@@ -29,7 +30,10 @@ export default function ServerActionsPage() {
             { label: "→", color: "" },
             { label: "DB / API", color: "bg-purple-100 text-purple-700" },
             { label: "→", color: "" },
-            { label: "revalidatePath()", color: "bg-yellow-100 text-yellow-700" },
+            {
+              label: "revalidatePath()",
+              color: "bg-yellow-100 text-yellow-700",
+            },
             { label: "+", color: "" },
             { label: "invalidateTags()", color: "bg-red-100 text-red-700" },
             { label: "→", color: "" },
@@ -57,9 +61,7 @@ export default function ServerActionsPage() {
           <h2 className="font-bold text-lg">
             📋 Список (RTK Query, автооновлення)
           </h2>
-          <Suspense
-            fallback={<SkeletonList count={3} />}
-          >
+          <Suspense fallback={<SkeletonList count={3} />}>
             <PostFeed />
           </Suspense>
         </div>
@@ -67,7 +69,9 @@ export default function ServerActionsPage() {
 
       {/* Server Actions vs RTK Query Mutations */}
       <Card>
-        <h2 className="font-bold mb-3">⚖️ Server Actions vs RTK Query Mutations</h2>
+        <h2 className="font-bold mb-3">
+          ⚖️ Server Actions vs RTK Query Mutations
+        </h2>
         <div className="overflow-x-auto">
           <table className="w-full text-xs">
             <thead>
@@ -79,17 +83,27 @@ export default function ServerActionsPage() {
             </thead>
             <tbody className="divide-y divide-gray-100">
               {[
-                ['Де виконується', '✅ Тільки сервер', '🔄 Клієнт → сервер'],
-                ['Доступ до DB', '✅ Прямий', '❌ Тільки через API'],
-                ['Безпека секретів', '✅ Не в bundle', '⚠️ URL видно'],
-                ['File upload', '✅ FormData нативно', '⚠️ Складніше'],
-                ['Optimistic update', '⚠️ Ручна', '✅ Вбудована'],
-                ['Cache invalidation', '✅ revalidatePath', '✅ invalidateTags'],
-                ['Loading state', 'useTransition', 'isLoading хук'],
-                ['Коли використовувати', 'Auth, DB, files', 'CRUD через REST API'],
+                ["Де виконується", "✅ Тільки сервер", "🔄 Клієнт → сервер"],
+                ["Доступ до DB", "✅ Прямий", "❌ Тільки через API"],
+                ["Безпека секретів", "✅ Не в bundle", "⚠️ URL видно"],
+                ["File upload", "✅ FormData нативно", "⚠️ Складніше"],
+                ["Optimistic update", "⚠️ Ручна", "✅ Вбудована"],
+                [
+                  "Cache invalidation",
+                  "✅ revalidatePath",
+                  "✅ invalidateTags",
+                ],
+                ["Loading state", "useTransition", "isLoading хук"],
+                [
+                  "Коли використовувати",
+                  "Auth, DB, files",
+                  "CRUD через REST API",
+                ],
               ].map(([criterion, sa, rtk]) => (
                 <tr key={criterion}>
-                  <td className="py-2 font-medium text-gray-700">{criterion}</td>
+                  <td className="py-2 font-medium text-gray-700">
+                    {criterion}
+                  </td>
                   <td className="py-2 text-green-700">{sa}</td>
                   <td className="py-2 text-blue-700">{rtk}</td>
                 </tr>
@@ -99,5 +113,5 @@ export default function ServerActionsPage() {
         </div>
       </Card>
     </div>
-  )
+  );
 }

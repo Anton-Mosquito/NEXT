@@ -27,7 +27,10 @@ function MastercardLogo() {
 
 function VisaLogo() {
   return (
-    <span className="text-lg font-extrabold italic tracking-tight text-[#1A1F71]" aria-label="Visa">
+    <span
+      className="text-lg font-extrabold italic tracking-tight text-[#1A1F71]"
+      aria-label="Visa"
+    >
       VISA
     </span>
   );
@@ -46,7 +49,7 @@ export function AccountCard({
     <div
       className={cn(
         "flex w-full flex-col rounded-2xl bg-card p-6 shadow-sm",
-        className
+        className,
       )}
     >
       {/* ── Header ──────────────────────────────────────────── */}

@@ -4,8 +4,10 @@ import { Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { InputHTMLAttributes } from "react";
 
-interface SearchInputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
+interface SearchInputProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "type"
+> {
   wrapperClassName?: string;
 }
 
@@ -21,7 +23,7 @@ export function SearchInput({
         "flex items-center rounded-[12px] bg-card",
         // padding: top 12 right 24 bottom 12 left 32
         "px-6 py-3 pl-8",
-        wrapperClassName
+        wrapperClassName,
       )}
     >
       <input
@@ -34,7 +36,7 @@ export function SearchInput({
           // hide browser-native clear/cancel button
           "[&::-webkit-search-cancel-button]:appearance-none",
           "[&::-webkit-search-decoration]:appearance-none",
-          className
+          className,
         )}
         {...props}
       />

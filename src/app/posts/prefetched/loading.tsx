@@ -1,5 +1,5 @@
 // src/app/posts/prefetched/loading.tsx
-import { Skeleton, SkeletonList } from '@/shared/ui'
+import { Skeleton, SkeletonList } from "@/shared/ui";
 
 export default function PrefetchedLoading() {
   return (
@@ -10,5 +10,5 @@ export default function PrefetchedLoading() {
         <SkeletonList count={5} />
       </div>
     </div>
-  )
+  );
 }

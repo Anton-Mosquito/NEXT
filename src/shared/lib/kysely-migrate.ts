@@ -11,7 +11,13 @@
 
 import * as path from "path";
 import * as fsSync from "fs";
-import { Kysely, PostgresDialect, CamelCasePlugin, Migrator, FileMigrationProvider } from "kysely";
+import {
+  Kysely,
+  PostgresDialect,
+  CamelCasePlugin,
+  Migrator,
+  FileMigrationProvider,
+} from "kysely";
 import { Pool } from "pg";
 import type { Database } from "@/shared/types/database";
 
@@ -22,7 +28,9 @@ if (!url) {
 }
 
 const sslUrl = url.replace(/sslmode=require/g, "sslmode=verify-full");
-const ssl = url.includes("sslmode=") ? { rejectUnauthorized: false } : undefined;
+const ssl = url.includes("sslmode=")
+  ? { rejectUnauthorized: false }
+  : undefined;
 
 const pool = new Pool({ connectionString: sslUrl, ssl });
 
@@ -76,5 +84,3 @@ migrate().catch((err) => {
   console.error("❌ Migration runner failed:", err);
   process.exit(1);
 });
-
-

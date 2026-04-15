@@ -12,9 +12,12 @@ export default function ProfilePage() {
   const user = useAppSelector(selectCurrentUser);
   const isAuthenticated = useAppSelector(selectIsAuthenticated);
 
-  const { data: userPosts, isLoading } = useGetPostsByUserQuery(parseInt(user?.id ?? '1', 10), {
-    skip: !user,
-  });
+  const { data: userPosts, isLoading } = useGetPostsByUserQuery(
+    parseInt(user?.id ?? "1", 10),
+    {
+      skip: !user,
+    },
+  );
 
   if (!isAuthenticated || !user) {
     return (

@@ -5,12 +5,19 @@ import { Eye, EyeOff } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { InputHTMLAttributes } from "react";
 
-interface PasswordInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
+interface PasswordInputProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "type"
+> {
   /** Shows the actual password value (revealed state from screenshot) */
   revealed?: boolean;
 }
 
-export function PasswordInput({ className, revealed: controlledRevealed, ...props }: PasswordInputProps) {
+export function PasswordInput({
+  className,
+  revealed: controlledRevealed,
+  ...props
+}: PasswordInputProps) {
   const [internalRevealed, setInternalRevealed] = useState(false);
   const isRevealed = controlledRevealed ?? internalRevealed;
 
@@ -23,7 +30,7 @@ export function PasswordInput({ className, revealed: controlledRevealed, ...prop
         "focus-within:border-gray-02",
         // Disabled
         "has-disabled:cursor-not-allowed has-disabled:opacity-50",
-        className
+        className,
       )}
     >
       <input

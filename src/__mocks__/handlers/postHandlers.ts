@@ -77,10 +77,7 @@ export const postHandlers = [
   ),
 
   // DELETE /posts/:id
-  http.delete(
-    "https://jsonplaceholder.typicode.com/posts/:id",
-    () => {
-      return new HttpResponse(null, { status: 200 });
-    },
-  ),
+  http.delete("https://jsonplaceholder.typicode.com/posts/:id", () => {
+    return new HttpResponse(null, { status: 200 });
+  }),
 ];

@@ -39,7 +39,7 @@ export function SidebarProfile({
       className={cn(
         // py-8 = 32px top/bottom, no horizontal padding (sidebar provides it)
         "flex items-center py-8",
-        className
+        className,
       )}
     >
       {/* Avatar + name block — 188px wide, gap-4 (16px) */}

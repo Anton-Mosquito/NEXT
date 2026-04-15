@@ -41,7 +41,7 @@ export function Sidebar({
         "flex h-full w-70 flex-col bg-card",
         // padding: 48px top/bottom, 28px left/right
         "px-7 py-12",
-        className
+        className,
       )}
     >
       {/* ── Logo ─────────────────────────────────────────────── */}
@@ -65,7 +65,7 @@ export function Sidebar({
                 "text-base leading-6 text-white transition-colors",
                 isActive
                   ? "bg-primary font-semibold"
-                  : "font-normal hover:bg-white/10"
+                  : "font-normal hover:bg-white/10",
               )}
             >
               <Icon size={24} className="shrink-0" />

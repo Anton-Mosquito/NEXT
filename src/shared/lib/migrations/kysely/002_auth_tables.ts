@@ -29,20 +29,21 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn("email_verified", "timestamptz")
     .execute();
 
-  await db.schema
-    .alterTable("user")
-    .addColumn("image", "text")
-    .execute();
+  await db.schema.alterTable("user").addColumn("image", "text").execute();
 
   // 4. Make `name` nullable — OAuth providers may not supply a name.
   await sql`ALTER TABLE "user" ALTER COLUMN name DROP NOT NULL`.execute(db);
 
   // 5. Migrate the primary key from SERIAL integer → TEXT UUID.
   //    a) Add a new column with a UUID default.
-  await sql`ALTER TABLE "user" ADD COLUMN new_id TEXT NOT NULL DEFAULT gen_random_uuid()::text`.execute(db);
+  await sql`ALTER TABLE "user" ADD COLUMN new_id TEXT NOT NULL DEFAULT gen_random_uuid()::text`.execute(
+    db,
+  );
 
   //    b) Drop the old integer PK constraint (try both possible names).
-  await sql`ALTER TABLE "user" DROP CONSTRAINT IF EXISTS users_pkey`.execute(db);
+  await sql`ALTER TABLE "user" DROP CONSTRAINT IF EXISTS users_pkey`.execute(
+    db,
+  );
   await sql`ALTER TABLE "user" DROP CONSTRAINT IF EXISTS user_pkey`.execute(db);
 
   //    c) Drop the old serial id column.

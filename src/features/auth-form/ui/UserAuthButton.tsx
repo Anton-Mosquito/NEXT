@@ -31,11 +31,7 @@ export function UserAuthButton() {
 
   if (status === "unauthenticated" || !session) {
     return (
-      <Button
-        size="sm"
-        variant="primary"
-        onClick={() => signIn("google")}
-      >
+      <Button size="sm" variant="primary" onClick={() => signIn("google")}>
         Sign In
       </Button>
     );
@@ -66,11 +62,7 @@ export function UserAuthButton() {
       </div>
 
       {/* Sign-out action */}
-      <Button
-        size="sm"
-        variant="ghost"
-        onClick={() => signOut()}
-      >
+      <Button size="sm" variant="ghost" onClick={() => signOut()}>
         Sign Out
       </Button>
     </div>

@@ -1,9 +1,9 @@
 // next.config.ts — оновлений
-import type { NextConfig } from 'next';
-import bundleAnalyzer from '@next/bundle-analyzer';
+import type { NextConfig } from "next";
+import bundleAnalyzer from "@next/bundle-analyzer";
 
 const withBundleAnalyzer = bundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
+  enabled: process.env.ANALYZE === "true",
 });
 
 const nextConfig: NextConfig = {
@@ -15,9 +15,7 @@ const nextConfig: NextConfig = {
   serverExternalPackages: ["pg"],
 
   images: {
-    remotePatterns: [
-      { protocol: "https", hostname: "i.pravatar.cc" },
-    ],
+    remotePatterns: [{ protocol: "https", hostname: "i.pravatar.cc" }],
   },
 
   // ✅ Оптимізації для production

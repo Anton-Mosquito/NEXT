@@ -28,7 +28,12 @@ export function CreateDbUserForm() {
     resolver: zodResolver(createUserSchema),
   });
 
-  const { mutateAsync, isSuccess, error, reset: resetMutation } = useCreateUserMutation();
+  const {
+    mutateAsync,
+    isSuccess,
+    error,
+    reset: resetMutation,
+  } = useCreateUserMutation();
 
   const onSubmit = async (data: CreateUserInput) => {
     await mutateAsync(data);
@@ -40,12 +45,10 @@ export function CreateDbUserForm() {
       <Card>
         <CardContent className="flex flex-col items-center gap-3 py-8">
           <p className="text-4xl">🎉</p>
-          <p className="font-semibold text-green-700">User created successfully!</p>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => resetMutation()}
-          >
+          <p className="font-semibold text-green-700">
+            User created successfully!
+          </p>
+          <Button variant="outline" size="sm" onClick={() => resetMutation()}>
             Add another user
           </Button>
         </CardContent>
@@ -62,7 +65,11 @@ export function CreateDbUserForm() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4" noValidate>
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-4"
+          noValidate
+        >
           {/* Name */}
           <div className="space-y-1">
             <Label htmlFor="name">Name</Label>

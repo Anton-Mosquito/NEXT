@@ -1,6 +1,6 @@
 // src/app/hydration-demo/page.tsx
-import { Card } from '@/shared/ui'
-import HydrationBugDemo from '@/components/HydrationBugDemo'
+import { Card } from "@/shared/ui";
+import HydrationBugDemo from "@/components/HydrationBugDemo";
 
 export default function HydrationDemoPage() {
   return (
@@ -17,13 +17,13 @@ export default function HydrationDemoPage() {
           🔍 Що таке Hydration Mismatch?
         </h2>
         <p className="text-sm text-gray-600 leading-relaxed">
-          Hydration — процес коли React клієнт &quot;оживляє&quot; серверний HTML.
-          Mismatch виникає коли серверний HTML ≠ клієнтський render.
-          React або ігнорує (warning) або повністю перерендерює (performance hit).
+          Hydration — процес коли React клієнт &quot;оживляє&quot; серверний
+          HTML. Mismatch виникає коли серверний HTML ≠ клієнтський render. React
+          або ігнорує (warning) або повністю перерендерює (performance hit).
         </p>
       </Card>
 
       <HydrationBugDemo />
     </div>
-  )
+  );
 }

@@ -1,9 +1,6 @@
 // src/shared/ui/Avatar.tsx
 import { cn } from "@/lib/utils";
-import {
-  Avatar as ShadcnAvatar,
-  AvatarFallback,
-} from "@/components/ui/avatar";
+import { Avatar as ShadcnAvatar, AvatarFallback } from "@/components/ui/avatar";
 
 interface AvatarProps {
   name: string;

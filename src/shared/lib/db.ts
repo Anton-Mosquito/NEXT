@@ -20,11 +20,10 @@ function createPool(): Pool {
   // Enable SSL for cloud databases (sslmode=require in the URL).
   // We switch to sslmode=verify-full in the URL to adopt the stricter semantics
   // that pg v9 will enforce by default, which silences the deprecation warning.
-  const sslUrl = url.replace(
-    /sslmode=require/g,
-    "sslmode=verify-full",
-  );
-  const ssl = url.includes("sslmode=") ? { rejectUnauthorized: false } : undefined;
+  const sslUrl = url.replace(/sslmode=require/g, "sslmode=verify-full");
+  const ssl = url.includes("sslmode=")
+    ? { rejectUnauthorized: false }
+    : undefined;
 
   return new Pool({
     connectionString: sslUrl,

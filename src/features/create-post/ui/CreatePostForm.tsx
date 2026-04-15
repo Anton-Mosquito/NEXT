@@ -82,7 +82,9 @@ export function CreatePostForm({ onSuccess, onCancel }: CreatePostFormProps) {
             aria-invalid={!!errors.body}
             className="resize-none"
           />
-          {errors.body && <p className="text-xs text-destructive">{errors.body}</p>}
+          {errors.body && (
+            <p className="text-xs text-destructive">{errors.body}</p>
+          )}
         </div>
 
         <div className="flex gap-2 pt-1">

@@ -4,7 +4,14 @@ import { Button as ShadcnButton } from "@/components/ui/button";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 type ButtonVariant = "primary" | "secondary" | "danger" | "ghost";
-type ButtonSize = "sm" | "md" | "lg" | "figma-sm" | "figma-md" | "figma-xl" | "figma-2xl";
+type ButtonSize =
+  | "sm"
+  | "md"
+  | "lg"
+  | "figma-sm"
+  | "figma-md"
+  | "figma-xl"
+  | "figma-2xl";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
@@ -31,9 +38,9 @@ const sizeMap: Record<ButtonSize, string> = {
   sm: "sm",
   md: "default",
   lg: "lg",
-  "figma-sm":  "figma-sm",
-  "figma-md":  "figma-md",
-  "figma-xl":  "figma-xl",
+  "figma-sm": "figma-sm",
+  "figma-md": "figma-md",
+  "figma-xl": "figma-xl",
   "figma-2xl": "figma-2xl",
 };
 

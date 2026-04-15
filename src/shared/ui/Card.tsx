@@ -31,7 +31,8 @@ export function Card({
       className={cn(
         "gap-0",
         paddingStyles[padding],
-        hoverable && "cursor-pointer hover:shadow-md hover:border-gray-300 transition-all",
+        hoverable &&
+          "cursor-pointer hover:shadow-md hover:border-gray-300 transition-all",
         className,
       )}
     >

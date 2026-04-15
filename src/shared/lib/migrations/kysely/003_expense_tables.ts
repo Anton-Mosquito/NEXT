@@ -35,9 +35,7 @@ export async function up(db: Kysely<any>): Promise<void> {
       col.notNull().defaultTo(0),
     )
     .addColumn("currency", "text", (col) => col.notNull().defaultTo("UAH"))
-    .addColumn("created_at", "timestamptz", (col) =>
-      col.defaultTo(sql`now()`),
-    )
+    .addColumn("created_at", "timestamptz", (col) => col.defaultTo(sql`now()`))
     .execute();
 
   // Enforce allowed account types at the DB level.
@@ -59,9 +57,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn("type", "text", (col) => col.notNull())
     .addColumn("color", "text")
     .addColumn("icon", "text")
-    .addColumn("created_at", "timestamptz", (col) =>
-      col.defaultTo(sql`now()`),
-    )
+    .addColumn("created_at", "timestamptz", (col) => col.defaultTo(sql`now()`))
     .execute();
 
   await sql`
@@ -94,9 +90,7 @@ export async function up(db: Kysely<any>): Promise<void> {
     .addColumn("type", "text", (col) => col.notNull())
     .addColumn("date", "timestamptz", (col) => col.notNull())
     .addColumn("description", "text")
-    .addColumn("created_at", "timestamptz", (col) =>
-      col.defaultTo(sql`now()`),
-    )
+    .addColumn("created_at", "timestamptz", (col) => col.defaultTo(sql`now()`))
     .execute();
 
   await sql`

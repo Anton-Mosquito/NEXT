@@ -1,18 +1,18 @@
 // src/app/ssr-safety/page.tsx
-import { Card } from '@/shared/ui'
-import { SsrSafetyDemo } from '@/components/SsrSafetyDemo'
-import { randomUUID } from 'crypto'
+import { Card } from "@/shared/ui";
+import { SsrSafetyDemo } from "@/components/SsrSafetyDemo";
+import { randomUUID } from "crypto";
 
 // ✅ Кожен запит має унікальний ID (доводить ізоляцію)
 function generateRequestId() {
   // У Node.js crypto.randomUUID доступний без імпорту
-  return Math.random().toString(36).slice(2, 9).toUpperCase()
+  return Math.random().toString(36).slice(2, 9).toUpperCase();
 }
 
 export default async function SsrSafetyPage() {
   // ✅ Унікальний для кожного HTTP запиту
-  const requestId = generateRequestId()
-  const serverTimestamp = new Date().toISOString()
+  const requestId = generateRequestId();
+  const serverTimestamp = new Date().toISOString();
 
   return (
     <div className="max-w-2xl mx-auto space-y-5">
@@ -32,10 +32,7 @@ export default async function SsrSafetyPage() {
         </p>
       </Card>
 
-      <SsrSafetyDemo
-        requestId={requestId}
-        serverTimestamp={serverTimestamp}
-      />
+      <SsrSafetyDemo requestId={requestId} serverTimestamp={serverTimestamp} />
     </div>
-  )
+  );
 }

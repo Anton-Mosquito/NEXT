@@ -1,5 +1,5 @@
 {
-  "name": "day5-fsd",
+  "name": "finance-dashboard-app",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -7,7 +7,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "analyze": "ANALYZE=true npm run build",
+    "lint:fix": "eslint --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "anal yze": "ANALYZE=true npm run build",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
@@ -63,6 +66,7 @@
     "eslint-plugin-boundaries": "^6.0.2",
     "jsdom": "^29.0.2",
     "msw": "^2.13.3",
+    "prettier": "^3.8.3",
     "shadcn": "^4.2.0",
     "tailwindcss": "^4.2.2",
     "tsx": "^4.21.0",

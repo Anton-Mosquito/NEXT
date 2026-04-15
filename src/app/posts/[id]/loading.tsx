@@ -1,6 +1,6 @@
 // src/app/posts/[id]/loading.tsx
 // ✅ Автоматичний Suspense fallback для цього route
-import { Skeleton, SkeletonCard } from '@/shared/ui'
+import { Skeleton, SkeletonCard } from "@/shared/ui";
 
 export default function PostDetailLoading() {
   return (

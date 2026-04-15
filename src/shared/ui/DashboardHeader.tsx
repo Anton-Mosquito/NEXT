@@ -34,7 +34,7 @@ export function DashboardHeader({
         "flex items-center bg-card",
         // padding: 20px top/bottom, 24px left, 32px right
         "py-5 pl-6 pr-8 border-b border-gray-05",
-        className
+        className,
       )}
     >
       {/* ── Left: greeting + date ──────────────────────────── */}

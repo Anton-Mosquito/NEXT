@@ -38,22 +38,34 @@ export default function UsersPage() {
         <h2 className="font-semibold">Architecture overview</h2>
         <ul className="list-disc list-inside space-y-1 text-muted-foreground">
           <li>
-            <strong className="text-foreground">src/shared/lib/db.ts</strong> — pg.Pool singleton; survives Next.js HMR in dev
+            <strong className="text-foreground">src/shared/lib/db.ts</strong> —
+            pg.Pool singleton; survives Next.js HMR in dev
           </li>
           <li>
-            <strong className="text-foreground">src/shared/lib/migrations/</strong> — plain SQL migration files (run with npm run db:migrate)
+            <strong className="text-foreground">
+              src/shared/lib/migrations/
+            </strong>{" "}
+            — plain SQL migration files (run with npm run db:migrate)
           </li>
           <li>
-            <strong className="text-foreground">src/shared/services/userService.ts</strong> — raw SQL queries with $1/$2 parameterization
+            <strong className="text-foreground">
+              src/shared/services/userService.ts
+            </strong>{" "}
+            — raw SQL queries with $1/$2 parameterization
           </li>
           <li>
-            <strong className="text-foreground">src/shared/schemas/userSchema.ts</strong> — Zod schemas for DbUser and CreateUserInput
+            <strong className="text-foreground">
+              src/shared/schemas/userSchema.ts
+            </strong>{" "}
+            — Zod schemas for DbUser and CreateUserInput
           </li>
           <li>
-            <strong className="text-foreground">src/app/api/users/</strong> — thin API-route controllers (validate → delegate → respond)
+            <strong className="text-foreground">src/app/api/users/</strong> —
+            thin API-route controllers (validate → delegate → respond)
           </li>
           <li>
-            <strong className="text-foreground">TanStack Query</strong> — client-side data-fetching/caching; auto-refetches after mutations
+            <strong className="text-foreground">TanStack Query</strong> —
+            client-side data-fetching/caching; auto-refetches after mutations
           </li>
         </ul>
       </div>

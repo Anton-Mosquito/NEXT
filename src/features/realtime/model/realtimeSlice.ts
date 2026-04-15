@@ -1,5 +1,9 @@
 // src/features/realtime/model/realtimeSlice.ts
-import { createSlice, createSelector, type PayloadAction } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  createSelector,
+  type PayloadAction,
+} from "@reduxjs/toolkit";
 import type {
   RealtimeState,
   ConnectionStatus,

@@ -1,7 +1,10 @@
 // src/entities/user/ui/DbUserList.tsx
 "use client";
 
-import { useUsersQuery, useDeleteUserMutation } from "@/entities/user/api/userQueries";
+import {
+  useUsersQuery,
+  useDeleteUserMutation,
+} from "@/entities/user/api/userQueries";
 import type { DbUser } from "@shared/schemas";
 
 import { Button } from "@/components/ui/button";
@@ -103,15 +106,23 @@ export function DbUserList() {
 
             {isError && (
               <TableRow>
-                <TableCell colSpan={5} className="py-8 text-center text-destructive">
-                  {error instanceof Error ? error.message : "Failed to load users"}
+                <TableCell
+                  colSpan={5}
+                  className="py-8 text-center text-destructive"
+                >
+                  {error instanceof Error
+                    ? error.message
+                    : "Failed to load users"}
                 </TableCell>
               </TableRow>
             )}
 
             {!isLoading && !isError && users?.length === 0 && (
               <TableRow>
-                <TableCell colSpan={5} className="py-12 text-center text-muted-foreground">
+                <TableCell
+                  colSpan={5}
+                  className="py-12 text-center text-muted-foreground"
+                >
                   No users yet. Create the first one above!
                 </TableCell>
               </TableRow>

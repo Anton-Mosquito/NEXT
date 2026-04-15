@@ -3,7 +3,7 @@
 
 import { Suspense } from "react";
 import { Card, Skeleton, SkeletonCard } from "@/shared/ui";
-import { ReduxStreamingClient } from '@/components/ReduxStreamingClient'
+import { ReduxStreamingClient } from "@/components/ReduxStreamingClient";
 
 // Симуляція різних швидкостей завантаження
 async function fetchFastData() {

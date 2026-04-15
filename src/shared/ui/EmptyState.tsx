@@ -56,14 +56,23 @@ export function EmptyState({
   );
 
   return (
-    <Card padding="none" className={cn("flex flex-col items-center justify-center text-center gap-3", paddingClass, className)}>
+    <Card
+      padding="none"
+      className={cn(
+        "flex flex-col items-center justify-center text-center gap-3",
+        paddingClass,
+        className,
+      )}
+    >
       <div role="img" aria-hidden className="text-gray-400">
         {icon ?? renderDefaultIcon()}
       </div>
 
       {title && <div className="font-medium text-gray-800">{title}</div>}
 
-      {description && <div className="text-sm text-gray-500 max-w-md">{description}</div>}
+      {description && (
+        <div className="text-sm text-gray-500 max-w-md">{description}</div>
+      )}
 
       {children}
 
@@ -75,7 +84,11 @@ export function EmptyState({
           size={action.size ?? "md"}
           className="mt-2"
         >
-          {action.href ? <a href={action.href}>{action.label}</a> : action.label}
+          {action.href ? (
+            <a href={action.href}>{action.label}</a>
+          ) : (
+            action.label
+          )}
         </Button>
       ) : null}
     </Card>

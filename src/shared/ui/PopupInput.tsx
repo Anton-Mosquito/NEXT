@@ -1,11 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { LabeledInput } from "./LabeledInput";
 import { cn } from "@/lib/utils";
@@ -37,7 +33,7 @@ export function PopupInput({
   className,
 }: PopupInputProps) {
   const [values, setValues] = useState<Record<string, string>>(() =>
-    Object.fromEntries(fields.map((f) => [f.label, f.defaultValue ?? ""]))
+    Object.fromEntries(fields.map((f) => [f.label, f.defaultValue ?? ""])),
   );
 
   function handleSubmit() {
@@ -51,7 +47,7 @@ export function PopupInput({
         className={cn(
           // Figma: 488×392, large radius, generous padding, no ring
           "w-full max-w-122 rounded-3xl p-8 gap-0 ring-0",
-          className
+          className,
         )}
       >
         {/* visually hidden title for a11y */}
@@ -68,7 +64,10 @@ export function PopupInput({
               placeholder={field.placeholder}
               value={values[field.label]}
               onChange={(e) =>
-                setValues((prev) => ({ ...prev, [field.label]: e.target.value }))
+                setValues((prev) => ({
+                  ...prev,
+                  [field.label]: e.target.value,
+                }))
               }
             />
           ))}

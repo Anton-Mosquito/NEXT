@@ -1,7 +1,9 @@
 <!-- src/docs/performance-checklist.md -->
+
 # Production Performance Checklist
 
 ## Redux/RTK Query
+
 - [ ] createSelector для всіх derived state
 - [ ] selectFromResult де потрібна часткова підписка
 - [ ] React.memo для list items
@@ -10,6 +12,7 @@
 - [ ] Видалено зайвий loggerMiddleware у production
 
 ## Next.js
+
 - [ ] Server Components для статичного контенту
 - [ ] dynamic() для важких Client Components
 - [ ] next/image для всіх зображень
@@ -18,12 +21,14 @@
 - [ ] generateStaticParams для dynamic routes
 
 ## Bundle
+
 - [ ] ANALYZE=true build — перевірено
 - [ ] Немає великих залежностей у client bundle
-- [ ] Named imports (не * from)
+- [ ] Named imports (не \* from)
 - [ ] Видалено dev-only code через NODE_ENV
 
 ## Testing
+
 - [ ] Unit тести для всіх slices
 - [ ] Unit тести для селекторів
 - [ ] Integration тести для RTK Query
@@ -32,14 +37,14 @@
 - [ ] Coverage > 70%
 
 ## Hydration
+
 - [ ] Немає "Hydration failed" warnings у console
 - [ ] localStorage/sessionStorage тільки у useEffect
 - [ ] Немає нових Date() без suppressHydrationWarning
 - [ ] preloadedState передається у StoreProvider
 
-
-
 ### 🎯 Бонус челендж
+
 ```
 □ Встанови why-did-you-render для dev mode:
   npm install -D @welldone-software/why-did-you-render
@@ -55,29 +60,31 @@
 ```
 
 ### 💡 Testing Golden Rules
+
 ```
 1. Unit тести для reducer/selector:
    reducer(state, action) → чисті функції, легко тестувати
-   
+
 2. MSW handler override у тесті:
    server.use(http.get('/posts', () => HttpResponse.json([])))
    → Тестуємо edge cases без зміни основних handlers
-   
+
 3. waitFor для async UI:
    await waitFor(() => expect(screen.getByTestId('data')).toBeInTheDocument())
-   
+
 4. toBe для мемоізації:
    expect(result1).toBe(result2)  // ← той самий об'єкт у пам'яті
-   
+
 5. store.getState() після user actions:
    await user.click(button)
    expect(store.getState().counter.value).toBe(1)
-   
+
 6. renderWithProviders завжди:
    Ніколи не рендери Redux компоненти без Provider!
 ```
 
 ### 🗂️ Нові файли
+
 ```
 src/
 ├── __mocks__/
@@ -112,3 +119,4 @@ src/
 │
 ├── jest.config.ts
 └── jest.setup.ts
+```

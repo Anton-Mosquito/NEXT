@@ -54,12 +54,15 @@ describe("useCreatePostMutation", () => {
     server.use(
       http.post("https://jsonplaceholder.typicode.com/posts", async () => {
         await new Promise((r) => setTimeout(r, 100));
-        return HttpResponse.json({
-          id: 101,
-          title: "New Post",
-          body: "",
-          userId: 1,
-        }, { status: 201 });
+        return HttpResponse.json(
+          {
+            id: 101,
+            title: "New Post",
+            body: "",
+            userId: 1,
+          },
+          { status: 201 },
+        );
       }),
     );
 

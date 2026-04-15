@@ -36,7 +36,7 @@ export function LabeledInput({
           "outline-none transition-colors",
           "focus:bg-muted",
           "disabled:cursor-not-allowed disabled:opacity-50",
-          className
+          className,
         )}
         {...props}
       />

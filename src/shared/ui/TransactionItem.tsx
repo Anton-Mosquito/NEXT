@@ -28,12 +28,7 @@ export function TransactionItem({
 }: TransactionItemProps) {
   if (variant === "row") {
     return (
-      <tr
-        className={cn(
-          "border-b border-bg-special last:border-0",
-          className
-        )}
-      >
+      <tr className={cn("border-b border-bg-special last:border-0", className)}>
         {/* Icon */}
         <td className="py-4 px-4 pr-4">
           <span className="flex size-10 shrink-0 items-center justify-center text-gray-01 [&_svg]:size-5">
@@ -65,7 +60,7 @@ export function TransactionItem({
     <div
       className={cn(
         "flex items-center gap-4 rounded-2xl bg-card px-4 py-5",
-        className
+        className,
       )}
     >
       {/* Icon square */}

@@ -15,13 +15,11 @@ export function MenuLogout({ onClick, className }: MenuLogoutProps) {
         "flex items-center gap-4 px-4 py-3",
         "transition-colors opacity-75 hover:bg-white/5 hover:opacity-100",
         "focus:outline-none ",
-        className
+        className,
       )}
     >
       <LogOut size={24} className="shrink-0 text-white" />
-      <span
-        className="w-39 text-base font-semibold leading-6 text-white text-left"
-      >
+      <span className="w-39 text-base font-semibold leading-6 text-white text-left">
         Logout
       </span>
     </button>

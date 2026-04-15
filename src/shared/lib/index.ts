@@ -34,7 +34,10 @@ export function truncate(text: string, maxLength: number): string {
 
 // ✅ Reading time
 export function getReadingTime(text: string, wpm = 200): number {
-  const words = text.trim().split(/\s+/).filter(word => word.length > 0).length;
+  const words = text
+    .trim()
+    .split(/\s+/)
+    .filter((word) => word.length > 0).length;
   if (words === 0) return 0;
   return Math.ceil(words / wpm);
 }

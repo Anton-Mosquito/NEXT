@@ -224,9 +224,7 @@ async function seed() {
       emailVerified: null,
       image: faker.image.avatar(),
     })
-    .onConflict((oc) =>
-      oc.column("email").doUpdateSet({ name: seedName }),
-    )
+    .onConflict((oc) => oc.column("email").doUpdateSet({ name: seedName }))
     .returning("id")
     .executeTakeFirstOrThrow();
 
@@ -257,7 +255,9 @@ async function seed() {
     .returning(["id", "name", "type"])
     .execute();
 
-  accounts.forEach((a) => console.log(`    ✓ ${a.name} (${a.type}) — id: ${a.id}`));
+  accounts.forEach((a) =>
+    console.log(`    ✓ ${a.name} (${a.type}) — id: ${a.id}`),
+  );
   console.log();
 
   // ── Step 4: Create categories ─────────────────────────────────────────────
@@ -305,30 +305,39 @@ async function seed() {
   const TRANSACTION_COUNT = 100;
   const INCOME_COUNT = 20;
 
-  const transactionValues = Array.from({ length: TRANSACTION_COUNT }, (_, i) => {
-    const isIncome = i < INCOME_COUNT;
-    const category = isIncome ? pick(incomeCategories) : pick(expenseCategories);
-    const account = pick(accounts);
-    const amount = randAmount(category.minAmount, category.maxAmount);
-    const date = faker.date.between({ from: ninetyDaysAgo, to: now });
+  const transactionValues = Array.from(
+    { length: TRANSACTION_COUNT },
+    (_, i) => {
+      const isIncome = i < INCOME_COUNT;
+      const category = isIncome
+        ? pick(incomeCategories)
+        : pick(expenseCategories);
+      const account = pick(accounts);
+      const amount = randAmount(category.minAmount, category.maxAmount);
+      const date = faker.date.between({ from: ninetyDaysAgo, to: now });
 
-    return {
-      id: sql<string>`gen_random_uuid()::text`,
-      userId,
-      accountId: account.id,
-      categoryId: category.id,
-      amount,
-      type: category.type,
-      date,
-      description: makeDescription(category.name),
-    };
-  });
+      return {
+        id: sql<string>`gen_random_uuid()::text`,
+        userId,
+        accountId: account.id,
+        categoryId: category.id,
+        amount,
+        type: category.type,
+        date,
+        description: makeDescription(category.name),
+      };
+    },
+  );
 
   // Insert in a single batch for performance.
   await db.insertInto("transaction").values(transactionValues).execute();
 
-  const incomeTxns = transactionValues.filter((t) => t.type === "income").length;
-  const expenseTxns = transactionValues.filter((t) => t.type === "expense").length;
+  const incomeTxns = transactionValues.filter(
+    (t) => t.type === "income",
+  ).length;
+  const expenseTxns = transactionValues.filter(
+    (t) => t.type === "expense",
+  ).length;
 
   console.log(`    ✓ ${TRANSACTION_COUNT} transactions inserted`);
   console.log(`      — ${incomeTxns} income`);

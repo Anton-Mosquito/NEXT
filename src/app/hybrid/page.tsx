@@ -95,9 +95,7 @@ export default async function HybridPage() {
       {/* Секція 3: Стрімінг другорядних даних */}
       <div>
         <h2 className="font-bold text-lg mb-3">🌊 Streaming + Redux Client</h2>
-        <Suspense
-          fallback={<SkeletonList count={3} />}
-        >
+        <Suspense fallback={<SkeletonList count={3} />}>
           {/* Async Server Component → передає у Client Widget */}
           <HybridDataLoader />
         </Suspense>

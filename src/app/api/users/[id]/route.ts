@@ -26,7 +26,10 @@ export async function GET(_request: NextRequest, { params }: RouteParams) {
     return NextResponse.json(user);
   } catch (error) {
     console.error(`[GET /api/users/${id}]`, error);
-    return NextResponse.json({ error: "Failed to fetch user" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to fetch user" },
+      { status: 500 },
+    );
   }
 }
 
@@ -45,6 +48,9 @@ export async function DELETE(_request: NextRequest, { params }: RouteParams) {
     return new NextResponse(null, { status: 204 });
   } catch (error) {
     console.error(`[DELETE /api/users/${id}]`, error);
-    return NextResponse.json({ error: "Failed to delete user" }, { status: 500 });
+    return NextResponse.json(
+      { error: "Failed to delete user" },
+      { status: 500 },
+    );
   }
 }

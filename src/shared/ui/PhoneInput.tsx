@@ -7,7 +7,7 @@ import type { InputHTMLAttributes } from "react";
 
 // Minimal static list — extend as needed
 const COUNTRY_CODES = [
-  { flag: "🇺🇸", code: "+1",  iso: "US" },
+  { flag: "🇺🇸", code: "+1", iso: "US" },
   { flag: "🇬🇧", code: "+44", iso: "GB" },
   { flag: "🇩🇪", code: "+49", iso: "DE" },
   { flag: "🇫🇷", code: "+33", iso: "FR" },
@@ -15,14 +15,21 @@ const COUNTRY_CODES = [
   { flag: "🇵🇱", code: "+48", iso: "PL" },
 ];
 
-interface PhoneInputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "type"> {
+interface PhoneInputProps extends Omit<
+  InputHTMLAttributes<HTMLInputElement>,
+  "type"
+> {
   defaultCountry?: string; // ISO code, e.g. "US"
 }
 
-export function PhoneInput({ className, defaultCountry = "US", ...props }: PhoneInputProps) {
+export function PhoneInput({
+  className,
+  defaultCountry = "US",
+  ...props
+}: PhoneInputProps) {
   const [open, setOpen] = useState(false);
   const [selected, setSelected] = useState(
-    COUNTRY_CODES.find((c) => c.iso === defaultCountry) ?? COUNTRY_CODES[0]
+    COUNTRY_CODES.find((c) => c.iso === defaultCountry) ?? COUNTRY_CODES[0],
   );
 
   return (
@@ -33,7 +40,7 @@ export function PhoneInput({ className, defaultCountry = "US", ...props }: Phone
         // Active border on focus-within
         "focus-within:border-gray-02",
         "has-disabled:cursor-not-allowed has-disabled:opacity-50",
-        className
+        className,
       )}
     >
       {/* Country selector */}
@@ -46,7 +53,11 @@ export function PhoneInput({ className, defaultCountry = "US", ...props }: Phone
       >
         <span className="text-base leading-none">{selected.flag}</span>
         <span className="text-gray-01">{selected.code}</span>
-        <ChevronDown size={14} className="text-gray-02 transition-transform" style={{ transform: open ? "rotate(180deg)" : undefined }} />
+        <ChevronDown
+          size={14}
+          className="text-gray-02 transition-transform"
+          style={{ transform: open ? "rotate(180deg)" : undefined }}
+        />
       </button>
 
       {/* Vertical separator */}
@@ -72,7 +83,10 @@ export function PhoneInput({ className, defaultCountry = "US", ...props }: Phone
                 role="option"
                 aria-selected={c.iso === selected.iso}
                 type="button"
-                onClick={() => { setSelected(c); setOpen(false); }}
+                onClick={() => {
+                  setSelected(c);
+                  setOpen(false);
+                }}
                 className="flex w-full items-center gap-2 px-3 py-2 text-body-md text-gray-01 hover:bg-gray-05 aria-selected:font-medium"
               >
                 <span>{c.flag}</span>

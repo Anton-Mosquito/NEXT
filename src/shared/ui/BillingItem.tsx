@@ -26,7 +26,12 @@ export function BillingItem({
   className,
 }: BillingItemProps) {
   return (
-    <div className={cn("flex items-center border border-bg-special rounded-2xl px-6", className)}>
+    <div
+      className={cn(
+        "flex items-center border border-bg-special rounded-2xl px-6",
+        className,
+      )}
+    >
       {/* ── Date box: w-18=72px, pt-3 pr-2 pb-3 pl-0 ────────── */}
       <div className="flex w-18 shrink-0 flex-col items-center rounded-lg bg-secondary pt-3 pr-2 pb-3 pl-0">
         {/* Month: Inter semi-bold 16px / 18px, gray-02 */}

@@ -11,7 +11,9 @@ interface ServerContext {
   apiState?: RootState["api"];
 }
 
-export function buildPreloadedState(context: ServerContext): Partial<RootState> {
+export function buildPreloadedState(
+  context: ServerContext,
+): Partial<RootState> {
   const state: Partial<RootState> = {
     auth: {
       user: context.user ?? null,

@@ -29,7 +29,7 @@ describe("auth selectors", () => {
 
     it("повертає user об'єкт", () => {
       const user = {
-        id: 1,
+        id: "1",
         name: "Alice",
         email: "alice@test.com",
         role: "admin" as const,
@@ -67,7 +67,7 @@ describe("auth selectors", () => {
     it("повертає весь auth стан", () => {
       const authState = {
         user: {
-          id: 1,
+          id: "1",
           name: "Bob",
           email: "bob@test.com",
           role: "user" as const,

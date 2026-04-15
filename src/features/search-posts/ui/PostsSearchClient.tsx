@@ -4,6 +4,13 @@
 import { useRouter, usePathname } from "next/navigation";
 import { Input } from "@/shared/ui";
 import { debounce } from "@/shared/lib";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useMemo } from "react";
 
 interface PostsSearchClientProps {
@@ -40,20 +47,24 @@ export function PostsSearchClient({
           onChange={(e) => updateSearch(e.target.value, initialUserId)}
         />
       </div>
-      <select
-        defaultValue={initialUserId ?? ""}
-        onChange={(e) =>
-          updateSearch(initialQuery, e.target.value || undefined)
+      <Select
+        defaultValue={initialUserId != null ? String(initialUserId) : "all"}
+        onValueChange={(val) =>
+          updateSearch(initialQuery, val === "all" ? undefined : val)
         }
-        className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-400 bg-white"
       >
-        <option value="">Всі автори</option>
-        {[1, 2, 3, 4, 5].map((id) => (
-          <option key={id} value={id}>
-            User #{id}
-          </option>
-        ))}
-      </select>
+        <SelectTrigger className="w-40">
+          <SelectValue placeholder="Всі автори" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="all">Всі автори</SelectItem>
+          {[1, 2, 3, 4, 5].map((id) => (
+            <SelectItem key={id} value={String(id)}>
+              User #{id}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
     </div>
   );
 }

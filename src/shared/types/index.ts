@@ -25,3 +25,6 @@ export interface PaginatedResult<T> {
 // Утиліта: зробити всі поля Required крім вказаних
 export type RequiredExcept<T, K extends keyof T> = Required<Omit<T, K>> &
   Pick<T, K>;
+
+// Kysely Database interface — re-exported for convenience
+export type { Database } from './database';

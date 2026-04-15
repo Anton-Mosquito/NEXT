@@ -6,16 +6,20 @@ interface RouteParams {
   params: Promise<{ id: string }>;
 }
 
+/** Validates that the id param is a non-empty string (UUID or legacy numeric string). */
+function isValidId(id: string): boolean {
+  return id.trim().length > 0;
+}
+
 export async function GET(_request: NextRequest, { params }: RouteParams) {
   const { id } = await params;
-  const userId = parseInt(id, 10);
 
-  if (isNaN(userId) || userId <= 0) {
+  if (!isValidId(id)) {
     return NextResponse.json({ error: "Invalid user ID" }, { status: 400 });
   }
 
   try {
-    const user = await UserService.getUserById(userId);
+    const user = await UserService.getUserById(id);
     if (!user) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
@@ -28,14 +32,13 @@ export async function GET(_request: NextRequest, { params }: RouteParams) {
 
 export async function DELETE(_request: NextRequest, { params }: RouteParams) {
   const { id } = await params;
-  const userId = parseInt(id, 10);
 
-  if (isNaN(userId) || userId <= 0) {
+  if (!isValidId(id)) {
     return NextResponse.json({ error: "Invalid user ID" }, { status: 400 });
   }
 
   try {
-    const deleted = await UserService.deleteUser(userId);
+    const deleted = await UserService.deleteUser(id);
     if (!deleted) {
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }

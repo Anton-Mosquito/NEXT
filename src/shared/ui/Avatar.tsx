@@ -1,5 +1,9 @@
 // src/shared/ui/Avatar.tsx
-import { cn } from "@/shared/lib";
+import { cn } from "@/lib/utils";
+import {
+  Avatar as ShadcnAvatar,
+  AvatarFallback,
+} from "@/components/ui/avatar";
 
 interface AvatarProps {
   name: string;
@@ -7,10 +11,10 @@ interface AvatarProps {
   className?: string;
 }
 
-const sizeStyles = {
-  sm: "w-7 h-7 text-xs",
-  md: "w-9 h-9 text-sm",
-  lg: "w-12 h-12 text-base",
+const sizeStyles: Record<NonNullable<AvatarProps["size"]>, string> = {
+  sm: "size-7 text-xs",
+  md: "size-9 text-sm",
+  lg: "size-12 text-base",
 };
 
 const colors = [
@@ -24,15 +28,21 @@ const colors = [
 export function Avatar({ name, size = "md", className }: AvatarProps) {
   const colorIndex = name.charCodeAt(0) % colors.length;
   return (
-    <div
+    <ShadcnAvatar
       className={cn(
-        "rounded-full bg-gradient-to-br flex items-center justify-center text-white font-bold shrink-0",
-        `bg-gradient-to-br ${colors[colorIndex]}`,
         sizeStyles[size],
+        "after:hidden", // remove Radix border overlay
         className,
       )}
     >
-      {name.charAt(0).toUpperCase()}
-    </div>
+      <AvatarFallback
+        className={cn(
+          "bg-linear-to-br text-white font-bold",
+          colors[colorIndex],
+        )}
+      >
+        {name.charAt(0).toUpperCase()}
+      </AvatarFallback>
+    </ShadcnAvatar>
   );
 }

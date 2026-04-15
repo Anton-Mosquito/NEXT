@@ -55,7 +55,7 @@ function UserRow({ user }: { user: DbUser }) {
       <TableCell className="font-medium">{user.name}</TableCell>
       <TableCell>{user.email}</TableCell>
       <TableCell className="text-muted-foreground text-xs">
-        {new Date(user.created_at).toLocaleDateString("en-GB", {
+        {new Date(user.createdAt ?? Date.now()).toLocaleDateString("en-GB", {
           day: "numeric",
           month: "short",
           year: "numeric",

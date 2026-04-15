@@ -3,7 +3,7 @@ import { screen, waitFor, act } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { renderWithProviders } from "@/test-utils/renderWithProviders";
 import { server } from "@/__mocks__/server";
-import { rest } from "msw";
+import { http, HttpResponse } from "msw";
 import { mockPosts } from "@/__mocks__/handlers/postHandlers";
 import { useGetPostsQuery, useGetPostByIdQuery } from "../postApi";
 
@@ -75,8 +75,8 @@ describe("postApi RTK Query", () => {
     it("показує error стан при помилці мережі", async () => {
       // ✅ Перевизначаємо handler для симуляції помилки
       server.use(
-        rest.get("https://jsonplaceholder.typicode.com/posts", (req, res, ctx) => {
-          return res(ctx.status(500));
+        http.get("https://jsonplaceholder.typicode.com/posts", () => {
+          return new HttpResponse(null, { status: 500 });
         }),
       );
 

@@ -1,16 +1,18 @@
 // src/shared/ui/Card.tsx
-import { cn } from "@/shared/lib";
+import { cn } from "@/lib/utils";
+import { Card as ShadcnCard } from "@/components/ui/card";
+import type { ReactNode } from "react";
 
 interface CardProps {
-  children: React.ReactNode;
+  children: ReactNode;
   className?: string;
   padding?: "sm" | "md" | "lg" | "none";
   hoverable?: boolean;
   onClick?: () => void;
 }
 
-const paddingStyles = {
-  none: "",
+const paddingStyles: Record<NonNullable<CardProps["padding"]>, string> = {
+  none: "p-0",
   sm: "p-3",
   md: "p-4",
   lg: "p-6",
@@ -24,17 +26,16 @@ export function Card({
   onClick,
 }: CardProps) {
   return (
-    <div
+    <ShadcnCard
       onClick={onClick}
       className={cn(
-        "bg-white rounded-xl border border-gray-200 shadow-sm",
+        "gap-0",
         paddingStyles[padding],
-        hoverable &&
-          "cursor-pointer hover:shadow-md hover:border-gray-300 transition-all",
+        hoverable && "cursor-pointer hover:shadow-md hover:border-gray-300 transition-all",
         className,
       )}
     >
       {children}
-    </div>
+    </ShadcnCard>
   );
 }

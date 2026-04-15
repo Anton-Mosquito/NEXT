@@ -3,6 +3,7 @@
 
 import { useState } from "react";
 import { Button, Input, Card } from "@/shared/ui";
+import { Textarea } from "@/components/ui/textarea";
 import { useCreatePostMutation } from "../api/createPostApi";
 
 interface CreatePostFormProps {
@@ -73,16 +74,15 @@ export function CreatePostForm({ onSuccess, onCancel }: CreatePostFormProps) {
         />
         <div className="flex flex-col gap-1">
           <label className="text-sm font-medium text-gray-700">Текст</label>
-          <textarea
+          <Textarea
             placeholder="Введи текст поста..."
             value={body}
             onChange={(e) => setBody(e.target.value)}
             rows={4}
-            className={`border rounded-lg px-3 py-2 text-sm resize-none focus:outline-none focus:border-blue-400 focus:ring-1 focus:ring-blue-400 ${
-              errors.body ? "border-red-400 bg-red-50" : "border-gray-300"
-            }`}
+            aria-invalid={!!errors.body}
+            className="resize-none"
           />
-          {errors.body && <p className="text-xs text-red-500">{errors.body}</p>}
+          {errors.body && <p className="text-xs text-destructive">{errors.body}</p>}
         </div>
 
         <div className="flex gap-2 pt-1">

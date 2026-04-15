@@ -1,28 +1,40 @@
 // src/shared/ui/Button.tsx
-import { cn } from "@/shared/lib";
-import type { ButtonHTMLAttributes } from "react";
+import { cn } from "@/lib/utils";
+import { Button as ShadcnButton } from "@/components/ui/button";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 type ButtonVariant = "primary" | "secondary" | "danger" | "ghost";
-type ButtonSize = "sm" | "md" | "lg";
+type ButtonSize = "sm" | "md" | "lg" | "figma-sm" | "figma-md" | "figma-xl" | "figma-2xl";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   size?: ButtonSize;
   isLoading?: boolean;
   fullWidth?: boolean;
+  asChild?: boolean;
+  /** Icon rendered alongside the label. Defaults to end position. */
+  icon?: ReactNode;
+  iconPosition?: "start" | "end";
 }
 
-const variantStyles: Record<ButtonVariant, string> = {
-  primary: "bg-blue-500 text-white hover:bg-blue-600 disabled:bg-blue-300",
-  secondary: "bg-gray-100 text-gray-700 hover:bg-gray-200 disabled:bg-gray-50",
-  danger: "bg-red-500 text-white hover:bg-red-600 disabled:bg-red-300",
-  ghost: "bg-transparent text-gray-600 hover:bg-gray-100",
+const variantMap: Record<
+  ButtonVariant,
+  "default" | "secondary" | "destructive" | "ghost"
+> = {
+  primary: "default",
+  secondary: "secondary",
+  danger: "destructive",
+  ghost: "ghost",
 };
 
-const sizeStyles: Record<ButtonSize, string> = {
-  sm: "px-3 py-1.5 text-xs rounded-lg",
-  md: "px-4 py-2 text-sm rounded-lg",
-  lg: "px-6 py-3 text-base rounded-xl",
+const sizeMap: Record<ButtonSize, string> = {
+  sm: "sm",
+  md: "default",
+  lg: "lg",
+  "figma-sm":  "figma-sm",
+  "figma-md":  "figma-md",
+  "figma-xl":  "figma-xl",
+  "figma-2xl": "figma-2xl",
 };
 
 export function Button({
@@ -30,32 +42,39 @@ export function Button({
   size = "md",
   isLoading = false,
   fullWidth = false,
+  asChild = false,
+  icon,
+  iconPosition = "end",
   className,
   children,
   disabled,
   ...props
 }: ButtonProps) {
+  const content = isLoading ? (
+    <span className="flex items-center justify-center gap-2">
+      <span className="w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin" />
+      {children}
+    </span>
+  ) : icon ? (
+    <>
+      {iconPosition === "start" && icon}
+      {children}
+      {iconPosition === "end" && icon}
+    </>
+  ) : (
+    children
+  );
+
   return (
-    <button
-      className={cn(
-        "font-medium transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-blue-400",
-        variantStyles[variant],
-        sizeStyles[size],
-        fullWidth && "w-full",
-        (disabled || isLoading) && "cursor-not-allowed opacity-60",
-        className,
-      )}
+    <ShadcnButton
+      variant={variantMap[variant]}
+      size={sizeMap[size] as Parameters<typeof ShadcnButton>[0]["size"]}
+      asChild={asChild}
+      className={cn(fullWidth && "w-full", className)}
       disabled={disabled || isLoading}
       {...props}
     >
-      {isLoading ? (
-        <span className="flex items-center justify-center gap-2">
-          <span className="w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin" />
-          {children}
-        </span>
-      ) : (
-        children
-      )}
-    </button>
+      {content}
+    </ShadcnButton>
   );
 }

@@ -4,7 +4,14 @@
 import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
 import { Input, Button, Badge } from "@/shared/ui";
 import { debounce } from "@/shared/lib";
-import { useMemo, useCallback } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useMemo } from "react";
 import {
   setSearch,
   setUserId,
@@ -34,20 +41,24 @@ export function PostsFilter() {
         />
       </div>
 
-      <select
-        value={filter.userId ?? ""}
-        onChange={(e) =>
-          dispatch(setUserId(e.target.value ? Number(e.target.value) : null))
+      <Select
+        value={filter.userId != null ? String(filter.userId) : "all"}
+        onValueChange={(val) =>
+          dispatch(setUserId(val === "all" ? null : Number(val)))
         }
-        className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-blue-400 bg-white"
       >
-        <option value="">Всі автори</option>
-        {[1, 2, 3, 4, 5].map((id) => (
-          <option key={id} value={id}>
-            User #{id}
-          </option>
-        ))}
-      </select>
+        <SelectTrigger className="w-40">
+          <SelectValue placeholder="Всі автори" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="all">Всі автори</SelectItem>
+          {[1, 2, 3, 4, 5].map((id) => (
+            <SelectItem key={id} value={String(id)}>
+              User #{id}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
 
       {isFiltered && (
         <Button

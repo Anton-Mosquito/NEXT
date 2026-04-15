@@ -1,9 +1,10 @@
 // src/entities/auth/model/types.ts
 export interface AuthUser {
-  id: number;
+  id: string;
   name: string;
   email: string;
   role: "admin" | "user";
+  image?: string | null;
 }
 
 export interface AuthState {

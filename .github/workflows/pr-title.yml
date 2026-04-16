@@ -1,0 +1,33 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# PR Title Checker — Enforces Conventional Commits format
+# ─────────────────────────────────────────────────────────────────────────────
+name: "PR Title Checker"
+
+on:
+  pull_request_target:
+    types:
+      - opened
+      - edited
+      - synchronize
+
+jobs:
+  main:
+    name: Validate PR Title
+    runs-on: ubuntu-latest
+    steps:
+      - uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # Вимагає, щоб PR мав один з цих префіксів
+          types: |
+            feat
+            fix
+            docs
+            style
+            refactor
+            perf
+            test
+            chore
+          # Дозволяє перевіряти scope, наприклад: feat(auth): add google login
+          requireScope: false

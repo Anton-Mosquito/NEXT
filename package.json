@@ -6,8 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "lint:fix": "eslint --fix",
+    "lint": "eslint src/",
+    "lint:fix": "eslint --fix src/",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "anal yze": "ANALYZE=true npm run build",
@@ -20,7 +20,23 @@
     "db:migrate:kysely": "tsx --env-file=.env.local src/shared/lib/kysely-migrate.ts",
     "db:seed": "tsx --env-file=.env.local scripts/seed.ts",
     "vercel:pull": "vercel env pull .env.local",
-    "db:setup": "npm run db:migrate"
+    "db:setup": "npm run db:migrate",
+    "prepare": "husky",
+    "commitlint": "commitlint --edit"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,css,md}": [
+      "prettier --write"
+    ]
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   },
   "dependencies": {
     "@auth/kysely-adapter": "^1.11.2",
@@ -46,6 +62,8 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.5.0",
+    "@commitlint/config-conventional": "^20.5.0",
     "@faker-js/faker": "^10.4.0",
     "@next/bundle-analyzer": "^16.2.3",
     "@tailwindcss/postcss": "^4.2.2",
@@ -63,8 +81,11 @@
     "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^10.2.0",
     "eslint-config-next": "^16.2.3",
+    "eslint-import-resolver-typescript": "^4.4.4",
     "eslint-plugin-boundaries": "^6.0.2",
+    "husky": "^9.1.7",
     "jsdom": "^29.0.2",
+    "lint-staged": "^16.4.0",
     "msw": "^2.13.3",
     "prettier": "^3.8.3",
     "shadcn": "^4.2.0",
@@ -77,13 +98,15 @@
   },
   "overrides": {
     "@tootallnate/once": ">=3.0.1",
-    "ajv": ">=8.17.2",
     "cookie": ">=0.7.2",
     "minimatch": ">=10.2.3",
     "path-to-regexp": ">=8.3.1",
     "smol-toml": ">=1.6.1",
     "srvx": ">=0.11.13",
     "tar": ">=7.5.11",
+    "@vercel/static-config": {
+      "ajv": ">=8.17.2"
+    },
     "@vercel/node": {
       "undici": ">=6.24.0"
     }

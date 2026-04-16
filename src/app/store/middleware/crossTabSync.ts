@@ -60,16 +60,19 @@ export function createLocalStorageSyncMiddleware(
     });
   }
 
-  return (store) => (next) => (action: any) => {
-    const result = next(action);
-    if (config.syncActions.includes(action.type)) {
-      try {
-        localStorage.setItem(
-          storageKey,
-          JSON.stringify({ action, timestamp: Date.now() }),
-        );
-      } catch {}
-    }
-    return result;
+  return (store) => {
+    console.log("🚀 ~ createLocalStorageSyncMiddleware ~ store:", store);
+    return (next) => (action: any) => {
+      const result = next(action);
+      if (config.syncActions.includes(action.type)) {
+        try {
+          localStorage.setItem(
+            storageKey,
+            JSON.stringify({ action, timestamp: Date.now() }),
+          );
+        } catch {}
+      }
+      return result;
+    };
   };
 }

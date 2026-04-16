@@ -4,7 +4,7 @@ module.exports = {
     collect: {
       // Build & start the production server before auditing
       startServerCommand: "npm run start",
-      startServerReadyPattern: "started server on",
+      startServerReadyPattern: "Ready in",
       startServerReadyTimeout: 30000,
       url: ["http://localhost:3000", "http://localhost:3000/posts"],
       // 3 runs per URL → use median to eliminate single-run variance

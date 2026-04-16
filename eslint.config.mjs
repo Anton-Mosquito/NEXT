@@ -7,6 +7,13 @@ const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
   // Boundaries plugin: enforce layer imports by folder
+  // Provide React version explicitly so eslint-plugin-react never calls
+  // context.getFilename() (removed in ESLint 10) during auto-detection.
+  {
+    settings: {
+      react: { version: "19" },
+    },
+  },
   {
     plugins: { boundaries: boundariesPlugin },
     settings: {
@@ -19,35 +26,34 @@ const eslintConfig = defineConfig([
       ],
     },
     rules: {
-      "boundaries/element-types": [
+      "boundaries/dependencies": [
         "error",
         {
           default: "disallow",
           rules: [
             {
-              from: "shared",
-              disallow: ["entities", "features", "widgets", "pages"],
-              allow: ["shared"],
+              from: { type: "shared" },
+              allow: { to: { type: "shared" } },
             },
             {
-              from: "entities",
-              disallow: ["features", "widgets", "pages"],
-              allow: ["shared"],
+              from: { type: "entities" },
+              allow: { to: { type: "shared" } },
             },
             {
-              from: "features",
-              disallow: ["widgets", "pages"],
-              allow: ["entities", "shared"],
+              from: { type: "features" },
+              allow: { to: { type: ["entities", "shared"] } },
             },
             {
-              from: "widgets",
-              disallow: ["pages"],
-              allow: ["features", "entities", "shared"],
+              from: { type: "widgets" },
+              allow: { to: { type: ["features", "entities", "shared"] } },
             },
             {
-              from: "pages",
-              disallow: [],
-              allow: ["app", "widgets", "features", "entities", "shared"],
+              from: { type: "pages" },
+              allow: {
+                to: {
+                  type: ["pages", "widgets", "features", "entities", "shared"],
+                },
+              },
             },
           ],
         },
@@ -61,6 +67,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Agent skills — third-party build artifacts, not project source
+    ".agents/**",
+    "scripts/**",
   ]),
 ]);
 

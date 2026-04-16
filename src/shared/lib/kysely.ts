@@ -14,7 +14,6 @@ import { pool } from "./db";
 import type { Database } from "@/shared/types/database";
 
 declare global {
-  // eslint-disable-next-line no-var
   var _kyselyDb: Kysely<Database> | undefined;
 }
 

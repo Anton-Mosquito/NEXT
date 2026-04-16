@@ -1,0 +1,23 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# Dependabot — Automated dependency updates
+# ─────────────────────────────────────────────────────────────────────────────
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    ignore:
+      - dependency-name: "eslint" # іноді мажорні оновлення лінтера краще робити ручками
+
+  # Оновлення самих GitHub Actions (щоб ci.yml завжди використовував актуальні версії)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    # Автоматично призначати PR на тебе (заміни YOUR_GITHUB_USERNAME на свій нік)
+    assignees:
+      - "Anton-Mosquito"

@@ -11,5 +11,6 @@ export function serializePreloadedState(
   // Використовуємо деструктуризацію, щоб прибрати api (RTK Query)
   // Назва ключа має збігатися з тим, що ти вказав у combineReducers (baseApi.reducerPath)
   const { api, ...rest } = state as any;
+  console.log("🚀 ~ serializePreloadedState ~ api:", api);
   return rest;
 }

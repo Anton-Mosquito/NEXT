@@ -19,7 +19,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
         with:
-          fetch-depth: 0          # semantic-release needs full history to read tags
+          fetch-depth: 0 # semantic-release needs full history to read tags
           persist-credentials: false
 
       - name: Setup Node.js

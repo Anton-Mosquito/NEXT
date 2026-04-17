@@ -1,3 +1,9 @@
+## [1.1.1](https://github.com/Anton-Mosquito/NEXT/compare/v1.1.0...v1.1.1) (2026-04-17)
+
+### Bug Fixes
+
+- **e2e:** fix next-server oom by setting node heap in command and job env ([28add52](https://github.com/Anton-Mosquito/NEXT/commit/28add529095aba1e6770413816320d28c15870f2))
+
 # [1.1.0](https://github.com/Anton-Mosquito/NEXT/compare/v1.0.0...v1.1.0) (2026-04-17)
 
 ### Features

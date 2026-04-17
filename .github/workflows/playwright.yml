@@ -69,8 +69,8 @@ jobs:
         run: npm run test:e2e
         env:
           CI: "true"
-          # Increase Node heap so next-server doesn't OOM on ubuntu-latest (7 GB RAM)
-          NODE_OPTIONS: "--max-old-space-size=3072"
+          # Increase Node heap for the test runner process
+          NODE_OPTIONS: "--max-old-space-size=4096"
           AUTH_SECRET: "ci_dummy_secret_for_build_only_123456789"
           DATABASE_URL: "postgres://testuser:testpassword@localhost:5432/testdb"
           GOOGLE_CLIENT_ID: "ci_dummy_google_client_id"

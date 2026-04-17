@@ -54,6 +54,8 @@ export default defineConfig({
     reuseExistingServer: !process.env.CI,
     timeout: 180 * 1000,
     env: {
+      // Prevent next-server from OOMing on memory-constrained CI runners
+      NODE_OPTIONS: "--max-old-space-size=4096",
       AUTH_SECRET:
         process.env.AUTH_SECRET ??
         "e2e_dummy_secret_for_local_test_only_123456",

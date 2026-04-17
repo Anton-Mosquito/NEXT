@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useGetPostsQuery } from "@/entities/post";
 import { LikeButton } from "@/features/like-post";
 import { DeletePostButton } from "@/features/delete-post";
-import { Card, Badge, Button, SkeletonList } from "@/shared/ui";
+import { Card, Badge, Button } from "@/shared/ui";
 import type { PostWithMeta } from "@/entities/post";
 import Link from "next/link";
 

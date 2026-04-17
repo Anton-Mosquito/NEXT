@@ -48,14 +48,14 @@ export default defineConfig({
     // In CI the build runs as a separate workflow step (with DB env vars).
     // Here we only start the pre-built server to avoid double-building and OOM.
     command: process.env.CI
-      ? "NODE_OPTIONS=--max-old-space-size=4096 npm run start"
-      : "npm run build && NODE_OPTIONS=--max-old-space-size=4096 npm run start",
+      ? "NODE_OPTIONS=--max-old-space-size=8192 npm run start"
+      : "npm run build && NODE_OPTIONS=--max-old-space-size=8192 npm run start",
     url: "http://127.0.0.1:3000",
     reuseExistingServer: !process.env.CI,
     timeout: 180 * 1000,
     env: {
       // Prevent next-server from OOMing on memory-constrained CI runners
-      NODE_OPTIONS: "--max-old-space-size=4096",
+      NODE_OPTIONS: "--max-old-space-size=8192",
       AUTH_SECRET:
         process.env.AUTH_SECRET ??
         "e2e_dummy_secret_for_local_test_only_123456",

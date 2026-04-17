@@ -48,7 +48,7 @@ export default defineConfig({
     command: "npm run build && npm run start",
     url: "http://127.0.0.1:3000",
     reuseExistingServer: !process.env.CI,
-    timeout: 120 * 1000,
+    timeout: 180 * 1000,
     env: {
       AUTH_SECRET:
         process.env.AUTH_SECRET ??

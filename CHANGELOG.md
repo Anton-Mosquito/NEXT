@@ -1,3 +1,9 @@
+# [1.1.0](https://github.com/Anton-Mosquito/NEXT/compare/v1.0.0...v1.1.0) (2026-04-17)
+
+### Features
+
+- add composite action for DB migrations and Next.js build; update workflows to use it ([43051e7](https://github.com/Anton-Mosquito/NEXT/commit/43051e762e9689d023454deb136435b003bfb925))
+
 # 1.0.0 (2026-04-16)
 
 ### Bug Fixes

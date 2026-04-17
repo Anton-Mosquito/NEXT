@@ -8,7 +8,7 @@
 
 import { readFileSync, readdirSync } from "fs";
 import { join } from "path";
-import { pool } from "./db";
+import { pool } from "./db-pool";
 
 async function migrate() {
   const migrationsDir = join(__dirname, "migrations");

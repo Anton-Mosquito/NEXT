@@ -48,8 +48,8 @@ export default defineConfig({
     // In CI the build runs as a separate workflow step (with DB env vars).
     // Here we only start the pre-built server to avoid double-building and OOM.
     command: process.env.CI
-      ? "npm run start"
-      : "npm run build && npm run start",
+      ? "NODE_OPTIONS=--max-old-space-size=4096 npm run start"
+      : "npm run build && NODE_OPTIONS=--max-old-space-size=4096 npm run start",
     url: "http://127.0.0.1:3000",
     reuseExistingServer: !process.env.CI,
     timeout: 180 * 1000,

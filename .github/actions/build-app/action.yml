@@ -1,0 +1,60 @@
+# .github/actions/build-app/action.yml
+#
+# Composite action — run DB migrations then build Next.js in production mode.
+#
+# Used by workflows that need a real database before building (Playwright, Lighthouse).
+# The caller is responsible for:
+#   - actions/checkout
+#   - actions/setup-node + npm ci
+#   - the postgres service container (services are job-level, cannot live here)
+#
+# Usage:
+#   - name: Migrate DB and build app
+#     uses: ./.github/actions/build-app
+#     with:
+#       database-url: "postgres://testuser:testpassword@localhost:5432/testdb"
+
+name: "Migrate DB and Build App"
+description: "Runs SQL + Kysely migrations then builds Next.js for production"
+
+inputs:
+  database-url:
+    description: "PostgreSQL connection string for migrations and build"
+    required: true
+  auth-secret:
+    description: "NextAuth AUTH_SECRET (dummy value is fine for CI builds)"
+    required: false
+    default: "ci_dummy_secret_for_build_only_123456789"
+  google-client-id:
+    description: "Google OAuth client ID (dummy value is fine for CI builds)"
+    required: false
+    default: "ci_dummy_google_client_id"
+  google-client-secret:
+    description: "Google OAuth client secret (dummy value is fine for CI builds)"
+    required: false
+    default: "ci_dummy_google_client_secret"
+  next-public-api-url:
+    description: "NEXT_PUBLIC_API_URL passed to the build"
+    required: false
+    default: "http://localhost:3000"
+
+runs:
+  using: "composite"
+  steps:
+    - name: Run DB migrations
+      shell: bash
+      run: npm run db:migrate && npm run db:migrate:kysely
+      env:
+        DATABASE_URL: ${{ inputs.database-url }}
+
+    - name: Build Next.js (production)
+      shell: bash
+      run: npm run build
+      env:
+        ANALYZE: "false"
+        NEXT_TELEMETRY_DISABLED: "1"
+        DATABASE_URL: ${{ inputs.database-url }}
+        AUTH_SECRET: ${{ inputs.auth-secret }}
+        GOOGLE_CLIENT_ID: ${{ inputs.google-client-id }}
+        GOOGLE_CLIENT_SECRET: ${{ inputs.google-client-secret }}
+        NEXT_PUBLIC_API_URL: ${{ inputs.next-public-api-url }}

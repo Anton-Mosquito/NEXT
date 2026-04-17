@@ -17,6 +17,21 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: testuser
+          POSTGRES_PASSWORD: testpassword
+          POSTGRES_DB: testdb
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U testuser -d testdb"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
@@ -45,12 +60,19 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
 
+      - name: Migrate DB and build app
+        uses: ./.github/actions/build-app
+        with:
+          database-url: "postgres://testuser:testpassword@localhost:5432/testdb"
+
       - name: Run Playwright E2E tests
         run: npm run test:e2e
         env:
           CI: "true"
+          # Increase Node heap so next-server doesn't OOM on ubuntu-latest (7 GB RAM)
+          NODE_OPTIONS: "--max-old-space-size=3072"
           AUTH_SECRET: "ci_dummy_secret_for_build_only_123456789"
-          DATABASE_URL: "postgres://user:pass@localhost:5432/db"
+          DATABASE_URL: "postgres://testuser:testpassword@localhost:5432/testdb"
           GOOGLE_CLIENT_ID: "ci_dummy_google_client_id"
           GOOGLE_CLIENT_SECRET: "ci_dummy_google_client_secret"
           NEXT_PUBLIC_API_URL: "http://localhost:3000"

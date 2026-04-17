@@ -18,7 +18,7 @@ export default defineConfig({
   retries: process.env.CI ? 2 : 0,
 
   /* Opt out of parallel tests on CI */
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 2 : undefined,
 
   /* Reporter */
   reporter: process.env.CI ? "github" : "html",
@@ -56,6 +56,9 @@ export default defineConfig({
     env: {
       // Prevent next-server from OOMing on memory-constrained CI runners
       NODE_OPTIONS: "--max-old-space-size=8192",
+      // Auth.js production safety: trust localhost host in E2E / CI
+      AUTH_TRUST_HOST: "true",
+      AUTH_URL: "http://localhost:3000",
       AUTH_SECRET:
         process.env.AUTH_SECRET ??
         "e2e_dummy_secret_for_local_test_only_123456",

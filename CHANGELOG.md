@@ -1,3 +1,9 @@
+## [1.1.3](https://github.com/Anton-Mosquito/NEXT/compare/v1.1.2...v1.1.3) (2026-04-17)
+
+### Bug Fixes
+
+- **e2e:** add AUTH_TRUST_HOST and AUTH_URL for nextauth in e2e env ([a49087a](https://github.com/Anton-Mosquito/NEXT/commit/a49087ac6fc351c3af9f471d2fc711c8fed3c315))
+
 ## [1.1.2](https://github.com/Anton-Mosquito/NEXT/compare/v1.1.1...v1.1.2) (2026-04-17)
 
 ### Bug Fixes

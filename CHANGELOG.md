@@ -1,3 +1,9 @@
+## [1.1.4](https://github.com/Anton-Mosquito/NEXT/compare/v1.1.3...v1.1.4) (2026-05-02)
+
+### Bug Fixes
+
+- **playwright:** adjust timeout settings for CI and local environments ([6b80156](https://github.com/Anton-Mosquito/NEXT/commit/6b80156bc8bb902ed900d6218eeb0dcbb4d547bf))
+
 ## [1.1.3](https://github.com/Anton-Mosquito/NEXT/compare/v1.1.2...v1.1.3) (2026-04-17)
 
 ### Bug Fixes

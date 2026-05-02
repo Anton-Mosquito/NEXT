@@ -52,7 +52,9 @@ export default defineConfig({
       : "npm run build && NODE_OPTIONS=--max-old-space-size=8192 npm run start",
     url: "http://127.0.0.1:3000",
     reuseExistingServer: !process.env.CI,
-    timeout: 180 * 1000,
+    // CI: build is a separate step, only `npm start` runs here (~30s)
+    // Local: full `npm run build && npm run start` can take 3-5 min
+    timeout: process.env.CI ? 60 * 1000 : 5 * 60 * 1000,
     env: {
       // Prevent next-server from OOMing on memory-constrained CI runners
       NODE_OPTIONS: "--max-old-space-size=8192",

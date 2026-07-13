@@ -1,3 +1,9 @@
+# [1.2.0](https://github.com/Anton-Mosquito/NEXT/compare/v1.1.4...v1.2.0) (2026-07-13)
+
+### Features
+
+- implement FSD-structured API layer for dashboard, transactions, and categories with Kysely integration ([6e943bf](https://github.com/Anton-Mosquito/NEXT/commit/6e943bf3b0742bb3840d9f9d8606a17f9d9ebf4b))
+
 ## [1.1.4](https://github.com/Anton-Mosquito/NEXT/compare/v1.1.3...v1.1.4) (2026-05-02)
 
 ### Bug Fixes

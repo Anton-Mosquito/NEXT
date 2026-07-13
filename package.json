@@ -23,7 +23,7 @@
     "db:migrate:kysely": "tsx src/shared/lib/kysely-migrate.ts",
     "db:seed": "tsx --env-file=.env.local scripts/seed.ts",
     "vercel:pull": "vercel env pull .env.local",
-    "db:setup": "npm run db:migrate",
+    "db:setup": "npm run db:migrate && npm run db:migrate:kysely",
     "prepare": "husky",
     "commitlint": "commitlint --edit"
   },

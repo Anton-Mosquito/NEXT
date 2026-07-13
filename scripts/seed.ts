@@ -237,7 +237,7 @@ async function seed() {
   const accountDefs = [
     { name: "Main Card", type: "card" as const, balance: 14_850.0 },
     { name: "Cash", type: "cash" as const, balance: 3_200.0 },
-    { name: "Savings", type: "crypto" as const, balance: 51_000.0 },
+    { name: "Savings", type: "savings" as const, balance: 51_000.0 },
   ];
 
   const accounts = await db
@@ -268,6 +268,7 @@ async function seed() {
     .values(
       CATEGORY_DEFS.map((c) => ({
         id: sql<string>`gen_random_uuid()::text`,
+        userId,
         name: c.name,
         type: c.type,
         color: c.color,

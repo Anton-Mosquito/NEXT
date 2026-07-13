@@ -94,8 +94,8 @@ export interface FinancialAccountTable {
   id: Generated<string>;
   userId: string;
   name: string;
-  /** 'cash' | 'card' | 'crypto' — enforced by a CHECK constraint */
-  type: string;
+  /** 'cash' | 'card' | 'savings' | 'crypto' — enforced by a CHECK constraint */
+  type: 'cash' | 'card' | 'savings' | 'crypto';
   /** NUMERIC(12,2) arrives as a string from pg driver */
   balance: ColumnType<string, number | string, number | string>;
   currency: Generated<string>;
@@ -111,6 +111,7 @@ export interface FinancialAccountTable {
  */
 export interface CategoryTable {
   id: Generated<string>;
+  userId: string;
   name: string;
   /** 'income' | 'expense' — enforced by a CHECK constraint */
   type: string;

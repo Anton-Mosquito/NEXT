@@ -1,3 +1,9 @@
+# [1.3.0](https://github.com/Anton-Mosquito/NEXT/compare/v1.2.0...v1.3.0) (2026-07-27)
+
+### Features
+
+- implement full dashboard layout with authentication, budget tracking, transaction management, and analytics features ([cf6882f](https://github.com/Anton-Mosquito/NEXT/commit/cf6882fad136970ca77584654b30a1b9c96afefd))
+
 # [1.2.0](https://github.com/Anton-Mosquito/NEXT/compare/v1.1.4...v1.2.0) (2026-07-13)
 
 ### Features

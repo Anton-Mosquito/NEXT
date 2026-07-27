@@ -1,6 +1,6 @@
 // src/features/text-editor/model/editorSlice.ts
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "@/app/store";
+import type { RootState } from "@/_learning/store";
 
 interface EditorContent {
   text: string;

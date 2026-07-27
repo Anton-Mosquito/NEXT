@@ -7,11 +7,14 @@ import { QueryProvider } from "@/app/providers/QueryProvider";
 import { SessionProvider } from "@/app/providers/SessionProvider";
 import { Header } from "@/widgets/header";
 import { WhydrInit } from "@/app/WhydrInit";
-import { buildPreloadedState } from "@/app/store/preloadState";
+import { buildPreloadedState } from "@/_learning/store/preloadState";
 import type { AuthUser } from "@/entities/auth";
-import { makeStore } from "@/app/store/makeStore";
+import { makeStore } from "@/_learning/store/makeStore";
 import { postApi } from "@/entities/post";
 import { auth } from "@/shared/lib/auth";
+
+import { ThemeProvider } from "@/app/providers/ThemeProvider";
+import { Toaster } from "@/components/ui/sonner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -66,25 +69,28 @@ export default async function RootLayout({
   });
 
   return (
-    <html lang="uk" className={inter.variable}>
+    <html lang="uk" className={inter.variable} suppressHydrationWarning>
       <body className="min-h-screen">
-        <QueryProvider>
-          {/*
-            SessionProvider passes the initial server session to next-auth/react
-            hooks (useSession) so the client hydrates without a loading flash.
-          */}
-          <SessionProvider session={session}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <QueryProvider>
             {/*
-              StoreProvider initialises Redux with server-side auth state.
-              Preloaded state prevents hydration mismatch on the client.
+              SessionProvider passes the initial server session to next-auth/react
+              hooks (useSession) so the client hydrates without a loading flash.
             */}
-            <StoreProvider preloadedState={preloadedState}>
-              <WhydrInit />
-              <Header />
-              <main className="max-w-5xl mx-auto px-4 py-6">{children}</main>
-            </StoreProvider>
-          </SessionProvider>
-        </QueryProvider>
+            <SessionProvider session={session}>
+              {/*
+                StoreProvider initialises Redux with server-side auth state.
+                Preloaded state prevents hydration mismatch on the client.
+              */}
+              <StoreProvider preloadedState={preloadedState}>
+                <WhydrInit />
+                <Header />
+                <main className="max-w-5xl mx-auto px-4 py-6">{children}</main>
+                <Toaster />
+              </StoreProvider>
+            </SessionProvider>
+          </QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

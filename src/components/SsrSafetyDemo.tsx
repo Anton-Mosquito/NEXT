@@ -3,7 +3,7 @@
 
 import { useRef, useState, useEffect } from "react";
 import { Card, Badge, Button } from "@/shared/ui";
-import { useAppSelector } from "@/app/store";
+import { useAppSelector } from "@/_learning/store";
 import { selectCurrentUser, selectIsAuthenticated } from "@/entities/auth";
 
 export function SsrSafetyDemo({

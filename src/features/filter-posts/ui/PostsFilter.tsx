@@ -1,7 +1,7 @@
 // src/features/filter-posts/ui/PostsFilter.tsx
 "use client";
 
-import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/_learning/store";
 import { Input, Button, Badge } from "@/shared/ui";
 import { debounce } from "@/shared/lib";
 import {

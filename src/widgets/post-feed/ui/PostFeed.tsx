@@ -8,10 +8,10 @@ import { LikeButton } from "@/features/like-post";
 import { DeletePostButton } from "@/features/delete-post";
 import { CreatePostForm } from "@/features/create-post";
 import { PostsFilter } from "@/features/filter-posts";
-import { useAppSelector } from "@/app/store";
+import { useAppSelector } from "@/_learning/store";
 import { selectPostsFilter, setPage } from "@/features/filter-posts";
 import { Button, Card } from "@/shared/ui";
-import { useAppDispatch } from "@/app/store";
+import { useAppDispatch } from "@/_learning/store";
 
 export function PostFeed() {
   const dispatch = useAppDispatch();

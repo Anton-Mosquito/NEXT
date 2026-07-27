@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "@/app/store";
+import { useAppDispatch, useAppSelector } from "@/_learning/store";
 import { toggleLike, selectPostLikes } from "@/features/like-post";
 import { Card, Button, Badge } from "@/shared/ui";
 
@@ -67,7 +67,7 @@ export function CrossTabDemo() {
       <Card className="bg-blue-50 border-blue-200 text-sm text-blue-700">
         <p className="font-bold mb-2">📋 Як тестувати:</p>
         <ol className="space-y-1 text-xs">
-          <li>1. Натисни "Відкрити другу вкладку"</li>
+          <li>1. Натисни &quot;Відкрити другу вкладку&quot;</li>
           <li>2. Поставив лайк у першій вкладці</li>
           <li>3. Спостерігай: лічильник оновлюється у ДРУГІЙ вкладці!</li>
           <li>4. BroadcastChannel відправляє action між вкладками</li>

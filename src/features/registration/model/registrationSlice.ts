@@ -16,7 +16,7 @@ import {
   validateAccount,
   validatePreferences,
 } from "./validators";
-import type { RootState } from "@/app/store";
+import type { RootState } from "@/_learning/store";
 
 const initialState: RegistrationState = {
   currentStep: 0,

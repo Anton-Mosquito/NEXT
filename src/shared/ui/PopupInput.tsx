@@ -73,7 +73,7 @@ export function PopupInput({
           ))}
 
           <Button
-            size="figma-2xl"
+            size="lg"
             className="mt-2 w-full"
             onClick={handleSubmit}
           >

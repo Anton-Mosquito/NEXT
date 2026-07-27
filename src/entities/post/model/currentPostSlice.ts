@@ -1,6 +1,6 @@
 // src/entities/post/model/currentPostSlice.ts
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "@/app/store";
+import type { RootState } from "@/_learning/store";
 import type { PostWithMeta } from "./types";
 
 interface CurrentPostState {

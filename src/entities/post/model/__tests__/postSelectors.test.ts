@@ -5,7 +5,7 @@ import {
   selectPostsQueryArgs,
   selectHasActiveFilters,
 } from "../postSelectors";
-import type { RootState } from "@/app/store";
+import type { RootState } from "@/_learning/store";
 
 // Мінімальний mock state
 const createMockState = (overrides?: Partial<RootState>): RootState =>

@@ -3,7 +3,7 @@
 
 import { useState, useTransition } from "react";
 import { Card, Input, Button, Badge } from "@/shared/ui";
-import { useAppDispatch } from "@/app/store";
+import { useAppDispatch } from "@/_learning/store";
 import { baseApi } from "@/shared/api";
 import {
   createPostAction,

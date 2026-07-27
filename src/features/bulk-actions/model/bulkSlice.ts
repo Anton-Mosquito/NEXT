@@ -4,7 +4,7 @@ import {
   createAsyncThunk,
   type PayloadAction,
 } from "@reduxjs/toolkit";
-import type { RootState } from "@/app/store";
+import type { RootState } from "@/_learning/store";
 
 export interface BulkItem {
   id: number;

@@ -1,7 +1,7 @@
 // src/features/registration/ui/RegistrationForm.tsx
 "use client";
 
-import { useAppDispatch, useAppSelector } from "@/app/store";
+import { useAppDispatch, useAppSelector } from "@/_learning/store";
 import {
   selectRegistration,
   selectCurrentStep,

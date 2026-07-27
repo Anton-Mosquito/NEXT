@@ -1,7 +1,7 @@
 // src/features/bulk-actions/ui/BulkActions.tsx
 "use client";
 
-import { useAppDispatch, useAppSelector } from "@/app/store";
+import { useAppDispatch, useAppSelector } from "@/_learning/store";
 import {
   selectBulkItems,
   selectBulkStats,

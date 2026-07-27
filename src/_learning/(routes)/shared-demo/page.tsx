@@ -141,16 +141,18 @@ export default function SharedDemoPage() {
       <Section title="Account Card">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <AccountCard
-            cardType="Master Card"
-            cardNetwork="mastercard"
-            accountNumber="133 456 886 8****"
-            totalAmount="$25000"
+            id="acc-1"
+            name="Master Card"
+            type="card"
+            balance={25000}
+            currency="USD"
           />
           <AccountCard
-            cardType="Visa"
-            cardNetwork="visa"
-            accountNumber="4111 1111 1111 1111"
-            totalAmount="$12500"
+            id="acc-2"
+            name="Visa"
+            type="card"
+            balance={12500}
+            currency="USD"
           />
         </div>
       </Section>
@@ -164,25 +166,31 @@ export default function SharedDemoPage() {
       <Section title="Transaction Item">
         <div className="flex flex-row gap-2">
           <TransactionItem
-            icon={<Gamepad2 size={24} />}
-            name="GTR 5"
-            shopName="Gadget & Gear"
-            date="17 May 2023"
-            amount="$160.00"
+            id="tx-1"
+            description="GTR 5"
+            amount={160.0}
+            type="expense"
+            date="2023-05-17"
+            categoryName="Entertainment"
+            categoryColor="#8b5cf6"
+            accountName="Gadget & Gear"
           />
           <TransactionItem
-            icon={<Gamepad2 size={24} />}
-            name="Polo shirt"
-            shopName="XL fashions"
-            date="17 May 2023"
-            amount="$20.00"
+            id="tx-2"
+            description="Polo shirt"
+            amount={20.0}
+            type="expense"
+            date="2023-05-17"
+            categoryName="Shopping"
+            categoryColor="#ec4899"
+            accountName="XL fashions"
           />
         </div>
       </Section>
 
       {/* ── Transaction List (table variant) ────────────────── */}
       <Section title="Transaction List">
-        <TransactionList />
+        <TransactionList transactions={[]} />
       </Section>
 
       {/* ── Sidebar Profile ─────────────────────────────────── */}

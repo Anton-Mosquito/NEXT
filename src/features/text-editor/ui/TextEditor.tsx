@@ -2,7 +2,7 @@
 "use client";
 
 import { useCallback } from "react";
-import { useAppDispatch, useAppSelector } from "@/app/store";
+import { useAppDispatch, useAppSelector } from "@/_learning/store";
 import {
   selectEditorPresent,
   selectCanUndo,

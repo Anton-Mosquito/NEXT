@@ -1,7 +1,7 @@
 import React, { PropsWithChildren, type JSX } from "react";
 import { render, type RenderOptions } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { makeStore, type AppStore, type RootState } from "@/app/store";
+import { makeStore, type AppStore, type RootState } from "@/_learning/store";
 
 // Використовуємо Partial<RootState> замість PreloadedState
 interface ExtendedRenderOptions extends Omit<RenderOptions, "queries"> {

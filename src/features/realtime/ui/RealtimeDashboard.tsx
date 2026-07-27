@@ -2,7 +2,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useAppSelector, useAppDispatch } from "@/app/store";
+import { useAppSelector, useAppDispatch } from "@/_learning/store";
 import {
   selectRealtimeStatus,
   selectLivePosts,

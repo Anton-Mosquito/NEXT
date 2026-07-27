@@ -3,7 +3,7 @@
 
 import { useState, useEffect, useRef, memo } from "react";
 import { Card, Badge, Button } from "@/shared/ui";
-import { useAppSelector, useAppDispatch } from "@/app/store";
+import { useAppSelector, useAppDispatch } from "@/_learning/store";
 import {
   selectLikesStats,
   selectAuthSummary,
@@ -45,7 +45,7 @@ function LikesStatsSubscriber() {
         <Badge variant="success">renders: {renderCount.current}</Badge>
       </div>
       <p className="text-sm">
-        ❤️ {stats.total} | ✅ {stats.liked} liked
+        ❤️ {String(stats.total)} | ✅ {String(stats.liked)} liked
       </p>
     </div>
   );

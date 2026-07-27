@@ -1,6 +1,6 @@
 // src/entities/post/model/postSelectors.ts
 import { createSelector } from "@reduxjs/toolkit";
-import type { RootState } from "@/app/store";
+import type { RootState } from "@/_learning/store";
 import { getReadingTime } from "@/shared/lib";
 
 // ============================================================

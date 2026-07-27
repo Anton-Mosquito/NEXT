@@ -6,7 +6,7 @@ import {
   type FetchArgs,
   type FetchBaseQueryError,
 } from "@reduxjs/toolkit/query/react";
-import type { RootState } from "@/app/store";
+import type { RootState } from "@/_learning/store";
 import { API_CONFIG } from "@/shared/config";
 import { logout, setCredentials } from "@/entities/auth";
 

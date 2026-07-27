@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { Card, Button } from "@/shared/ui";
-import { useAppSelector } from "@/app/store";
+import { useAppSelector } from "@/_learning/store";
 import { selectCurrentUser } from "@/entities/auth";
 
 interface ReduxStreamingClientProps {

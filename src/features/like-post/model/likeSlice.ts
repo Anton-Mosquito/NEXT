@@ -1,6 +1,6 @@
 // src/features/like-post/model/likeSlice.ts
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "@/app/store";
+import type { RootState } from "@/_learning/store";
 
 interface LikeState {
   // { [postId]: { count: number, isLiked: boolean } }

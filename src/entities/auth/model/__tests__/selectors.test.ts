@@ -5,7 +5,7 @@ import {
   selectIsAuthenticated,
   selectAccessToken,
 } from "../selectors";
-import type { RootState } from "@/app/store";
+import type { RootState } from "@/_learning/store";
 
 // ✅ Mock partial RootState для тестів selectors
 const createMockState = (

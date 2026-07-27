@@ -1,7 +1,7 @@
 // src/features/like-post/ui/LikeButton.tsx
 "use client";
 
-import { useAppDispatch, useAppSelector } from "@/app/store/hooks";
+import { useAppDispatch, useAppSelector } from "@/_learning/store";
 import { Button } from "@/shared/ui";
 import { cn } from "@/shared/lib";
 import { toggleLike, selectPostLikes } from "../model/likeSlice";

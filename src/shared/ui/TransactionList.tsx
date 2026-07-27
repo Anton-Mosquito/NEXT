@@ -1,93 +1,50 @@
 import { cn } from "@/lib/utils";
-import {
-  Gamepad2,
-  ShoppingBag,
-  UtensilsCrossed,
-  Clapperboard,
-  Bus,
-  Pizza,
-  Keyboard,
-} from "lucide-react";
 import { TransactionItem, type TransactionItemProps } from "./TransactionItem";
-
-export type Transaction = Omit<TransactionItemProps, "variant" | "className">;
+import { Skeleton } from "./Skeleton";
+import { EmptyState } from "./EmptyState";
 
 interface TransactionListProps {
-  transactions?: Transaction[];
+  transactions: TransactionItemProps[];
+  isLoading?: boolean;
+  emptyMessage?: string;
   className?: string;
 }
 
-const DEFAULT_TRANSACTIONS: Transaction[] = [
-  {
-    icon: <Gamepad2 size={20} />,
-    name: "GTR 5",
-    shopName: "Gadget & Gear",
-    date: "17 May, 2023",
-    paymentMethod: "Credit Card",
-    amount: "$160.00",
-  },
-  {
-    icon: <ShoppingBag size={20} />,
-    name: "Polo shirt",
-    shopName: "XL fashions",
-    date: "17 May, 2023",
-    paymentMethod: "Credit Card",
-    amount: "$20.00",
-  },
-  {
-    icon: <UtensilsCrossed size={20} />,
-    name: "Biriyani",
-    shopName: "Hajir Biriyani",
-    date: "17 May, 2023",
-    paymentMethod: "Credit Card",
-    amount: "$12.00",
-  },
-  {
-    icon: <Clapperboard size={20} />,
-    name: "Movie ticket",
-    shopName: "Inox",
-    date: "17 May, 2023",
-    paymentMethod: "Credit Card",
-    amount: "$15.00",
-  },
-  {
-    icon: <Bus size={20} />,
-    name: "Taxi fare",
-    shopName: "Uber",
-    date: "17 May, 2023",
-    paymentMethod: "Credit Card",
-    amount: "$10.00",
-  },
-  {
-    icon: <Pizza size={20} />,
-    name: "Pizza",
-    shopName: "Pizza Hit",
-    date: "17 May, 2023",
-    paymentMethod: "Credit Card",
-    amount: "$20.00",
-  },
-  {
-    icon: <Keyboard size={20} />,
-    name: "Keyboard",
-    shopName: "Gadget & Gear",
-    date: "17 May, 2023",
-    paymentMethod: "Credit Card",
-    amount: "$30.00",
-  },
-];
-
 const COLUMNS = [
-  "Items",
-  "Shop Name",
+  "Category",
+  "Description",
   "Date",
-  "Payment Method",
+  "Account",
   "Amount",
 ] as const;
 
 export function TransactionList({
-  transactions = DEFAULT_TRANSACTIONS,
+  transactions,
+  isLoading,
+  emptyMessage = "No transactions found.",
   className,
 }: TransactionListProps) {
+  
+  if (isLoading) {
+    return (
+      <div className={cn("w-full rounded-2xl border border-bg-special bg-card p-4 space-y-4", className)}>
+        {[...Array(5)].map((_, i) => (
+          <Skeleton key={i} className="h-12 w-full" />
+        ))}
+      </div>
+    );
+  }
+
+  if (transactions.length === 0) {
+    return (
+      <EmptyState
+        title="No transactions"
+        description={emptyMessage}
+        className={className}
+      />
+    );
+  }
+
   return (
     <div
       className={cn(
@@ -112,8 +69,8 @@ export function TransactionList({
           </tr>
         </thead>
         <tbody>
-          {transactions.map((tx, i) => (
-            <TransactionItem key={`${tx.name}-${i}`} variant="row" {...tx} />
+          {transactions.map((tx) => (
+            <TransactionItem key={tx.id} variant="row" {...tx} />
           ))}
         </tbody>
       </table>

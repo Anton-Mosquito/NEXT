@@ -1,7 +1,7 @@
 // src/components/PreloadedStateDemo.tsx
 "use client";
 
-import { useAppSelector } from "@/app/store";
+import { useAppSelector } from "@/_learning/store";
 import {
   selectCurrentUser,
   selectIsAuthenticated,

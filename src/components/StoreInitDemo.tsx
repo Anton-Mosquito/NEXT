@@ -3,8 +3,8 @@
 
 import { useCallback } from "react";
 import { Card, Badge } from "@/shared/ui";
-import { StoreInitializer } from "@/app/store/StoreInitializer";
-import { useAppSelector, useAppDispatch } from "@/app/store";
+import { StoreInitializer } from "@/_learning/store/StoreInitializer";
+import { useAppSelector, useAppDispatch } from "@/_learning/store";
 import {
   selectCurrentPost,
   selectCurrentPostHydrated,
@@ -12,7 +12,7 @@ import {
 } from "@/entities/post";
 import { initializePost } from "@/entities/post/model/currentPostSlice";
 import type { PostWithMeta } from "@/entities/post";
-import type { AppDispatch } from "@/app/store";
+import type { AppDispatch } from "@/_learning/store";
 
 interface StoreInitDemoProps {
   serverPost: PostWithMeta;
@@ -84,7 +84,7 @@ if (!ref.current) {
             <p>
               <span className="text-purple-600">title:</span>{" "}
               <span className="text-amber-600">
-                "{currentPost.title.slice(0, 40)}..."
+                &quot;{currentPost.title.slice(0, 40)}...&quot;
               </span>
             </p>
             <p>

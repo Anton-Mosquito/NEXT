@@ -52,27 +52,54 @@ export function Sidebar({
 
       {/* ── Nav menu — mt-10 = 40px gap from logo ────────────── */}
       <nav className="mt-10 flex flex-col gap-4">
-        {items.map((item) => {
-          const isActive = activeHref === item.href;
-          const Icon = item.icon;
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={cn(
-                // gap-3 = 12px between icon and label
-                "flex items-center gap-3 rounded-xl px-4 py-3",
-                "text-base leading-6 text-white transition-colors",
-                isActive
-                  ? "bg-primary font-semibold"
-                  : "font-normal hover:bg-white/10",
-              )}
-            >
-              <Icon size={24} className="shrink-0" />
-              <span>{item.label}</span>
-            </Link>
-          );
-        })}
+        {items
+          .filter((item) => item.href !== "/settings")
+          .map((item) => {
+            const isActive = activeHref === item.href;
+            const Icon = item.icon;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={cn(
+                  // gap-3 = 12px between icon and label
+                  "flex items-center gap-3 rounded-xl px-4 py-3",
+                  "text-base leading-6 text-white transition-colors",
+                  isActive
+                    ? "bg-primary font-semibold"
+                    : "font-normal hover:bg-white/10",
+                )}
+              >
+                <Icon size={24} className="shrink-0" />
+                <span>{item.label}</span>
+              </Link>
+            );
+          })}
+
+        {items
+          .filter((item) => item.href === "/settings")
+          .map((item) => {
+            const isActive = activeHref === item.href;
+            const Icon = item.icon;
+            return (
+              <div key={item.href} className="flex flex-col gap-4">
+                <div className="my-1 border-t border-white/10" />
+                <Link
+                  href={item.href}
+                  className={cn(
+                    "flex items-center gap-3 rounded-xl px-4 py-3",
+                    "text-base leading-6 text-white transition-colors",
+                    isActive
+                      ? "bg-primary font-semibold"
+                      : "font-normal hover:bg-white/10",
+                  )}
+                >
+                  <Icon size={24} className="shrink-0" />
+                  <span>{item.label}</span>
+                </Link>
+              </div>
+            );
+          })}
       </nav>
 
       {/* ── Flexible spacer (≈ 228px at 1024px sidebar height) ── */}

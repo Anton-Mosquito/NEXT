@@ -6,7 +6,7 @@ import {
   makeStore,
   type AppStore,
   type RootState,
-} from "@/app/store/makeStore";
+} from "@/_learning/store/makeStore";
 
 interface StoreProviderProps {
   children: React.ReactNode;

@@ -10,7 +10,7 @@ import type {
   LivePost,
   LiveNotification,
 } from "./types";
-import type { RootState } from "@/app/store";
+import type { RootState } from "@/_learning/store";
 
 const initialState: RealtimeState = {
   status: "disconnected",

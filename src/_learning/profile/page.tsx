@@ -1,7 +1,7 @@
 // src/app/profile/page.tsx
 "use client";
 
-import { useAppSelector } from "@/app/store";
+import { useAppSelector } from "@/_learning/store";
 import { selectCurrentUser, selectIsAuthenticated } from "@/entities/auth";
 import { Card, Avatar, Badge, Button, SkeletonList } from "@/shared/ui";
 import { useGetPostsByUserQuery } from "@/entities/post";

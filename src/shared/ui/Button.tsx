@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { Button as ShadcnButton } from "@/components/ui/button";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
-type ButtonVariant = "primary" | "secondary" | "danger" | "ghost";
+type ButtonVariant = "primary" | "secondary" | "danger" | "destructive" | "ghost" | "outline";
 type ButtonSize =
   | "sm"
   | "md"
@@ -31,7 +31,9 @@ const variantMap: Record<
   primary: "default",
   secondary: "secondary",
   danger: "destructive",
+  destructive: "destructive",
   ghost: "ghost",
+  outline: "secondary",
 };
 
 const sizeMap: Record<ButtonSize, string> = {

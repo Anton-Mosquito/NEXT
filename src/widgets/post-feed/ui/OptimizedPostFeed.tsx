@@ -8,7 +8,7 @@ import { memo, useMemo, useCallback, useState } from "react";
 import { useGetPostsQuery } from "@/entities/post";
 import { LikeButton } from "@/features/like-post";
 import { Card, Badge } from "@/shared/ui";
-import { useAppSelector } from "@/app/store";
+import { useAppSelector } from "@/_learning/store";
 import {
   selectPostsQueryArgs,
   selectLikesStats,

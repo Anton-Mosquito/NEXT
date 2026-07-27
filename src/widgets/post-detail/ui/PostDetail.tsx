@@ -144,11 +144,11 @@
 import { useState, useCallback } from "react";
 import Link from "next/link";
 import { Card, Badge, Avatar, Button } from "@/shared/ui";
-import { StoreInitializer } from "@/app/store/StoreInitializer";
+import { StoreInitializer } from "@/_learning/store/StoreInitializer";
 import { LikeButton } from "@/features/like-post";
 import { getReadingTime } from "@/shared/lib";
 import { initializePost } from "@/entities/post/model/currentPostSlice";
-import { useAppSelector } from "@/app/store";
+import { useAppSelector } from "@/_learning/store";
 import {
   selectCurrentPost,
   selectCurrentPostHydrated,

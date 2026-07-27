@@ -1,9 +1,9 @@
-// src/shared/ui/Avatar.tsx
 import { cn } from "@/lib/utils";
-import { Avatar as ShadcnAvatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar as ShadcnAvatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface AvatarProps {
   name: string;
+  src?: string | null;
   size?: "sm" | "md" | "lg";
   className?: string;
 }
@@ -22,8 +22,8 @@ const colors = [
   "from-orange-400 to-orange-600",
 ];
 
-export function Avatar({ name, size = "md", className }: AvatarProps) {
-  const colorIndex = name.charCodeAt(0) % colors.length;
+export function Avatar({ name, src, size = "md", className }: AvatarProps) {
+  const colorIndex = (name || "U").charCodeAt(0) % colors.length;
   return (
     <ShadcnAvatar
       className={cn(
@@ -32,13 +32,14 @@ export function Avatar({ name, size = "md", className }: AvatarProps) {
         className,
       )}
     >
+      {src && <AvatarImage src={src} alt={name} />}
       <AvatarFallback
         className={cn(
           "bg-linear-to-br text-white font-bold",
           colors[colorIndex],
         )}
       >
-        {name.charAt(0).toUpperCase()}
+        {(name || "U").charAt(0).toUpperCase()}
       </AvatarFallback>
     </ShadcnAvatar>
   );

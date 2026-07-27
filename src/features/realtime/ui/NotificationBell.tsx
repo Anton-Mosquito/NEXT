@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { useAppSelector, useAppDispatch } from "@/app/store";
+import { useAppSelector, useAppDispatch } from "@/_learning/store";
 import {
   selectNotifications,
   selectUnreadCount,

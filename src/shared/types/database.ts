@@ -28,6 +28,7 @@ export interface UserTable {
   email: string;
   emailVerified: Date | null;
   image: string | null;
+  passwordHash: string | null;
   createdAt: Generated<Date>;
 }
 
@@ -143,6 +144,18 @@ export interface TransactionTable {
   createdAt: Generated<Date>;
 }
 
+/**
+ * `budget` — spending limits per category per month
+ */
+export interface BudgetTable {
+  id: Generated<string>;
+  userId: string;
+  categoryId: string;
+  amount: number;
+  month: string;
+  createdAt: Generated<Date>;
+}
+
 // ---------------------------------------------------------------------------
 // Root Database interface — used everywhere Kysely is typed
 // ---------------------------------------------------------------------------
@@ -165,4 +178,5 @@ export interface Database {
   financialAccount: FinancialAccountTable;
   category: CategoryTable;
   transaction: TransactionTable;
+  budget: BudgetTable;
 }

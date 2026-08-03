@@ -42,7 +42,7 @@
     ]
   },
   "dependencies": {
-    "@auth/kysely-adapter": "^1.11.2",
+    "@auth/kysely-adapter": "^1.11.3",
     "@hookform/resolvers": "^5.2.2",
     "@reduxjs/toolkit": "^2.11.2",
     "@tanstack/react-query": "^5.99.2",

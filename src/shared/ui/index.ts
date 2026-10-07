@@ -3,6 +3,7 @@ export { Input } from "./Input";
 export { PasswordInput } from "./PasswordInput";
 export { PhoneInput } from "./PhoneInput";
 export { AccountCard } from "./AccountCard";
+export { GoalItem } from "./GoalItem";
 export { ExpenseCard } from "./ExpenseCard";
 export type { ExpenseItem } from "./ExpenseCard";
 export { ExpensesBreakdown } from "./ExpensesBreakdown";

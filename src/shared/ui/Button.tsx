@@ -3,7 +3,8 @@ import { cn } from "@/lib/utils";
 import { Button as ShadcnButton } from "@/components/ui/button";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
-type ButtonVariant = "primary" | "secondary" | "danger" | "destructive" | "ghost" | "outline";
+type ButtonVariant =
+  "primary" | "secondary" | "danger" | "destructive" | "ghost" | "outline";
 type ButtonSize =
   | "sm"
   | "md"
@@ -11,7 +12,8 @@ type ButtonSize =
   | "figma-sm"
   | "figma-md"
   | "figma-xl"
-  | "figma-2xl";
+  | "figma-2xl"
+  | "figma-big-secondary";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
@@ -38,17 +40,18 @@ const variantMap: Record<
 
 const sizeMap: Record<ButtonSize, string> = {
   sm: "sm",
-  md: "default",
-  lg: "lg",
+  md: "figma-md",
+  lg: "figma-xl",
   "figma-sm": "figma-sm",
   "figma-md": "figma-md",
   "figma-xl": "figma-xl",
   "figma-2xl": "figma-2xl",
+  "figma-big-secondary": "figma-big-secondary",
 };
 
 export function Button({
   variant = "primary",
-  size = "md",
+  size = "figma-md",
   isLoading = false,
   fullWidth = false,
   asChild = false,

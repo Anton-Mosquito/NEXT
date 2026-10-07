@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
 interface CardProps {
   children: ReactNode;
   className?: string;
-  padding?: "sm" | "md" | "lg" | "none";
+  padding?: "sm" | "md" | "lg" | "xl" | "none";
   hoverable?: boolean;
   onClick?: () => void;
 }
@@ -16,6 +16,7 @@ const paddingStyles: Record<NonNullable<CardProps["padding"]>, string> = {
   sm: "p-3",
   md: "p-4",
   lg: "p-6",
+  xl: "p-8",
 };
 
 export function Card({

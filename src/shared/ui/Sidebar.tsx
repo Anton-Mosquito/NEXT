@@ -19,7 +19,6 @@ interface SidebarProps {
     name: string;
     avatarSrc?: string;
   };
-  onLogout?: () => void;
   onViewProfile?: () => void;
   profileMenuItems?: { label: string; onClick?: () => void }[];
   className?: string;
@@ -29,7 +28,6 @@ export function Sidebar({
   items,
   activeHref,
   user = { name: "Tanzir Rahman" },
-  onLogout,
   onViewProfile,
   profileMenuItems,
   className,
@@ -37,79 +35,46 @@ export function Sidebar({
   return (
     <aside
       className={cn(
-        // 280px wide, full height, dark card surface
-        "flex h-full w-70 flex-col bg-card",
-        // padding: 48px top/bottom, 28px left/right
+        "flex h-screen w-70 shrink-0 flex-col bg-[#191919]",
         "px-7 py-12",
         className,
       )}
     >
-      {/* ── Logo ─────────────────────────────────────────────── */}
-      <div className="text-center text-2xl leading-8 tracking-[0.08em] text-white">
-        <span className="font-extrabold">FINE</span>
-        <span className="font-normal">bank.IO</span>
+      <div className="flex w-56 justify-center text-center text-[24px] leading-8 tracking-[1.92px] text-white">
+        <span className="font-logo font-extrabold">FINE</span>
+        <span className="font-logo font-medium">bank.</span>
+        <span className="font-logo font-extrabold">IO</span>
       </div>
 
-      {/* ── Nav menu — mt-10 = 40px gap from logo ────────────── */}
-      <nav className="mt-10 flex flex-col gap-4">
-        {items
-          .filter((item) => item.href !== "/settings")
-          .map((item) => {
-            const isActive = activeHref === item.href;
-            const Icon = item.icon;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  // gap-3 = 12px between icon and label
-                  "flex items-center gap-3 rounded-xl px-4 py-3",
-                  "text-base leading-6 text-white transition-colors",
-                  isActive
-                    ? "bg-primary font-semibold"
-                    : "font-normal hover:bg-white/10",
-                )}
-              >
-                <Icon size={24} className="shrink-0" />
-                <span>{item.label}</span>
-              </Link>
-            );
-          })}
-
-        {items
-          .filter((item) => item.href === "/settings")
-          .map((item) => {
-            const isActive = activeHref === item.href;
-            const Icon = item.icon;
-            return (
-              <div key={item.href} className="flex flex-col gap-4">
-                <div className="my-1 border-t border-white/10" />
-                <Link
-                  href={item.href}
-                  className={cn(
-                    "flex items-center gap-3 rounded-xl px-4 py-3",
-                    "text-base leading-6 text-white transition-colors",
-                    isActive
-                      ? "bg-primary font-semibold"
-                      : "font-normal hover:bg-white/10",
-                  )}
-                >
-                  <Icon size={24} className="shrink-0" />
-                  <span>{item.label}</span>
-                </Link>
-              </div>
-            );
-          })}
+      <nav
+        className="mt-10 min-h-0 w-56 flex-1 space-y-4 overflow-y-auto pb-4"
+        aria-label="Main navigation"
+      >
+        {items.map((item) => {
+          const isActive = activeHref === item.href;
+          const Icon = item.icon;
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-current={isActive ? "page" : undefined}
+              className={cn(
+                "flex h-12 w-56 items-center gap-3 rounded-[4px] px-4",
+                "text-[16px] leading-6 transition-colors",
+                isActive
+                  ? "bg-[#299D91] font-semibold text-white"
+                  : "font-normal text-white/70 hover:bg-white/10",
+              )}
+            >
+              <Icon size={24} className="shrink-0" strokeWidth={2} />
+              <span>{item.label}</span>
+            </Link>
+          );
+        })}
       </nav>
 
-      {/* ── Flexible spacer (≈ 228px at 1024px sidebar height) ── */}
-      <div className="flex-1" />
-
-      {/* ── Logout ───────────────────────────────────────────── */}
-      <MenuLogout onClick={onLogout} />
-
-      {/* ── Profile — mt-11 = 44px gap from logout ───────────── */}
-      <div className="mt-11">
+      <div className="flex w-56 flex-col gap-11">
+        <MenuLogout />
         <SidebarProfile
           name={user.name}
           avatarSrc={user.avatarSrc}

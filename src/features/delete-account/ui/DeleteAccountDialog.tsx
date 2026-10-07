@@ -18,6 +18,7 @@ interface DeleteAccountDialogProps {
   accountName: string;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  onSuccess?: () => void;
 }
 
 export function DeleteAccountDialog({
@@ -25,6 +26,7 @@ export function DeleteAccountDialog({
   accountName,
   open,
   onOpenChange,
+  onSuccess,
 }: DeleteAccountDialogProps) {
   const deleteAccount = useDeleteFinancialAccountMutation();
   const [error, setError] = useState<string | null>(null);
@@ -35,6 +37,7 @@ export function DeleteAccountDialog({
     try {
       await deleteAccount.mutateAsync(accountId);
       onOpenChange(false);
+      onSuccess?.();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unable to delete account");
     }

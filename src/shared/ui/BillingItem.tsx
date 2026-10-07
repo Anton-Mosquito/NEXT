@@ -28,53 +28,55 @@ export function BillingItem({
   return (
     <div
       className={cn(
-        "flex items-center border border-bg-special rounded-2xl px-6",
+        "flex h-[162px] w-full max-w-[1046px] items-center bg-card border-b border-[var(--surface-icon)] px-0",
         className,
       )}
     >
       {/* ── Date box: w-18=72px, pt-3 pr-2 pb-3 pl-0 ────────── */}
-      <div className="flex w-18 shrink-0 flex-col items-center rounded-lg bg-secondary pt-3 pr-2 pb-3 pl-0">
+      <div className="flex h-[82px] w-[72px] shrink-0 flex-col items-center justify-center rounded-[8px] bg-[var(--surface-icon)]/25">
         {/* Month: Inter semi-bold 16px / 18px, gray-02 */}
-        <span className="text-base font-semibold leading-4.5 text-gray-02">
+        <span className="text-[16px] font-semibold leading-[18px] text-[var(--text-subtle)]">
           {month}
         </span>
         {/* Day: Inter extra-bold 22px / 32px, secondary-foreground */}
-        <span className="text-2xl font-extrabold leading-8 text-secondary-foreground">
+        <span className="text-[22px] font-extrabold leading-[32px] text-[var(--text-secondary)]">
           {day}
         </span>
       </div>
 
       {/* ── Logo + name — ml-10 (40px) from date box ──────────── */}
-      <div className="ml-10 flex shrink-0 items-center gap-3">
+      <div className="ml-[122px] flex w-[120px] shrink-0 items-center gap-3">
         {logo && <div className="shrink-0">{logo}</div>}
-        <span className="text-heading-md text-foreground">{serviceName}</span>
+        <span className="text-[16px] font-semibold leading-[24px] text-card-foreground">
+          {serviceName}
+        </span>
       </div>
 
       {/* ── Title + Description — ml-24 (96px), flex-1 ────────── */}
-      <div className="ml-24 flex-1">
+      <div className="ml-[122px] flex-1">
         {/* Title: Inter extra-bold 18px / 24px, foreground */}
-        <h4 className="text-lg font-extrabold leading-6 text-foreground">
+        <h4 className="text-[18px] font-extrabold leading-[24px] text-card-foreground">
           {title}
         </h4>
         {/* Body: Inter regular 14px / 22px, gray-03 */}
-        <p className="mt-1 text-sm font-normal leading-5.5 text-gray-03">
+        <p className="mt-1 text-[14px] font-normal leading-[22px] text-[var(--text-placeholder)]">
           {description}
         </p>
       </div>
 
       {/* ── Billing date: regular 16px / 24px, gray-03 ────────── */}
-      <span className="shrink-0 text-base font-normal leading-6 text-gray-03">
+      <span className="shrink-0 text-[16px] font-normal leading-[24px] text-[var(--text-placeholder)]">
         {billingDate}
       </span>
 
       {/* ── Vertical separator ─────────────────────────────────── */}
-      <div className="mx-8 h-8 w-px shrink-0 bg-border" />
+      <div className="mx-8 h-8 w-px shrink-0 bg-[var(--surface-header)]" />
 
       {/* ── Price box: px-6 py-3 rounded-md border border-gray-05 */}
       {/* Total gap between billingDate and price ≈ 122px via mx-8 + flex natural spacing */}
-      <div className="shrink-0 rounded-md border border-gray-05 px-6 py-3">
+      <div className="flex h-12 w-[108px] shrink-0 items-center justify-center rounded-[8px] border border-[var(--surface-header)]">
         {/* Amount: Inter extra-bold 18px / 24px, foreground */}
-        <span className="text-lg font-extrabold leading-6 text-foreground">
+        <span className="text-[18px] font-extrabold leading-[24px] text-card-foreground">
           {amount}
         </span>
       </div>

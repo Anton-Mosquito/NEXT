@@ -24,9 +24,6 @@ interface TopCategoriesChartProps {
 }
 
 export function TopCategoriesChart({ data, isLoading }: TopCategoriesChartProps) {
-  const formatTooltip = (value: number) => {
-    return value.toLocaleString("uk-UA", { style: "currency", currency: "UAH" });
-  };
 
   const formatXAxis = (tickItem: number) => {
     if (tickItem >= 1000) {

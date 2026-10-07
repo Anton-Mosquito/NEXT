@@ -1,11 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { useBudgetsQuery, useDeleteBudgetMutation } from "@/entities/budget/api/budgetQueries";
+import {
+  useBudgetsQuery,
+  useDeleteBudgetMutation,
+} from "@/entities/budget/api/budgetQueries";
 import { BudgetProgressCard } from "@/shared/ui/BudgetProgressCard";
 import { AddBudgetForm } from "@/features/add-budget/ui/AddBudgetForm";
 import { Button, Card, EmptyState, Skeleton } from "@/shared/ui";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -39,13 +47,17 @@ export function BudgetsWidget() {
   const goToPrevMonth = () => {
     const [y, m] = currentMonth.split("-").map(Number);
     const d = new Date(y, m - 2);
-    setCurrentMonth(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`);
+    setCurrentMonth(
+      `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`,
+    );
   };
 
   const goToNextMonth = () => {
     const [y, m] = currentMonth.split("-").map(Number);
     const d = new Date(y, m);
-    setCurrentMonth(`${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`);
+    setCurrentMonth(
+      `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}`,
+    );
   };
 
   const formatMoney = (val: number) =>
@@ -102,21 +114,19 @@ export function BudgetsWidget() {
         <Card className="p-6">
           <p className="text-sm font-medium text-gray-02">Budgets on track</p>
           <p className="mt-2 text-2xl font-bold">
-            {onTrackCount} <span className="text-sm text-gray-02">/ {budgets?.length || 0}</span>
+            {onTrackCount}{" "}
+            <span className="text-sm text-gray-02">
+              / {budgets?.length || 0}
+            </span>
           </p>
         </Card>
       </div>
 
       {/* Grid of Budgets */}
       {isLoading ? (
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {[1, 2, 3].map((i) => (
-            <Card key={i} className="p-6 h-[164px]">
-              <Skeleton className="h-6 w-1/2 mb-4" />
-              <Skeleton className="h-4 w-3/4 mb-4" />
-              <Skeleton className="h-2 w-full mb-4" />
-              <Skeleton className="h-4 w-1/3 ml-auto" />
-            </Card>
+        <div className="space-y-4">
+          {Array.from({ length: 3 }).map((_, i) => (
+            <Skeleton key={i} className="h-28 w-full rounded-xl" />
           ))}
         </div>
       ) : !budgets || budgets.length === 0 ? (
@@ -158,12 +168,16 @@ export function BudgetsWidget() {
       </Dialog>
 
       {/* Delete Confirmation */}
-      <AlertDialog open={!!deleteTarget} onOpenChange={(open) => !open && setDeleteTarget(null)}>
+      <AlertDialog
+        open={!!deleteTarget}
+        onOpenChange={(open) => !open && setDeleteTarget(null)}
+      >
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Delete Budget</AlertDialogTitle>
             <AlertDialogDescription>
-              Are you sure you want to delete this budget? This action cannot be undone.
+              Are you sure you want to delete this budget? This action cannot be
+              undone.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

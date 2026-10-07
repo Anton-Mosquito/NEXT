@@ -31,32 +31,39 @@ export function ExpenseItemCard({
       onClick={onClick}
       onKeyDown={onClick ? (e) => e.key === "Enter" && onClick() : undefined}
       className={cn(
-        "flex items-center gap-4 rounded-2xl bg-card px-4 py-4",
+        "flex h-[74px] w-full max-w-[200px] items-center gap-4 rounded-[8px] bg-card px-4 py-2",
         onClick && "cursor-pointer transition-colors hover:bg-secondary/60",
         className,
       )}
     >
       {/* Icon box */}
-      <div className="flex size-16 shrink-0 items-center justify-center rounded-2xl bg-secondary text-gray-02 [&_svg]:size-7">
+      <div className="flex h-14 w-10 shrink-0 items-center justify-center rounded-[8px] bg-[var(--surface-icon)] text-[var(--text-subtle)] [&_svg]:size-6">
         {icon}
       </div>
 
       {/* Text block */}
       <div className="flex min-w-0 flex-1 flex-col gap-0.5">
         {/* Category */}
-        <span className="text-body-md text-gray-02">{category}</span>
+        <span className="text-[12px] font-medium leading-[16px] text-[var(--text-subtle)]">
+          {category}
+        </span>
 
         {/* Amount row */}
         <div className="flex items-center gap-2">
-          <span className="text-heading-md font-bold text-foreground">
+          <span className="text-[16px] font-bold leading-[24px] text-card-foreground">
             {amount}
           </span>
-          <ArrowRight className="size-4 text-gray-03" />
+          <ArrowRight
+            className="size-4 text-[var(--text-placeholder)]"
+            strokeWidth={2}
+          />
         </div>
 
         {/* Trend row */}
         <div className="flex items-center gap-1">
-          <span className="text-body-sm text-gray-02">{changePercent}%*</span>
+          <span className="rounded-full text-[12px] font-medium leading-[16px] text-[var(--text-placeholder)]">
+            {changePercent}%*
+          </span>
           {trend === "up" ? (
             <ArrowUp className="size-3.5 text-destructive" />
           ) : (

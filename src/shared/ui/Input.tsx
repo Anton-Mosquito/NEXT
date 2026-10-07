@@ -20,12 +20,24 @@ export function Input({
   const inputId = id ?? label?.toLowerCase().replace(/\s+/g, "-");
 
   return (
-    <div className="flex flex-col gap-1">
-      {label && <Label htmlFor={inputId}>{label}</Label>}
+    <div className="flex w-full max-w-[400px] flex-col gap-2">
+      {label && (
+        <Label
+          htmlFor={inputId}
+          className="text-[16px] font-medium text-[#525256]"
+        >
+          {label}
+        </Label>
+      )}
       <ShadcnInput
         id={inputId}
         aria-invalid={!!error}
-        className={className}
+        className={[
+          "h-12 w-full rounded-[8px] border border-[#D0D5DD] bg-white px-4 py-3",
+          "text-[16px] leading-[24px] text-[#4B5768] placeholder:text-[#999DA3]",
+          "outline-none transition-colors focus-visible:border-[#4B5768] focus-visible:ring-0",
+          className,
+        ].join(" ")}
         {...props}
       />
       {error && <p className="text-xs text-destructive">{error}</p>}

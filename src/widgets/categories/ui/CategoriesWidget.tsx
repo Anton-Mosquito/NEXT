@@ -65,7 +65,7 @@ export function CategoriesWidget() {
       {isLoading ? (
         <div className="space-y-3">
           {skeletonItems.map((item) => (
-            <Skeleton key={item} className="h-14 w-full rounded-xl" />
+            <Skeleton key={item} className="h-12 w-full rounded-lg" />
           ))}
         </div>
       ) : null}

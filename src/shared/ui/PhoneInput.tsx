@@ -35,10 +35,8 @@ export function PhoneInput({
   return (
     <div
       className={cn(
-        // Base field styling — Figma spec
-        "relative flex w-full items-center rounded-[8px] border border-gray-03 bg-transparent transition-colors",
-        // Active border on focus-within
-        "focus-within:border-gray-02",
+        "relative flex h-12 w-full max-w-[400px] items-center rounded-[8px] border border-[#D0D5DD] bg-white transition-colors",
+        "focus-within:border-[#4B5768]",
         "has-disabled:cursor-not-allowed has-disabled:opacity-50",
         className,
       )}
@@ -47,27 +45,27 @@ export function PhoneInput({
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className="flex shrink-0 items-center gap-1.5 px-4 py-3 text-body-md text-gray-01 focus-visible:outline-none"
+        className="flex shrink-0 items-center gap-2 px-4 py-3 text-[16px] leading-[24px] text-[#4B5768] focus-visible:outline-none"
         aria-label="Select country code"
         aria-expanded={open}
       >
         <span className="text-base leading-none">{selected.flag}</span>
-        <span className="text-gray-01">{selected.code}</span>
+        <span>{selected.code}</span>
         <ChevronDown
-          size={14}
-          className="text-gray-02 transition-transform"
+          size={16}
+          className="text-[#4B5768] transition-transform"
           style={{ transform: open ? "rotate(180deg)" : undefined }}
         />
       </button>
 
       {/* Vertical separator */}
-      <span className="h-5 w-px shrink-0 bg-gray-03" aria-hidden />
+      <span className="h-6 w-px shrink-0 bg-[#4B5768]" aria-hidden />
 
       {/* Phone number input */}
       <input
         type="tel"
         inputMode="tel"
-        className="min-w-0 flex-1 bg-transparent px-4 py-3 text-body-md text-gray-01 placeholder:text-gray-03 outline-none"
+        className="min-w-0 flex-1 bg-transparent px-4 py-3 text-[16px] leading-[24px] text-[#4B5768] placeholder:text-[#999DA3] outline-none"
         {...props}
       />
 

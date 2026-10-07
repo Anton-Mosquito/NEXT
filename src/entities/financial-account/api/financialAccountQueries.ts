@@ -13,6 +13,11 @@ export const financialAccountKeys = {
   all: ["financial-accounts"] as const,
 };
 
+export type FinancialAccountUpdateInput = {
+  name?: string;
+  currency?: string;
+};
+
 /**
  * Fetch all financial accounts for the current user
  */
@@ -42,8 +47,13 @@ export function useCreateFinancialAccountMutation() {
 export function useUpdateFinancialAccountMutation() {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: ({ id, input }: { id: string; input: unknown }) =>
-      updateFinancialAccount(id, input),
+    mutationFn: ({
+      id,
+      input,
+    }: {
+      id: string;
+      input: FinancialAccountUpdateInput;
+    }) => updateFinancialAccount(id, input),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: financialAccountKeys.all });
     },

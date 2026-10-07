@@ -39,7 +39,6 @@ export function TransactionItem({
       maximumFractionDigits: 2,
     },
   )}`;
-  const amountColor = isIncome ? "text-green-500" : "text-red-500";
 
   const d = new Date(date);
   const formattedDate = `${String(d.getDate()).padStart(2, "0")} ${d.toLocaleString("en-US", { month: "short" })}`;
@@ -56,28 +55,39 @@ export function TransactionItem({
 
   if (variant === "row") {
     return (
-      <tr className={cn("border-b border-bg-special last:border-0", className)}>
+      <tr
+        className={cn(
+          "h-[72px] border-b border-[var(--surface-icon)] last:border-0",
+          className,
+        )}
+      >
         {/* Category */}
-        <td className="py-4 px-4 pr-4">
-          <span className="text-body-md text-gray-01">{categoryLabel}</span>
+        <td className="px-0 py-4 pr-4">
+          <span className="text-[16px] font-semibold leading-[24px] text-foreground">
+            {categoryLabel}
+          </span>
         </td>
         {/* Description */}
         <td className="py-4 pr-4">
-          <span className="text-body-md text-gray-01">
+          <span className="text-[16px] font-medium leading-[24px] text-[var(--text-tertiary)]">
             {description || "—"}
           </span>
         </td>
         {/* Date */}
         <td className="py-4 pr-4">
-          <span className="text-body-md text-gray-01">{formattedDate}</span>
+          <span className="text-[16px] font-medium leading-[24px] text-[var(--text-tertiary)]">
+            {formattedDate}
+          </span>
         </td>
         {/* Account */}
         <td className="py-4 pr-4">
-          <span className="text-body-md text-gray-01">{accountName}</span>
+          <span className="text-[16px] font-medium leading-[24px] text-[var(--text-tertiary)]">
+            {accountName}
+          </span>
         </td>
         {/* Amount */}
         <td className="py-4 text-right">
-          <span className={cn("text-body-md font-medium", amountColor)}>
+          <span className="text-[16px] font-semibold leading-[24px] text-[var(--text-tertiary)]">
             {formattedAmount}
           </span>
         </td>
@@ -109,13 +119,13 @@ export function TransactionItem({
   return (
     <div
       className={cn(
-        "flex items-center gap-4 rounded-2xl bg-card px-4 py-5",
+        "flex h-[88px] w-full items-center gap-7 rounded-[8px] bg-card px-0 py-6",
         className,
       )}
     >
       {/* Category square (using color if possible) */}
       <div
-        className="flex size-14 shrink-0 items-center justify-center rounded-2xl text-white font-bold text-lg"
+        className="flex size-10 shrink-0 items-center justify-center rounded-[8px] bg-[var(--surface-icon)] text-[var(--text-tertiary)] text-lg font-bold"
         style={{ backgroundColor: categoryColor || "hsl(var(--secondary))" }}
       >
         {categoryName.charAt(0).toUpperCase()}
@@ -123,10 +133,10 @@ export function TransactionItem({
 
       {/* Description + Account */}
       <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-        <span className="text-body-sm text-gray-02 truncate">
+        <span className="truncate text-[12px] font-normal leading-[16px] text-[var(--text-placeholder)]">
           {accountName}
         </span>
-        <span className="text-heading-md text-foreground truncate">
+        <span className="truncate text-[16px] font-semibold leading-[24px] text-card-foreground">
           {description || categoryName}
         </span>
       </div>
@@ -134,10 +144,12 @@ export function TransactionItem({
       {/* Amount + date */}
       <div className="flex shrink-0 items-center gap-3">
         <div className="flex flex-col items-end gap-0.5">
-          <span className={cn("text-display-sm", amountColor)}>
+          <span className="text-[16px] font-semibold leading-[24px] text-[var(--text-secondary)]">
             {formattedAmount}
           </span>
-          <span className="text-body-sm text-gray-02">{formattedDate}</span>
+          <span className="text-[12px] font-normal leading-[16px] text-[var(--text-placeholder)]">
+            {formattedDate}
+          </span>
         </div>
         <div className="flex items-center gap-1">
           <button

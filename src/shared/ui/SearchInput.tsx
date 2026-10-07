@@ -20,9 +20,9 @@ export function SearchInput({
   return (
     <div
       className={cn(
-        "flex items-center rounded-[12px] bg-card",
-        // padding: top 12 right 24 bottom 12 left 32
+        "flex h-12 w-full max-w-88 items-center rounded-xl bg-white",
         "px-6 py-3 pl-8",
+        "dark:bg-card",
         wrapperClassName,
       )}
     >
@@ -31,9 +31,7 @@ export function SearchInput({
         placeholder={placeholder}
         className={cn(
           "w-full flex-1 bg-transparent outline-none",
-          "text-body-lg text-foreground",
-          "placeholder:text-gray-03",
-          // hide browser-native clear/cancel button
+          "text-[16px] leading-6 text-[#4B5768] placeholder:text-[#9F9F9F] dark:text-foreground dark:placeholder:text-muted-foreground",
           "[&::-webkit-search-cancel-button]:appearance-none",
           "[&::-webkit-search-decoration]:appearance-none",
           className,
@@ -41,8 +39,11 @@ export function SearchInput({
         {...props}
       />
 
-      {/* gap of ~170px between placeholder end and icon is natural at Figma's 352px width */}
-      <Search size={24} className="ml-6 shrink-0 text-secondary-foreground" />
+      <Search
+        size={24}
+        className="ml-6 shrink-0 text-[#525256] dark:text-muted-foreground"
+        strokeWidth={2}
+      />
     </div>
   );
 }

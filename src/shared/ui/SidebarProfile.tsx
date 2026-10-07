@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import { MoreVertical } from "lucide-react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -37,14 +36,11 @@ export function SidebarProfile({
   return (
     <div
       className={cn(
-        // py-8 = 32px top/bottom, no horizontal padding (sidebar provides it)
-        "flex items-center py-8",
+        "flex h-26 w-56 items-center gap-8 border-t border-white/8 py-8",
         className,
       )}
     >
-      {/* Avatar + name block — 188px wide, gap-4 (16px) */}
       <div className="flex w-47 shrink-0 items-center gap-4">
-        {/* Avatar 32px circle */}
         <div className="size-8 shrink-0 overflow-hidden rounded-full bg-secondary">
           {avatarSrc ? (
             <Image
@@ -61,31 +57,30 @@ export function SidebarProfile({
           )}
         </div>
 
-        {/* Text stack */}
         <div className="flex min-w-0 flex-col">
-          <span className="truncate text-heading-md text-white">{name}</span>
+          <span className="truncate text-[16px] font-semibold leading-6 text-white">
+            {name}
+          </span>
           <button
             type="button"
             onClick={onViewProfile}
-            className="truncate text-left text-body-sm text-white/50 transition-opacity hover:text-white/80"
+            className="truncate text-left text-[12px] leading-4 text-white/70 transition-opacity hover:text-white/80"
           >
             {viewLabel}
           </button>
         </div>
       </div>
 
-      {/* 32px spacer between name block and icon */}
-      <div className="w-8 shrink-0" />
-
-      {/* Three-dot menu */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button
             type="button"
-            className="shrink-0 rounded-md p-1 text-white transition-colors hover:bg-white/10 focus:outline-none"
+            className="flex h-5 w-1 shrink-0 flex-col gap-1 rounded-md text-white transition-colors hover:bg-white/10 focus:outline-none"
             aria-label="Open profile menu"
           >
-            <MoreVertical size={20} />
+            <span className="size-1 rounded-full bg-white" />
+            <span className="size-1 rounded-full bg-white" />
+            <span className="size-1 rounded-full bg-white" />
           </button>
         </DropdownMenuTrigger>
 

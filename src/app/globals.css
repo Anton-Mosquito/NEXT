@@ -4,168 +4,112 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* ============================================================
-   DESIGN TOKENS — LIGHT MODE
-   Source: Figma design system
-   ============================================================ */
 :root {
-  /* --- Semantic surface colors --- */
-  --background: oklch(1 0 0); /* #FFFFFF */
-  --foreground: oklch(0.148 0 0); /* #191919 Default Black */
-  --card: oklch(1 0 0); /* #FFFFFF */
-  --card-foreground: oklch(0.148 0 0); /* #191919 */
-  --popover: oklch(1 0 0); /* #FFFFFF */
-  --popover-foreground: oklch(0.148 0 0); /* #191919 */
-
-  /* --- Brand colors --- */
-  --primary: oklch(
-    0.607 0.103 192
-  ); /* #299D91 — 3.3:1 on white, see --primary-accessible */
-  --primary-foreground: oklch(1 0 0); /* #FFFFFF */
-  --primary-accessible: oklch(
-    0.49 0.082 192
-  ); /* #1E7A70 — 4.6:1 on white, use for small text */
-
-  /* --- Secondary / Muted --- */
-  --secondary: oklch(0.959 0 0); /* #F3F3F3 Gray05 */
-  --secondary-foreground: oklch(
-    0.386 0.004 285
-  ); /* #525256 — 7.8:1 on white ✅ */
-  --muted: oklch(0.959 0 0); /* #F3F3F3 Gray05 */
-  --muted-foreground: oklch(0.467 0 0); /* #666666 Gray01 — 5.7:1 on white ✅ */
-  --accent: oklch(0.959 0 0); /* #F3F3F3 Gray05 */
-  --accent-foreground: oklch(0.148 0 0); /* #191919 */
-
-  /* --- Feedback colors --- */
-  --destructive: oklch(0.584 0.213 30); /* #E73D1C Red */
-  --success: oklch(0.68 0.142 148); /* #4DAF6E Green */
-
-  /* --- Form / Borders --- */
-  --border: oklch(0.915 0 0); /* #E8E8E8 Gray04 */
-  --input: oklch(0.915 0 0); /* #E8E8E8 Gray04 */
-  --ring: oklch(0.607 0.103 192); /* #299D91 primary */
-
-  /* --- Raw gray palette --- */
-  --gray-01: oklch(0.467 0 0); /* #666666 — 5.7:1 ✅ */
-  --gray-02: oklch(0.578 0 0); /* #878787 — 3.6:1 ⚠ large text only */
-  --gray-03: oklch(0.668 0 0); /* #9F9F9F — 2.6:1 ⚠ decorative/disabled only */
-  --gray-04: oklch(0.915 0 0); /* #E8E8E8 */
-  --gray-05: oklch(0.959 0 0); /* #F3F3F3 */
-
-  /* --- Special / Overlay tokens --- */
-  --bg-special: oklch(0.845 0 0 / 25%); /* #D2D2D2 @ 25% */
-  --overlay-light: oklch(1 0 0 / 70%); /* #FFFFFF @ 70% */
-  --overlay-subtle: oklch(1 0 0 / 8%); /* #FFFFFF @ 8% */
-
-  /* --- Charts (carry-forward) --- */
-  --chart-1: oklch(0.809 0.105 251.813);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.546 0.245 262.881);
-  --chart-4: oklch(0.488 0.243 264.376);
-  --chart-5: oklch(0.424 0.199 265.638);
-
-  /* --- Layout --- */
-  --radius: 0.625rem;
-
-  /* --- Sidebar --- */
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.148 0 0);
-  --sidebar-primary: oklch(0.607 0.103 192);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.959 0 0);
-  --sidebar-accent-foreground: oklch(0.148 0 0);
-  --sidebar-border: oklch(0.915 0 0);
-  --sidebar-ring: oklch(0.607 0.103 192);
+  --background: #f3f3f3;
+  --foreground: #191919;
+  --card: #ffffff;
+  --card-foreground: #191919;
+  --popover: #ffffff;
+  --popover-foreground: #191919;
+  --primary: #299d91;
+  --primary-foreground: #0d1a1a;
+  --primary-accessible: #1f7d73;
+  --secondary: #f3f3f3;
+  --secondary-foreground: #525256;
+  --muted: #f3f3f3;
+  --muted-foreground: #878787;
+  --accent: #f3f3f3;
+  --accent-foreground: #191919;
+  --destructive: #e73d1c;
+  --success: #4daf6e;
+  --border: #e8e8e8;
+  --input: #e8e8e8;
+  --ring: #299d91;
+  --chart-1: #299d91;
+  --chart-2: #4daf6e;
+  --chart-3: #525256;
+  --chart-4: #878787;
+  --chart-5: #e8e8e8;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #191919;
+  --sidebar-primary: #299d91;
+  --sidebar-primary-foreground: #0d1a1a;
+  --sidebar-accent: #f3f3f3;
+  --sidebar-accent-foreground: #191919;
+  --sidebar-border: #e8e8e8;
+  --sidebar-ring: #299d91;
+  --overlay: rgba(17, 17, 17, 0.45);
+  --surface-icon: #d2d2d2;
+  --surface-header: #e8e8e8;
+  --text-secondary: #525256;
+  --text-tertiary: #666666;
+  --text-subtle: #878787;
+  --text-placeholder: #9f9f9f;
+  --radius: 0.75rem;
 }
 
-/* ============================================================
-   DESIGN TOKENS — DARK MODE
-   ============================================================ */
 .dark {
-  /* --- Semantic surface colors --- */
-  --background: oklch(0.148 0 0); /* #191919 */
-  --foreground: oklch(0.959 0 0); /* #F3F3F3 */
-  --card: oklch(0.197 0.003 285); /* ~#252528 */
-  --card-foreground: oklch(0.959 0 0);
-  --popover: oklch(0.197 0.003 285);
-  --popover-foreground: oklch(0.959 0 0);
-
-  /* --- Brand colors --- */
-  --primary: oklch(0.607 0.103 192); /* #299D91 — passes on dark bg */
-  --primary-foreground: oklch(1 0 0);
-  --primary-accessible: oklch(
-    0.607 0.103 192
-  ); /* same — passes on dark background */
-
-  /* --- Secondary / Muted --- */
-  --secondary: oklch(0.229 0.003 285); /* ~#2E2E31 */
-  --secondary-foreground: oklch(0.959 0 0);
-  --muted: oklch(0.229 0.003 285);
-  --muted-foreground: oklch(0.668 0 0); /* #9F9F9F Gray03 — readable on dark */
-  --accent: oklch(0.229 0.003 285);
-  --accent-foreground: oklch(0.959 0 0);
-
-  /* --- Feedback colors --- */
-  --destructive: oklch(0.644 0.213 30); /* Lighter red for dark backgrounds */
-  --success: oklch(0.7 0.142 148); /* Slightly lighter green */
-
-  /* --- Form / Borders --- */
-  --border: oklch(1 0 0 / 12%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.607 0.103 192);
-
-  /* --- Raw gray palette (inverted roles for dark context) --- */
-  --gray-01: oklch(0.668 0 0); /* #9F9F9F — lighter in dark */
-  --gray-02: oklch(0.578 0 0); /* #878787 */
-  --gray-03: oklch(0.467 0 0); /* #666666 */
-  --gray-04: oklch(0.229 0.003 285); /* dark raised surface */
-  --gray-05: oklch(0.197 0.003 285); /* darkest surface */
-
-  /* --- Special / Overlay tokens --- */
-  --bg-special: oklch(0 0 0 / 25%); /* Black @ 25% for dark context */
-  --overlay-light: oklch(1 0 0 / 70%);
-  --overlay-subtle: oklch(1 0 0 / 8%);
-
-  /* --- Charts (carry-forward) --- */
-  --chart-1: oklch(0.809 0.105 251.813);
-  --chart-2: oklch(0.623 0.214 259.815);
-  --chart-3: oklch(0.546 0.245 262.881);
-  --chart-4: oklch(0.488 0.243 264.376);
-  --chart-5: oklch(0.424 0.199 265.638);
-
-  /* --- Sidebar --- */
-  --sidebar: oklch(0.197 0.003 285);
-  --sidebar-foreground: oklch(0.959 0 0);
-  --sidebar-primary: oklch(0.607 0.103 192);
-  --sidebar-primary-foreground: oklch(1 0 0);
-  --sidebar-accent: oklch(0.229 0.003 285);
-  --sidebar-accent-foreground: oklch(0.959 0 0);
-  --sidebar-border: oklch(1 0 0 / 12%);
-  --sidebar-ring: oklch(0.607 0.103 192);
+  --background: #121212;
+  --foreground: #f5f5f5;
+  --card: #1e1e1e;
+  --card-foreground: #f5f5f5;
+  --popover: #1e1e1e;
+  --popover-foreground: #f5f5f5;
+  --primary: #52d5c5;
+  --primary-foreground: #0e1717;
+  --primary-accessible: #7ee0d1;
+  --secondary: #2a2a2a;
+  --secondary-foreground: #f5f5f5;
+  --muted: #2a2a2a;
+  --muted-foreground: #a1a1a1;
+  --accent: #2a2a2a;
+  --accent-foreground: #f5f5f5;
+  --destructive: #ff7a5c;
+  --success: #67d99a;
+  --border: #3a3a3a;
+  --input: #3a3a3a;
+  --ring: #52d5c5;
+  --chart-1: #52d5c5;
+  --chart-2: #67d99a;
+  --chart-3: #c7c7c7;
+  --chart-4: #a1a1a1;
+  --chart-5: #3a3a3a;
+  --sidebar: #1e1e1e;
+  --sidebar-foreground: #f5f5f5;
+  --sidebar-primary: #52d5c5;
+  --sidebar-primary-foreground: #0e1717;
+  --sidebar-accent: #2a2a2a;
+  --sidebar-accent-foreground: #f5f5f5;
+  --sidebar-border: #3a3a3a;
+  --sidebar-ring: #52d5c5;
+  --overlay: rgba(0, 0, 0, 0.64);
+  --surface-icon: #333333;
+  --surface-header: #2a2a2a;
+  --text-secondary: #d1d1d1;
+  --text-tertiary: #b5b5b5;
+  --text-subtle: #a1a1a1;
+  --text-placeholder: #898989;
 }
 
 @theme inline {
-  /* --- Font family --- */
-  --font-sans: var(--font-sans);
+  --font-sans: "Inter", "Segoe UI", sans-serif;
+  --font-logo: var(--font-poppins), "Poppins", "Segoe UI", sans-serif;
 
-  /* --- Font sizes (Figma scale) with paired line-heights ---
-       Tailwind v4 convention: --text-{size}--line-height         */
-  --text-xs: 0.75rem; /* 12px */
-  --text-xs--line-height: 1rem; /* 16px */
-  --text-sm: 0.875rem; /* 14px */
-  --text-sm--line-height: 1.25rem; /* 20px */
-  --text-base: 1rem; /* 16px */
-  --text-base--line-height: 1.5rem; /* 24px */
-  --text-lg: 1.125rem; /* 18px */
-  --text-lg--line-height: 1.5rem; /* 24px */
-  --text-xl: 1.25rem; /* 20px */
-  --text-xl--line-height: 1.75rem; /* 28px */
-  --text-2xl: 1.375rem; /* 22px */
-  --text-2xl--line-height: 2rem; /* 32px */
-  --text-3xl: 1.5rem; /* 24px */
-  --text-3xl--line-height: 1.75rem; /* 28px */
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1rem;
+  --text-body-small: 0.875rem;
+  --text-body-small--line-height: 1.25rem;
+  --text-body-base: 1rem;
+  --text-body-base--line-height: 1.5rem;
+  --text-subtitle-small: 1.125rem;
+  --text-subtitle-small--line-height: 1.5rem;
+  --text-subtitle-medium: 1.25rem;
+  --text-subtitle-medium--line-height: 1.75rem;
+  --text-heading-h3: 1.375rem;
+  --text-heading-h3--line-height: 1.75rem;
+  --text-heading-h2: 1.5rem;
+  --text-heading-h2--line-height: 2rem;
 
-  /* --- Shadcn semantic color mappings --- */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -186,27 +130,11 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-
-  /* --- Raw gray palette utilities: bg-gray-01, text-gray-02, etc. --- */
-  --color-gray-01: var(--gray-01);
-  --color-gray-02: var(--gray-02);
-  --color-gray-03: var(--gray-03);
-  --color-gray-04: var(--gray-04);
-  --color-gray-05: var(--gray-05);
-
-  /* --- Special tokens --- */
-  --color-bg-special: var(--bg-special);
-  --color-overlay-light: var(--overlay-light);
-  --color-overlay-subtle: var(--overlay-subtle);
-
-  /* --- Charts --- */
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-
-  /* --- Sidebar --- */
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -215,8 +143,8 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+  --color-overlay: var(--overlay);
 
-  /* --- Border radius scale --- */
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
@@ -230,75 +158,79 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
+
   html {
-    @apply font-sans;
+    color-scheme: light;
+    font-family: var(--font-sans);
+  }
+
+  .font-logo {
+    font-family: var(--font-logo);
+  }
+
+  .dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
   }
 }
 
-/* ============================================================
-   SEMANTIC TYPOGRAPHY UTILITIES
-   Usage: className="text-display-lg" or cn("text-body-md", ...)
-   Compatible with cn() via clsx + tailwind-merge v3
-   ============================================================ */
 @layer utilities {
-  /* --- Display — page headings, hero text --- */
-  .text-display-lg {
-    font-size: 1.5rem; /* 24px */
-    line-height: 1.75rem; /* 28px */
-    font-weight: 700;
-  }
-  .text-display-md {
-    font-size: 1.375rem; /* 22px */
-    line-height: 2rem; /* 32px */
-    font-weight: 700;
-  }
-  .text-display-sm {
-    font-size: 1.25rem; /* 20px */
-    line-height: 1.75rem; /* 28px */
-    font-weight: 600;
+  .text-caption {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 400;
+    letter-spacing: 0;
   }
 
-  /* --- Heading — card and widget titles --- */
-  .text-heading-lg {
-    font-size: 1.125rem; /* 18px */
-    line-height: 1.5rem; /* 24px */
-    font-weight: 600;
-  }
-  .text-heading-md {
-    font-size: 1rem; /* 16px */
-    line-height: 1.5rem; /* 24px */
-    font-weight: 600;
+  .text-body-small {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 400;
+    letter-spacing: 0;
   }
 
-  /* --- Body — paragraph and content text --- */
-  .text-body-lg {
-    font-size: 1rem; /* 16px */
-    line-height: 1.5rem; /* 24px */
+  .text-body-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
     font-weight: 400;
-  }
-  .text-body-md {
-    font-size: 0.875rem; /* 14px */
-    line-height: 1.25rem; /* 20px */
-    font-weight: 400;
-  }
-  .text-body-sm {
-    font-size: 0.75rem; /* 12px */
-    line-height: 1rem; /* 16px */
-    font-weight: 400;
+    letter-spacing: 0;
   }
 
-  /* --- Label — form labels, metadata, badges --- */
-  .text-label-lg {
-    font-size: 0.875rem; /* 14px */
-    line-height: 1.25rem; /* 20px */
+  .text-subtitle-small {
+    font-size: 1.125rem;
+    line-height: 1.5rem;
     font-weight: 500;
+    letter-spacing: 0;
   }
-  .text-label-md {
-    font-size: 0.75rem; /* 12px */
-    line-height: 1rem; /* 16px */
-    font-weight: 500;
+
+  .text-subtitle-medium {
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  .text-heading-h3 {
+    font-size: 1.375rem;
+    line-height: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+
+  .text-heading-h2 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.005em;
   }
 }

@@ -15,9 +15,8 @@ import {
   Kysely,
   PostgresDialect,
   CamelCasePlugin,
-  Migrator,
-  FileMigrationProvider,
 } from "kysely";
+import { Migrator, FileMigrationProvider } from "kysely/migration";
 import { Pool } from "pg";
 import type { Database } from "@/shared/types/database";
 

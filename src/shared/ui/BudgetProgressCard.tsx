@@ -65,14 +65,16 @@ export function BudgetProgressCard({
       </div>
 
       <div className="mb-2 text-sm text-gray-02">
-        <span className="font-medium text-foreground">{formatMoney(spentAmount)}</span> spent of{" "}
-        {formatMoney(limitAmount)} limit
+        <span className="font-medium text-foreground">
+          {formatMoney(spentAmount)}
+        </span>{" "}
+        spent of {formatMoney(limitAmount)} limit
       </div>
 
       <div className="mb-2 flex items-center gap-4">
-        <Progress 
-          value={Math.min(percentage, 100)} 
-          className="h-2 flex-1" 
+        <Progress
+          value={Math.min(percentage, 100)}
+          className="h-2 flex-1"
           indicatorClassName={progressColor}
         />
         <span className="text-sm font-medium">{percentage.toFixed(0)}%</span>

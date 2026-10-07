@@ -36,9 +36,6 @@ export function MonthlyTrendChart({ data, isLoading }: MonthlyTrendChartProps) {
     return `₴${tickItem}`;
   };
 
-  const formatTooltip = (value: number) => {
-    return value.toLocaleString("uk-UA", { style: "currency", currency: "UAH" });
-  };
 
   return (
     <Card className="p-6">

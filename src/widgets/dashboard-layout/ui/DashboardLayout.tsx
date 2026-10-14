@@ -11,7 +11,7 @@ export default async function DashboardLayout({
   const userName = session?.user?.name?.split(" ")[0] ?? "Guest";
 
   return (
-    <DashboardLayoutClient userName={userName}>
+    <DashboardLayoutClient userName={userName} userId={session?.user?.id}>
       {children}
     </DashboardLayoutClient>
   );

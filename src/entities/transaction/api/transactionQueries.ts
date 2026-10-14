@@ -19,6 +19,7 @@ import { dashboardKeys } from "@/entities/dashboard/api/dashboardQueries";
 export const transactionKeys = {
   all: ["transactions"] as const,
   infiniteAll: ["infinite-transactions"] as const,
+  search: (search: string) => ["transaction-search", search] as const,
   list: (filters: TransactionFilters) =>
     ["transactions", { ...filters }] as const,
   infiniteList: (filters: Omit<TransactionFilters, "page">) =>
@@ -31,6 +32,8 @@ export type TransactionFilters = {
   type?: "income" | "expense";
   dateFrom?: string;
   dateTo?: string;
+  search?: string;
+  id?: string;
   page?: number;
   limit?: number;
 };
@@ -42,6 +45,15 @@ export function useTransactionsQuery(filters: TransactionFilters) {
     queryKey: transactionKeys.list(filters),
     queryFn: () => getTransactions(filters),
     placeholderData: keepPreviousData,
+  });
+}
+
+export function useTransactionSearchQuery(search: string) {
+  return useQuery({
+    queryKey: transactionKeys.search(search),
+    queryFn: () => getTransactions({ search, page: 1, limit: 6 }),
+    enabled: search.length >= 2,
+    staleTime: 30_000,
   });
 }
 

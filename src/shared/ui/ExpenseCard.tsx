@@ -8,7 +8,7 @@ export interface ExpenseItem {
   date: string;
 }
 
-interface ExpenseCardProps {
+export interface ExpenseCardProps {
   /** Lucide icon or any ReactNode rendered inside the icon square */
   icon: ReactNode;
   category: string;
@@ -18,6 +18,7 @@ interface ExpenseCardProps {
   /** up = spending increased (red arrow), down = decreased (green arrow) */
   trend: "up" | "down";
   items: ExpenseItem[];
+  comparisonLabel?: string;
   className?: string;
 }
 
@@ -28,6 +29,7 @@ export function ExpenseCard({
   changePercent,
   trend,
   items,
+  comparisonLabel = "Compare to last month",
   className,
 }: ExpenseCardProps) {
   const TrendIcon = trend === "up" ? ArrowUp : ArrowDown;
@@ -67,7 +69,7 @@ export function ExpenseCard({
               <TrendIcon size={18} className={trendColor} strokeWidth={2.5} />
             </div>
             <span className="text-[12px] font-light leading-[12px] text-[var(--text-tertiary)]">
-              Compare to last month
+              {comparisonLabel}
             </span>
           </div>
         </div>

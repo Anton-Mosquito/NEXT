@@ -59,7 +59,7 @@ export function Sidebar({
               href={item.href}
               aria-current={isActive ? "page" : undefined}
               className={cn(
-                "flex h-12 w-56 items-center gap-3 rounded-[4px] px-4",
+                "flex h-12 w-56 items-center gap-3 rounded-lg px-4",
                 "text-[16px] leading-6 transition-colors",
                 isActive
                   ? "bg-[#299D91] font-semibold text-white"

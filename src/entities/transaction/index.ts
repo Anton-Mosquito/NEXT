@@ -1,1 +1,4 @@
-export { useInfiniteTransactionsQuery } from "./api/transactionQueries";
+export {
+  useInfiniteTransactionsQuery,
+  useTransactionSearchQuery,
+} from "./api/transactionQueries";

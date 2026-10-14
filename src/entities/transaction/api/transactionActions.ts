@@ -12,6 +12,8 @@ const getTransactionsFiltersSchema = z.object({
   type: z.enum(["income", "expense"]).optional(),
   dateFrom: z.string().optional(),
   dateTo: z.string().optional(),
+  search: z.string().trim().max(120).optional(),
+  id: z.string().optional(),
   page: z.number().default(1),
   limit: z.number().max(100).default(20),
 });
@@ -45,7 +47,17 @@ export async function getTransactions(filters?: unknown) {
     throw new Error(`Validation failed: ${parsed.error.message}`);
   }
 
-  const { financialAccountId, categoryId, type, dateFrom, dateTo, page, limit } = parsed.data;
+  const {
+    financialAccountId,
+    categoryId,
+    type,
+    dateFrom,
+    dateTo,
+    search,
+    id,
+    page,
+    limit,
+  } = parsed.data;
 
   // Data Query
   let query = db
@@ -71,6 +83,8 @@ export async function getTransactions(filters?: unknown) {
   // Count Query
   let countQuery = db
     .selectFrom("transaction as t")
+    .innerJoin("category as c", "t.categoryId", "c.id")
+    .innerJoin("financialAccount as fa", "t.accountId", "fa.id")
     .select(({ fn }) => [fn.count<string>("t.id").as("count")])
     .where("t.userId", "=", userId);
 
@@ -94,6 +108,27 @@ export async function getTransactions(filters?: unknown) {
   if (dateTo) {
     query = query.where("t.date", "<=", new Date(dateTo));
     countQuery = countQuery.where("t.date", "<=", new Date(dateTo));
+  }
+  if (search) {
+    const pattern = `%${search}%`;
+    query = query.where((eb) =>
+      eb.or([
+        eb("t.description", "ilike", pattern),
+        eb("c.name", "ilike", pattern),
+        eb("fa.name", "ilike", pattern),
+      ]),
+    );
+    countQuery = countQuery.where((eb) =>
+      eb.or([
+        eb("t.description", "ilike", pattern),
+        eb("c.name", "ilike", pattern),
+        eb("fa.name", "ilike", pattern),
+      ]),
+    );
+  }
+  if (id) {
+    query = query.where("t.id", "=", id);
+    countQuery = countQuery.where("t.id", "=", id);
   }
 
   const offset = (page - 1) * limit;
@@ -127,7 +162,8 @@ export async function createTransaction(input: unknown) {
     throw new Error(`Validation failed: ${parsed.error.message}`);
   }
 
-  const { financialAccountId, categoryId, amount, type, description, date } = parsed.data;
+  const { financialAccountId, categoryId, amount, type, description, date } =
+    parsed.data;
 
   return await db.transaction().execute(async (trx) => {
     // 1. Insert transaction
@@ -244,7 +280,10 @@ export async function deleteTransaction(id: string) {
       .executeTakeFirstOrThrow();
 
     // Reverse balance effect
-    const balanceChange = existingTx.type === "income" ? -Number(existingTx.amount) : Number(existingTx.amount);
+    const balanceChange =
+      existingTx.type === "income"
+        ? -Number(existingTx.amount)
+        : Number(existingTx.amount);
 
     await trx
       .updateTable("financialAccount")

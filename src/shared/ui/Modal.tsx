@@ -14,6 +14,7 @@ interface ModalProps {
   title?: string;
   children?: React.ReactNode;
   closeOnOverlay?: boolean;
+  className?: string;
 }
 
 export function Modal({
@@ -22,6 +23,7 @@ export function Modal({
   title,
   children,
   closeOnOverlay = true,
+  className,
 }: ModalProps) {
   return (
     <Dialog
@@ -31,6 +33,7 @@ export function Modal({
       }}
     >
       <DialogContent
+        className={className}
         onPointerDownOutside={(e) => {
           if (!closeOnOverlay) e.preventDefault();
         }}

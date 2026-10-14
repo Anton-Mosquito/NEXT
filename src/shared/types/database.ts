@@ -29,6 +29,7 @@ export interface UserTable {
   emailVerified: Date | null;
   image: string | null;
   passwordHash: string | null;
+  billsSeeded: Generated<boolean>;
   createdAt: Generated<Date>;
 }
 
@@ -96,7 +97,7 @@ export interface FinancialAccountTable {
   userId: string;
   name: string;
   /** 'cash' | 'card' | 'savings' | 'crypto' — enforced by a CHECK constraint */
-  type: 'cash' | 'card' | 'savings' | 'crypto';
+  type: "cash" | "card" | "savings" | "crypto";
   /** NUMERIC(12,2) arrives as a string from pg driver */
   balance: ColumnType<string, number | string, number | string>;
   currency: Generated<string>;
@@ -156,6 +157,29 @@ export interface BudgetTable {
   createdAt: Generated<Date>;
 }
 
+/**
+ * `bill` — a user's one-time bill or upcoming payment reminder.
+ */
+export interface BillTable {
+  id: Generated<string>;
+  userId: string;
+  vendorName: string;
+  title: string;
+  description: string;
+  dueDate: ColumnType<Date, string | Date, string | Date>;
+  lastChargeDate: ColumnType<
+    Date | null,
+    string | Date | null,
+    string | Date | null
+  >;
+  amount: ColumnType<string, number | string, number | string>;
+  currency: string;
+  status: "unpaid" | "paid";
+  paidAt: Date | null;
+  createdAt: Generated<Date>;
+  updatedAt: Generated<Date>;
+}
+
 // ---------------------------------------------------------------------------
 // Root Database interface — used everywhere Kysely is typed
 // ---------------------------------------------------------------------------
@@ -179,4 +203,5 @@ export interface Database {
   category: CategoryTable;
   transaction: TransactionTable;
   budget: BudgetTable;
+  bill: BillTable;
 }

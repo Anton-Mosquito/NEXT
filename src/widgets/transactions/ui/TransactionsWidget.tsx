@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Card } from "@/shared/ui/Card";
 import { EmptyState } from "@/shared/ui/EmptyState";
 import { TransactionItem } from "@/shared/ui/TransactionItem";
@@ -24,11 +24,19 @@ import {
 } from "@/components/ui/pagination";
 import { TransactionList } from "@/shared/ui/TransactionList";
 
-export function TransactionsWidget() {
-  const [filters, setFilters] = useState<TransactionFilters>({
+export function TransactionsWidget({
+  highlightedTransactionId,
+  initialCategoryId,
+}: {
+  highlightedTransactionId?: string;
+  initialCategoryId?: string;
+}) {
+  const [filters, setFilters] = useState<TransactionFilters>(() => ({
     page: 1,
     limit: 20,
-  });
+    ...(initialCategoryId ? { categoryId: initialCategoryId } : {}),
+    ...(highlightedTransactionId ? { id: highlightedTransactionId } : {}),
+  }));
   const [formModal, setFormModal] = useState<{
     open: boolean;
     editData?: React.ComponentProps<typeof TransactionFormModal>["editData"];
@@ -37,9 +45,18 @@ export function TransactionsWidget() {
     id: string;
   } | null>(null);
 
-  const { data, isLoading } = useTransactionsQuery(filters);
+  const { data, isLoading, isError, error, refetch } =
+    useTransactionsQuery(filters);
   const { data: accounts } = useFinancialAccountsQuery();
   const { data: categories } = useCategoriesQuery();
+
+  useEffect(() => {
+    if (!highlightedTransactionId || isLoading || !data?.data.length) return;
+
+    document
+      .getElementById(`transaction-${highlightedTransactionId}`)
+      ?.scrollIntoView({ behavior: "smooth", block: "center" });
+  }, [data, highlightedTransactionId, isLoading]);
 
   return (
     <div>
@@ -69,6 +86,14 @@ export function TransactionsWidget() {
       <Card className="mt-4">
         {isLoading ? (
           <TransactionList transactions={[]} isLoading />
+        ) : isError ? (
+          <EmptyState
+            title="Unable to load transactions"
+            description={
+              error instanceof Error ? error.message : "Please try again."
+            }
+            action={{ label: "Try again", onClick: () => void refetch() }}
+          />
         ) : data?.data.length ? (
           <div className="space-y-3">
             {data.data.map((transaction) => {
@@ -78,30 +103,41 @@ export function TransactionsWidget() {
                   ? transaction.date.toISOString()
                   : String(transaction.date);
 
+              const isHighlighted = transaction.id === highlightedTransactionId;
+
               return (
-                <TransactionItem
+                <div
                   key={transaction.id}
-                  {...transaction}
-                  type={transaction.type as "income" | "expense"}
-                  amount={normalizedAmount}
-                  date={normalizedDate}
-                  variant="card"
-                  onEdit={() =>
-                    setFormModal({
-                      open: true,
-                      editData: {
-                        id: transaction.id,
-                        amount: normalizedAmount,
-                        type: transaction.type as "income" | "expense",
-                        description: transaction.description,
-                        date: normalizedDate,
-                        categoryId: transaction.categoryId,
-                        financialAccountId: transaction.accountId,
-                      },
-                    })
+                  id={`transaction-${transaction.id}`}
+                  className={
+                    isHighlighted
+                      ? "rounded-lg ring-2 ring-primary ring-offset-2"
+                      : undefined
                   }
-                  onDelete={() => setDeleteTarget({ id: transaction.id })}
-                />
+                >
+                  <TransactionItem
+                    {...transaction}
+                    type={transaction.type as "income" | "expense"}
+                    amount={normalizedAmount}
+                    date={normalizedDate}
+                    variant="card"
+                    onEdit={() =>
+                      setFormModal({
+                        open: true,
+                        editData: {
+                          id: transaction.id,
+                          amount: normalizedAmount,
+                          type: transaction.type as "income" | "expense",
+                          description: transaction.description,
+                          date: normalizedDate,
+                          categoryId: transaction.categoryId,
+                          financialAccountId: transaction.accountId,
+                        },
+                      })
+                    }
+                    onDelete={() => setDeleteTarget({ id: transaction.id })}
+                  />
+                </div>
               );
             })}
           </div>

@@ -20,7 +20,7 @@
     "test:e2e:ui": "npx playwright test --ui",
     "test:e2e:report": "npx playwright show-report",
     "db:migrate": "tsx src/shared/lib/db-migrate.ts",
-    "db:migrate:kysely": "tsx src/shared/lib/kysely-migrate.ts",
+    "db:migrate:kysely": "tsx --env-file=.env.local src/shared/lib/kysely-migrate.ts",
     "db:seed": "tsx --env-file=.env.local scripts/seed.ts",
     "vercel:pull": "vercel env pull .env.local",
     "db:setup": "npm run db:migrate && npm run db:migrate:kysely",

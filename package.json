@@ -91,7 +91,7 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@types/webpack-bundle-analyzer": "^4.7.0",
-    "@vitejs/plugin-react": "^6.0.5",
+    "@vitejs/plugin-react": "^6.1.2",
     "@vitest/coverage-v8": "^4.1.4",
     "@welldone-software/why-did-you-render": "^10.0.1",
     "babel-plugin-react-compiler": "^1.0.0",

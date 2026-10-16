@@ -2,7 +2,6 @@
 "use client";
 
 import { useState } from "react";
-import { Card } from "@/shared/ui";
 
 // ✅ ПАТЕРН 2 в дії:
 // Client Component з клієнтським станом

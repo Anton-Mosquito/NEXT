@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { Card, Badge, Button } from "@/shared/ui";
+import { Card, Badge } from "@/shared/ui";
 import { LikeButton } from "@/features/like-post";
 import { useAppSelector } from "@/_learning/store";
 import { selectCurrentUser, selectIsAuthenticated } from "@/entities/auth";

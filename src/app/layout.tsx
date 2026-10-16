@@ -5,7 +5,6 @@ import "./globals.css";
 import { StoreProvider } from "@/app/providers/StoreProvider";
 import { QueryProvider } from "@/app/providers/QueryProvider";
 import { SessionProvider } from "@/app/providers/SessionProvider";
-import { Header } from "@/widgets/header";
 import { WhydrInit } from "@/app/WhydrInit";
 import { buildPreloadedState } from "@/_learning/store/preloadState";
 import type { AuthUser } from "@/entities/auth";

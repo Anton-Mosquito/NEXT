@@ -7,7 +7,7 @@ import {
   selectIsAuthenticated,
   selectAccessToken,
 } from "@/entities/auth";
-import { Card, Badge } from "@/shared/ui";
+import { Card } from "@/shared/ui";
 import { useState, useEffect } from "react";
 
 export function PreloadedStateDemo() {

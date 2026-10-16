@@ -2,7 +2,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Card, Badge } from "@/shared/ui";
 
 // ============================================================
 // ❌ ПОГАНО: Hydration mismatch через browser-only значення

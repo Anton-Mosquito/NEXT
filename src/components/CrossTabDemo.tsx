@@ -4,7 +4,7 @@
 import { useState, useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/_learning/store";
 import { toggleLike, selectPostLikes } from "@/features/like-post";
-import { Card, Button, Badge } from "@/shared/ui";
+import { Card, Button } from "@/shared/ui";
 
 export function CrossTabDemo() {
   const dispatch = useAppDispatch();

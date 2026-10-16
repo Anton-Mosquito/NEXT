@@ -152,9 +152,20 @@ export interface BudgetTable {
   id: Generated<string>;
   userId: string;
   categoryId: string;
-  amount: number;
+  amount: ColumnType<string, number | string, number | string>;
   month: string;
   createdAt: Generated<Date>;
+}
+
+/**
+ * `savings_goal` — a reusable monthly savings target per user.
+ */
+export interface SavingsGoalTable {
+  id: Generated<string>;
+  userId: string;
+  monthlyTarget: ColumnType<string, number | string, number | string>;
+  createdAt: Generated<Date>;
+  updatedAt: Generated<Date>;
 }
 
 /**
@@ -203,5 +214,6 @@ export interface Database {
   category: CategoryTable;
   transaction: TransactionTable;
   budget: BudgetTable;
+  savingsGoal: SavingsGoalTable;
   bill: BillTable;
 }

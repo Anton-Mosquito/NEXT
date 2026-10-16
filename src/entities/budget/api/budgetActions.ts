@@ -3,6 +3,7 @@
 import { db } from "@/shared/lib/kysely";
 import { auth } from "@/shared/lib/auth";
 import { z } from "zod";
+import { categoryGoalSaveSchema } from "../lib/categoryGoalSchema";
 
 const createBudgetSchema = z.object({
   categoryId: z.string().min(1),
@@ -13,6 +14,79 @@ const createBudgetSchema = z.object({
 const updateBudgetSchema = z.object({
   amount: z.coerce.number().positive(),
 });
+
+export async function getCategoryGoalCards(monthInput: unknown) {
+  const session = await auth();
+  if (!session?.user?.id) throw new Error("Unauthorized");
+  const userId = session.user.id;
+  const parsedMonth = z
+    .string()
+    .regex(/^\d{4}-(0[1-9]|1[0-2])$/)
+    .safeParse(monthInput);
+
+  if (!parsedMonth.success) throw new Error("Invalid month.");
+
+  return db
+    .selectFrom("category as c")
+    .leftJoin("budget as b", (join) =>
+      join
+        .onRef("b.categoryId", "=", "c.id")
+        .on("b.userId", "=", userId)
+        .on("b.month", "=", parsedMonth.data),
+    )
+    .select([
+      "c.id as categoryId",
+      "c.name as categoryName",
+      "c.color as categoryColor",
+      "c.icon as categoryIcon",
+      "b.id as budgetId",
+      "b.amount as goalAmount",
+    ])
+    .where("c.userId", "=", userId)
+    .where("c.type", "=", "expense")
+    .orderBy("c.name", "asc")
+    .execute()
+    .then((rows) =>
+      rows.map((row) => ({
+        ...row,
+        goalAmount: row.goalAmount === null ? null : Number(row.goalAmount),
+      })),
+    );
+}
+
+export async function setCategoryGoal(input: unknown) {
+  const session = await auth();
+  if (!session?.user?.id) throw new Error("Unauthorized");
+  const userId = session.user.id;
+  const parsed = categoryGoalSaveSchema.safeParse(input);
+
+  if (!parsed.success) {
+    throw new Error(`Validation failed: ${parsed.error.message}`);
+  }
+
+  const { categoryId, amount, month } = parsed.data;
+  const category = await db
+    .selectFrom("category")
+    .select("id")
+    .where("id", "=", categoryId)
+    .where("userId", "=", userId)
+    .where("type", "=", "expense")
+    .executeTakeFirst();
+
+  if (!category) throw new Error("Expense category not found.");
+
+  await db
+    .insertInto("budget")
+    .values({ userId, categoryId, amount, month })
+    .onConflict((conflict) =>
+      conflict
+        .columns(["userId", "categoryId", "month"])
+        .doUpdateSet({ amount }),
+    )
+    .execute();
+
+  return { success: true };
+}
 
 export async function getBudgetsWithSpending(month?: string) {
   const session = await auth();
@@ -58,7 +132,8 @@ export async function getBudgetsWithSpending(month?: string) {
 
       const limitAmount = Number(budget.limitAmount);
       const spentAmount = Number(spendingResult?.total ?? 0);
-      const percentage = limitAmount > 0 ? (spentAmount / limitAmount) * 100 : 0;
+      const percentage =
+        limitAmount > 0 ? (spentAmount / limitAmount) * 100 : 0;
       const remaining = limitAmount - spentAmount;
 
       let status: "ok" | "warning" | "exceeded" = "ok";
@@ -76,7 +151,7 @@ export async function getBudgetsWithSpending(month?: string) {
         remaining,
         status,
       };
-    })
+    }),
   );
 
   return results;
@@ -105,8 +180,13 @@ export async function createBudget(input: unknown) {
       })
       .execute();
     return { success: true };
-  } catch (error: any) {
-    if (error.code === "23505") { // unique_violation
+  } catch (error: unknown) {
+    if (
+      error &&
+      typeof error === "object" &&
+      "code" in error &&
+      error.code === "23505"
+    ) {
       throw new Error("Budget for this category already exists for this month");
     }
     throw error;

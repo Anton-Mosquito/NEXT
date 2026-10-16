@@ -117,7 +117,7 @@ export function DashboardLayoutClient({
       <div className="flex flex-1 flex-col overflow-hidden bg-background">
         <DashboardHeader
           userName={userName}
-          showGreeting={pathname !== "/expenses"}
+          showGreeting={pathname !== "/expenses" && pathname !== "/goals"}
           searchValue={searchValue}
           searchResults={searchResults}
           isSearchLoading={isSearchLoading && deferredSearch.length >= 2}

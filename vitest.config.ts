@@ -14,13 +14,14 @@ export default defineConfig({
     },
   },
   test: {
+    dir: "./src",
     globals: true,
     environment: "jsdom",
     setupFiles: ["./vitest.setup.ts"],
     css: true,
     deps: {
       optimizer: {
-        web: {
+        client: {
           include: ["msw"],
         },
       },

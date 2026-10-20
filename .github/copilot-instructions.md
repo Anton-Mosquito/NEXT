@@ -14,50 +14,52 @@ The app is built with **Feature-Sliced Design (FSD)** architecture and a **dual 
 
 ## ⚙️ Tech Stack (do not suggest alternatives)
 
+`package.json` is the source of truth for exact dependency versions.
+
 ### Runtime & Framework
 
-- **Next.js 16.1.6** — App Router, React Server Components (RSC), Server Actions, Streaming, PPR, Turbopack
-- **React 19.2.3** — Server Components, Client Components, hooks
-- **TypeScript ^5** — strict mode enabled (`"strict": true`)
+- **Next.js ^16.3.0** — App Router, React Server Components (RSC), Server Actions, Streaming, Turbopack
+- **React ^19.2.8** — Server Components, Client Components, hooks
+- **TypeScript ^6.0.3** — strict mode enabled (`"strict": true`)
 
 ### State Management
 
 - **Redux Toolkit ^2.11.2** — global **client-side** state only (UI state, auth, modals)
 - **React Redux ^9.2.0** — `useSelector` / `useDispatch` hooks
-- **TanStack React Query ^5.90.21** — all **server state**: fetching, caching, prefetching, optimistic updates, background refetch
+- **TanStack React Query ^5.101.4** — all **server state**: fetching, caching, prefetching, optimistic updates, background refetch
 
 > Rule: Never use Redux for server data. Never use React Query for pure UI state.
 
 ### Forms & Validation
 
-- **React Hook Form ^7.71.2** — all form management (minimal re-renders)
+- **React Hook Form ^7.84.0** — all form management (minimal re-renders)
 - **@hookform/resolvers ^5.2.2** — Zod integration
 - **Zod ^4.3.6** — all runtime validation schemas (forms, API responses, env vars)
 
 ### UI & Styling
 
-- **Tailwind CSS ^4.2.1** — utility-first CSS
-- **shadcn/ui ^4.1.1** — component library (Radix UI + Tailwind)
-- **Radix UI ^1.4.3** — headless primitives
-- **Lucide React ^0.577.0** — icons
+- **Tailwind CSS ^4.3.3** — utility-first CSS
+- **shadcn CLI ^4.16.2** — component library (Radix UI + Tailwind)
+- **Radix UI ^1.6.7** — headless primitives
+- **Lucide React ^1.29.0** — icons
 - **CVA ^0.7.1** — component variants
 - **clsx ^2.1.1 + tailwind-merge ^3.5.0** — conditional class merging via `cn()` utility
 
 ### Database
 
-- **PostgreSQL 16** via Prisma Postgres (cloud) or any PostgreSQL instance
-- **pg (node-postgres) ^8.20.0** — direct SQL queries
+- **PostgreSQL 16** — use the configured PostgreSQL instance
+- **Kysely ^0.29.4** and **pg (node-postgres) ^8.20.0** — database access; do not assume Prisma is installed
 
 ### Testing
 
-- **Vitest ^4.1.2** — unit and integration tests
+- **Vitest ^4.1.4** — unit and integration tests
 - **@testing-library/react ^16.3.2** — component tests (test behavior, not implementation)
-- **MSW ^1.3.3** — HTTP mocking at network level
-- **jsdom ^29.0.1** — browser-like environment
+- **MSW ^2.13.4** — HTTP mocking at network level
+- **jsdom ^29.0.2** — browser-like environment
 
 ### Code Quality
 
-- **ESLint ^9** with `eslint-config-next` and `eslint-plugin-boundaries`
+- **ESLint ^10.2.0** with `eslint-config-next` and `eslint-plugin-boundaries`
 
 ---
 

@@ -14,8 +14,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "test:ci": "vitest run --ci --coverage",
-    "test:ui": "vitest --ui",
+    "test:ci": "vitest run --coverage",
     "test:e2e": "npx playwright test",
     "test:e2e:ui": "npx playwright test --ui",
     "test:e2e:report": "npx playwright show-report",
@@ -92,7 +91,7 @@
     "@types/react-dom": "^19.2.3",
     "@types/webpack-bundle-analyzer": "^4.7.0",
     "@vitejs/plugin-react": "^6.1.2",
-    "@vitest/coverage-v8": "^4.1.4",
+    "@vitest/coverage-v8": "^5.0.5",
     "@welldone-software/why-did-you-render": "^10.0.1",
     "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^10.2.0",
@@ -110,7 +109,8 @@
     "tsx": "^4.21.0",
     "typescript": "^6.0.3",
     "vercel": "^63.1.2",
-    "vitest": "^4.1.4",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.5",
     "whatwg-fetch": "^3.6.20"
   },
   "overrides": {

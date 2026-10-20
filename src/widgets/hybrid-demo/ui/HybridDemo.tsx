@@ -80,7 +80,7 @@ export function HybridDemo({ initialPosts }: HybridDemoProps) {
       ))}
 
       {/* Підсумок патерну */}
-      <div className="bg-gradient-to-r from-green-50 to-blue-50 rounded-xl p-4 border border-green-100 text-xs text-gray-600 space-y-1">
+      <div className="bg-linear-to-r from-green-50 to-blue-50 rounded-xl p-4 border border-green-100 text-xs text-gray-600 space-y-1">
         <p className="font-semibold text-gray-700 mb-1">
           ✅ Цей widget демонструє Hybrid паттерн:
         </p>

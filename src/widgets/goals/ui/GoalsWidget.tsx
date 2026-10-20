@@ -88,8 +88,8 @@ function GoalsLoadingState() {
     <div className="flex flex-col gap-6">
       <Skeleton className="h-8 w-32" />
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(320px,0.8fr)_minmax(0,1.6fr)]">
-        <Skeleton className="h-[360px] w-full" />
-        <Skeleton className="h-[360px] w-full" />
+        <Skeleton className="h-90 w-full" />
+        <Skeleton className="h-90 w-full" />
       </div>
       <Skeleton className="h-8 w-72" />
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
@@ -119,7 +119,7 @@ function SavingsGauge({
     : "Monthly savings target not set";
 
   return (
-    <div className="mx-auto w-full max-w-[260px]">
+    <div className="mx-auto w-full max-w-65">
       <svg
         viewBox="0 0 240 145"
         role="img"
@@ -193,7 +193,7 @@ function SavingsSummaryChart({
   );
 
   return (
-    <Card className="flex min-h-[360px] flex-col p-5 sm:p-6">
+    <Card className="flex min-h-90 flex-col p-5 sm:p-6">
       <div className="mb-5 flex flex-wrap items-start justify-between gap-4">
         <div>
           <h2 className="text-lg font-semibold text-foreground">
@@ -231,7 +231,7 @@ function SavingsSummaryChart({
         <div
           role="img"
           aria-label={`Cumulative savings for ${currentPeriod} compared with ${previousPeriod}`}
-          className="min-h-[250px] flex-1"
+          className="min-h-62.5 flex-1"
         >
           <ResponsiveContainer width="100%" height="100%">
             <ComposedChart
@@ -399,7 +399,7 @@ export function GoalsWidget() {
       <h1 className="text-2xl font-bold text-foreground">Goals</h1>
 
       <div className="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(320px,0.8fr)_minmax(0,1.6fr)]">
-        <Card className="flex min-h-[360px] flex-col p-5 sm:p-6">
+        <Card className="flex min-h-90 flex-col p-5 sm:p-6">
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-3">
               <span className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">

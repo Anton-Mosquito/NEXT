@@ -96,7 +96,7 @@ export function TransactionsFilterBar({
 
   return (
     <div className="flex flex-wrap items-center gap-3 rounded-2xl border border-border/60 bg-background/70 p-3">
-      <div className="min-w-[180px] flex-1">
+      <div className="min-w-45 flex-1">
         <Tabs
           value={values.type}
           onValueChange={(value) =>
@@ -114,7 +114,7 @@ export function TransactionsFilterBar({
         </Tabs>
       </div>
 
-      <div className="min-w-[180px] flex-1">
+      <div className="min-w-45 flex-1">
         <Select
           value={values.financialAccountId}
           onValueChange={(value) =>
@@ -135,7 +135,7 @@ export function TransactionsFilterBar({
         </Select>
       </div>
 
-      <div className="min-w-[180px] flex-1">
+      <div className="min-w-45 flex-1">
         <Select
           value={values.categoryId}
           onValueChange={(value) =>
@@ -156,7 +156,7 @@ export function TransactionsFilterBar({
         </Select>
       </div>
 
-      <div className="min-w-[200px] flex-1">
+      <div className="min-w-50 flex-1">
         <Controller
           control={control}
           name="dateFrom"
@@ -187,7 +187,7 @@ export function TransactionsFilterBar({
         />
       </div>
 
-      <div className="min-w-[200px] flex-1">
+      <div className="min-w-50 flex-1">
         <Controller
           control={control}
           name="dateTo"

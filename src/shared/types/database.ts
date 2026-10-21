@@ -28,6 +28,7 @@ export interface UserTable {
   email: string;
   emailVerified: Date | null;
   image: string | null;
+  phone: string | null;
   passwordHash: string | null;
   billsSeeded: Generated<boolean>;
   createdAt: Generated<Date>;

@@ -143,13 +143,6 @@ function AccountStep() {
         hint="Спробуй taken@example.com для демо помилки"
         placeholder="ivan@example.com"
       />
-      <Input
-        label="Username *"
-        value={data.username}
-        onChange={(e) => update("username", e.target.value)}
-        error={touched ? errors.username : undefined}
-        placeholder="ivan_petrenko"
-      />
       <div className="space-y-1">
         <Input
           label="Пароль *"

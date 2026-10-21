@@ -6,7 +6,6 @@ export const mockUsers: User[] = [
   {
     id: 1,
     name: "Alice Smith",
-    username: "alice",
     email: "alice@test.com",
     phone: "555-1234",
     website: "alice.dev",
@@ -16,7 +15,6 @@ export const mockUsers: User[] = [
   {
     id: 2,
     name: "Bob Johnson",
-    username: "bob",
     email: "bob@test.com",
     phone: "555-5678",
     website: "bob.dev",

@@ -27,7 +27,6 @@ export function UserCard({
         <Avatar name={user.name} size={compact ? "sm" : "md"} />
         <div className="flex-1 min-w-0">
           <p className="font-semibold text-gray-800 truncate">{user.name}</p>
-          <p className="text-xs text-gray-400">@{user.username}</p>
           {!compact && (
             <div className="flex gap-2 mt-1.5 flex-wrap">
               <Badge variant="default">🏢 {user.company.name}</Badge>

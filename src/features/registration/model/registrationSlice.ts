@@ -29,7 +29,7 @@ const initialState: RegistrationState = {
       touched: false,
     },
     account: {
-      data: { email: "", username: "", password: "", confirmPassword: "" },
+      data: { email: "", password: "", confirmPassword: "" },
       errors: {},
       isValid: false,
       touched: false,

@@ -9,6 +9,7 @@ export const dbUserSchema = z.object({
   email: z.email(),
   emailVerified: z.coerce.date().nullable().optional(),
   image: z.string().url().nullable().optional(),
+  phone: z.string().max(30).nullable().optional(),
   createdAt: z.coerce.date().optional(),
 });
 

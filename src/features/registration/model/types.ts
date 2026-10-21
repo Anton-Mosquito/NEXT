@@ -8,7 +8,6 @@ export interface PersonalData {
 
 export interface AccountData {
   email: string;
-  username: string;
   password: string;
   confirmPassword: string;
 }

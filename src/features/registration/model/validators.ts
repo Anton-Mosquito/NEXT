@@ -29,11 +29,6 @@ export function validateAccount(data: AccountData): Errors<AccountData> {
   else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
     errors.email = "Невірний формат email";
   }
-  if (!data.username.trim()) errors.username = "Username обов'язковий";
-  else if (data.username.length < 3) errors.username = "Мінімум 3 символи";
-  else if (!/^[a-zA-Z0-9_]+$/.test(data.username)) {
-    errors.username = "Тільки літери, цифри та _";
-  }
   if (!data.password) errors.password = "Пароль обов'язковий";
   else if (data.password.length < 8) errors.password = "Мінімум 8 символів";
   else if (!/(?=.*[A-Z])(?=.*[0-9])/.test(data.password)) {

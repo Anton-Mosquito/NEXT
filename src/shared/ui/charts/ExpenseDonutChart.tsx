@@ -20,8 +20,8 @@ export function ExpenseDonutChart({
 }: ExpenseDonutChartProps) {
   if (isLoading) {
     return (
-      <Card className="p-6">
-        <h3 className="mb-4 text-lg font-semibold text-foreground">
+      <Card className="rounded-lg border-0 bg-card p-6 shadow-[0_20px_25px_rgba(76,103,100,0.10)]">
+        <h3 className="mb-4 text-base font-semibold leading-6 text-foreground">
           Expenses by Category
         </h3>
         <Skeleton className="h-50 w-full rounded-full" />
@@ -35,8 +35,8 @@ export function ExpenseDonutChart({
   }));
 
   return (
-    <Card className="p-6">
-      <h3 className="mb-4 text-lg font-semibold text-foreground">
+    <Card className="rounded-lg border-0 bg-card p-6 shadow-[0_20px_25px_rgba(76,103,100,0.10)]">
+      <h3 className="mb-4 text-base font-semibold leading-6 text-foreground">
         Expenses by Category
       </h3>
       {chartData.length === 0 ? (
